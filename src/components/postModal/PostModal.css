@@ -50,14 +50,10 @@
     overflow: hidden;
   }
 
-  .img-in-modal {
-    width: 100%;
-    object-fit: cover;
-    max-height: 550px;
-  }
 
   .modal-content-container {
     /* margin: 5vh 0 0 5vh; */
+    width:50%;
   }
   .modal-close {
     color: #aaa;
@@ -74,14 +70,23 @@
     color: black;
   }
 
+  .img-in-modal {
+    width: 100%;
+    object-fit: cover;
+    max-height: 550px;
+  }
+
   .title-in-modal {
     padding-top: 10px;
   }
   
   .text-in-modal {
+    margin: 2vh 0 0 5vh;
   }
+
   hr {
-    width: 500px;
+    width: 1000px;
+    max-width: 100%;
   }
   html,
   a {

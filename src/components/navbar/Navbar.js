@@ -20,16 +20,9 @@ function Navbar() {
         </div>
 
         <div className="nav-links">
-          <a className="nav-links-logo">✏️</a>
-          <a href="" target="_blank">
-            🔎
-          </a>
-          <a href="" target="_blank">
-            🚀
-          </a>
-          <a href="" target="_blank">
-            🌞
-          </a>
+          <Link to="write">✏️</Link>
+          <Link to="explore">🚀</Link>
+          <Link to="">🌞</Link>
           <Link to="/login">🧑</Link>
         </div>
       </div>
