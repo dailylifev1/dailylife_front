@@ -1,10 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './postModal.css';
-import { postActions } from '../../reducers/post';
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./postModal.css";
+import { postActions } from "../../reducers/post";
+
 
 const tempComment = [
   {
@@ -102,7 +103,6 @@ const ModalClose = styled.div`
   aspect-ratio: 1;
   color: #aaa;
   text-decoration: none;
-  border: 1px red solid;
 
   & svg {
     position: absolute;
@@ -189,6 +189,8 @@ function PostModal({ modalOpacity, setModalOpacity }) {
   const [replyList, setReplyList] = useState([]);
   const [replyHover, setReplyHover] = useState(-1);
   const [replyDeleteFlag, setReplyDeleteFlag] = useState(-1);
+  const [reReplyFlag, setReReplyFlag] = useState([]);
+  const replyInput = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -200,18 +202,15 @@ function PostModal({ modalOpacity, setModalOpacity }) {
   function replyInsertHandler(e) {
     if (localStorage.getItem('accessToken')) {
       axios
-        .post(
-          `${process.env.REACT_APP_HOST}/api/reply/insert`,
-          {
-            boardNum: currentPostData.boardNum,
-            replyContext: e.target.value,
-          },
+        .get(
+          `${process.env.REACT_APP_HOST}/api/reply/getReply/${currentPostData.boardNum}`,
           {
             headers: {
               'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
             },
           },
         )
+
         .then((res) => {
           e.target.value = '';
           res.data.time = dateHandler(res.data.replyTime);
@@ -241,18 +240,24 @@ function PostModal({ modalOpacity, setModalOpacity }) {
       })
       .catch((err) => console.log(err));
 
+
+    /** 댓글 리스트 초기화 */
     return () => {
       setReplyList([]);
+      setReReplyFlag([]);
+      sessionStorage.removeItem("replyInfo");
     };
   }, [currentPostData.boardNum]);
 
   /** 댓글이 작성된 날짜 계산 */
   const dateHandler = (replyDate) => {
+
     const [sec, min, hour, day, week, month, year] = [1, 60, 3600, 86400, 86400 * 7, 2592000, 2592000 * 12];
 
     const today = new Date();
     replyDate = new Date(
       `${replyDate[0]}-${replyDate[1]}-${replyDate[2]} ${(replyDate[3] + 9) % 24}:${replyDate[4]}:${replyDate[5]}`,
+
     );
     const elapsedTime = Math.trunc((today.getTime() - replyDate.getTime()) / 1000);
     let elapsedText = '';
@@ -284,6 +289,115 @@ function PostModal({ modalOpacity, setModalOpacity }) {
     if (replyHeart === 0) return null;
     return '좋아요 ' + replyHeart;
   };
+
+  /** 댓글, 대댓글 작성 api 통신 함수 */
+  function replyInsertHandler(e) {
+    if (localStorage.getItem("accessToken")) {
+      if (sessionStorage.getItem("replyInfo") === null) {
+        axios
+          .post(
+            `${process.env.REACT_APP_HOST}/api/reply/insert`,
+            {
+              boardNum: currentPostData.boardNum,
+              replyContext: e.target.value,
+            },
+            {
+              headers: {
+                "X-ACCESS-TOKEN": localStorage.getItem("accessToken"),
+              },
+            }
+          )
+          .then((res) => {
+            e.target.value = "";
+            res.data.time = dateHandler(res.data.replyTime);
+            setReplyList([
+              ...replyList,
+              {
+                boardNum: res.data.boardNum,
+                replyContext: res.data.replyContext,
+                replyNum: res.data.replyNum,
+                replyTime: res.data.replytime,
+                time: res.data.time,
+                userName: res.data.user.userName,
+                userNum: res.data.user.userNum,
+              },
+            ]);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        const [replyNum, replyUserName] = sessionStorage
+          .getItem("replyInfo")
+          .split(",");
+        const replyContext = replyInput.current.value.replace(
+          replyUserName,
+          ""
+        );
+        axios
+          .post(
+            `${process.env.REACT_APP_HOST}/api/replyReply/insert`,
+            {
+              replyNum: replyNum,
+              replyReplyContext: replyContext,
+            },
+            {
+              headers: {
+                "X-ACCESS-TOKEN": localStorage.getItem("accessToken"),
+              },
+            }
+          )
+          .then((res) => {
+            axios
+              .get(
+                `${process.env.REACT_APP_HOST}/api/replyReply/getReply/${res.data.replyNum}`,
+                {
+                  headers: {
+                    "X-ACCESS-TOKEN": localStorage.getItem("accessToken"),
+                  },
+                }
+              )
+              .then((reReplyRes) => {
+                let newReplyList = [...replyList];
+                let idx = newReplyList.findIndex(
+                  (item) => item.replyNum === res.data.replyNum
+                );
+                newReplyList[idx].reReply = reReplyRes.data;
+                setReplyList(newReplyList);
+                replyInput.current.value = "";
+                sessionStorage.removeItem("replyInfo");
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      e.target.value = "";
+      alert("로그인 후 이용해주세요.");
+    }
+  }
+
+  /** 대댓글 작성 */
+  const reReplyInsertHandler = (idx) => {
+    replyInput.current.value = `@${replyList[idx].userName} `;
+    replyInput.current.focus();
+    sessionStorage.setItem("replyInfo", [
+      replyList[idx].replyNum,
+      `@${replyList[idx].userName} `,
+    ]);
+  };
+  /** 대댓글 작성 해제 */
+  const reReplyCheckHandler = (e) => {
+    if (e.target.value === "" && sessionStorage.length) {
+      sessionStorage.removeItem("replyInfo");
+    }
+  };
+
+  /** 대댓글 열기 */
+  const getReReply = (idx) => {
+    let tmp = [...reReplyFlag];
+    tmp[idx] = 1 - tmp[idx];
+    setReReplyFlag(tmp);
+  };
+
   return (
     <>
       <div className="container">
@@ -311,7 +425,9 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                       console.log('x clicked');
                     }}
                   >
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+
                       <path
                         d="M1 1L17 17"
                         stroke="#42413C"
@@ -320,7 +436,9 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                         strokeLinejoin="round"
                       />
                     </svg>
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+
                       <path
                         d="M1 1L17 17"
                         stroke="#42413C"
@@ -429,12 +547,14 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                     <CommentDateContainer>
                       <span className="empty"></span>
                       <span className="comment-date">
+
                         {item.time} · {getReplyHeart(item.replyNum) ?? ''}
                         {' · '}
                         답글 달기
                         {item.subCommentCount ? (
                           <>
                             <span className="comment-expand"> · 답글 보기 ({item.subCommentCount}개) </span>
+
                           </>
                         ) : (
                           ''
@@ -450,8 +570,8 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                               className="_ab6-"
                               color="#8e8e8e"
                               fill="#8e8e8e"
-                              width="24"
-                              height="24"
+                              width="30"
+                              height="30"
                               role="img"
                               viewBox="0 0 24 24"
                             >
@@ -464,13 +584,20 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                           ''
                         )}
                       </span>
-                      {/* 댓글 답변목록 */}
-                      {/* <ul className="comment-sub-list">
-                        <li className="comment-sub-item">
-                          <div className="avatar"></div>
-                        </li>
-                      </ul> */}
                     </CommentDateContainer>
+                    {/* 대댓글 목록 */}
+                    {reReplyFlag[index]
+                      ? item.reReply.map((item, idx) => (
+                          <div style={{ width: "100%", height: "30px" }}>
+                            {item.replyReplyContext}
+                          </div>
+                        ))
+                      : // <ul className="comment-sub-list">
+                        //   <li className="comment-sub-item">
+                        //     <div className="avatar"></div>
+                        //   </li>
+                        // </ul>
+                        ""}
                   </CommentContainer>
                 ))}
               </div>
@@ -480,16 +607,22 @@ function PostModal({ modalOpacity, setModalOpacity }) {
                 <input
                   type="text"
                   className="comment-create-text"
+                  ref={replyInput}
                   placeholder="댓글 달기"
                   onKeyUp={(e) => {
                     if (window.event.keyCode === 13 && e.target.value !== '') replyInsertHandler(e);
+                  }}
+                  onChange={(e) => {
+                    reReplyCheckHandler(e);
                   }}
                 ></input>
               </CommentCreate>
             </div>
           </ModalBody>
           {replyDeleteFlag !== -1 ? (
+
             <ReplyDeleteModal replyDeleteNum={replyDeleteFlag} setReplyDeleteFlag={setReplyDeleteFlag} />
+
           ) : (
             ''
           )}
@@ -507,7 +640,15 @@ function ReplyDeleteModal(props) {
           'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
         },
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        let idx = props.replyList.findIndex(
+          (item) => item.replyNum === replyNum
+        );
+        let newReplyList = [...props.replyList];
+        newReplyList.splice(idx, 1);
+        props.setReplyList(newReplyList);
+        props.setReplyDeleteFlag(-1);
+      })
       .catch((err) => console.log(err));
   };
 
