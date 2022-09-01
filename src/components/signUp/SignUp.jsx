@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import useForm from './useForm';
 
-import loginFormData from 'mocks/loginFormData';
+import loginFormData from 'mocks/signupFormData';
 
 function SignUp() {
   const { handleChange, handleSubmit } = useForm({

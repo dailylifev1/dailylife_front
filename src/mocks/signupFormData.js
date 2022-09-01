@@ -1,4 +1,4 @@
-const loginFormData = [
+const signupFormData = [
   {
     placeholder: 'email address',
     name: 'email',
@@ -21,4 +21,4 @@ const loginFormData = [
   },
 ];
 
-export default loginFormData;
+export default signupFormData;
