@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import PostRender from "./PostRender";
 
-function NavLink() {
-  // const accessToken = localStorage.getItem('accessToken');
+function NavLinks() {
+  const accessToken = localStorage.getItem('accessToken');
   return (
     <div className="nav-links">
       <PostRender />
@@ -10,4 +11,4 @@ function NavLink() {
   )
 }
 
-export default NavLink;
+export default NavLinks;

@@ -10,7 +10,7 @@ import Navbar from './components/navbar';
 import RecentlyViewed from './components/recentlyViewed/recentlyViewed';
 import SignUp from './components/signUp/SignUp';
 import Searching from 'components/navbar/searching/Searching';
-import NewUserPost from 'components/navbar/navlink/writePage/writePage';
+import writePage from 'components/navbar/navlink/writePage/writePage';
 
 function App() {
   // const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/recentlyViewed" element={<RecentlyViewed />} />
         <Route path="/search" element={<Searching />} />
-        <Route path="/post" element={<NewUserPost />} />
+        <Route path="/post" element={<writePage />} />
         <Route path="/myInfo" element={<MyInfo />} />
       </Routes>
     </BrowserRouter>

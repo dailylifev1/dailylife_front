@@ -39,29 +39,28 @@ function writePage(props) {
     //   props.changeOpenPostModal(false);
     // };
     return (
-      <>
-        <div className="newPost-container">
-          <section className="newPost-modal">
-            <section className="newPost-boarding">
-              <div className="newPost-title">게시글 작성</div>
-              <section className="newPost-body">
-                <div className="newPost-body-pic">
-                  <p className="newPost-body-pic-explain">마우스로 클릭하여 이미지를 추가해주세요.</p>
-                  <img className="newPost-body-pic-cloudPic" src="/assets/cloud-upload.png" />
-                </div>
-                <input className="newPost-body-title" placeholder="제목을 입력해주세요" />
-                <input className="newPost-body-content" placeholder="내용을 입력해주세요" />
-              </section>
-              <img
-                className="newPost-modal-close"
-                onClick={closeModal}
-                src="/assets/x.png"
-                alt="newPostModal"
-              />
+      <div className="newPost-container">
+        <section className="newPost-modal">
+          <section className="newPost-boarding">
+            <div className="newPost-title">게시글 작성</div>
+            <section className="newPost-body">
+              <div className="newPost-body-pic">
+                <p className="newPost-body-pic-explain">마우스로 클릭하여 이미지를 추가해주세요.</p>
+                <img className="newPost-body-pic-cloudPic" src="/assets/cloud-upload.png" alt="" />
+              </div>
+              <input className="newPost-body-title" placeholder="제목을 입력해주세요" />
+              <input className="newPost-body-content" placeholder="내용을 입력해주세요" />
             </section>
+            <button
+              type="button"
+              className="newPost-modal-close"
+              // onClick={closeModal}
+              src="/assets/x.png"
+              alt="newPostModal"
+            />
           </section>
-        </div>
-      </>
+        </section>
+      </div>
     );
   }
 }
