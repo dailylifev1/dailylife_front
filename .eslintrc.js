@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'react/jsx-one-expression-per-line': 'off',
     'no-alert': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 0,
