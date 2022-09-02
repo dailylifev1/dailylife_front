@@ -3,7 +3,11 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'standard-with-typescript', 'airbnb'],
+  extends: [
+    'plugin:react/recommended',
+    'standard-with-typescript',
+    'airbnb',
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -12,7 +16,13 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', 'plugin: prettier/recommended'],
+        extensions: [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx',
+          'plugin: prettier/recommended',
+        ],
         paths: ['src'],
       },
     },
@@ -23,10 +33,16 @@ module.exports = {
     'no-alert': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 0,
+    indent: '[]', // ?
     'import/order': [
       'error',
       {
-        groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
+        groups: [
+          'builtin',
+          'external',
+          ['parent', 'sibling'],
+          'index',
+        ],
         pathGroups: [
           {
             pattern: 'angular',
