@@ -20,20 +20,20 @@ const useLoginForm = (initialValues) => {
       ...prevState,
       [name]: value,
     }));
-    // console.log(values);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const result = userApi.postUserInfoForLogIn({
-      userId: formData.userId,
-      userPassword: formData.userPassword,
-    });
+    // eslint-disable-next-line operator-linebreak
+    const result =
+      await userApi.postUserInfoForLogIn({
+        userId: formData.userId,
+        userPassword: formData.userPassword,
+      });
     setLoading(false);
     if (result.ok === true) {
       const response = result.data;
-      console.log(result.ok);
       localStorage.setItem(
         'accessToken',
         response.data.data.accessToken,

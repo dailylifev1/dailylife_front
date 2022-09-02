@@ -7,7 +7,7 @@ const loginFormData = [
   {
     type: 'password',
     placeholder: '비밀번호',
-    name: 'password',
+    name: 'userPassword',
   },
 ];
 
