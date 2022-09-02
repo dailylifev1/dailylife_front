@@ -22,10 +22,10 @@ const userApi = {
     },
   ),
   postUserInfoForLogIn: methodFormat(
-    async (userInfo) => {
+    async ({ userId, userPassword }) => {
       const payload = {
-        userId: userInfo.userId,
-        userPassword: userInfo.userPassword,
+        userId,
+        userPassword,
       };
       const response = await client.post(
         `/${PATH}/login`,
