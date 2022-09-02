@@ -1,10 +1,12 @@
 const loginFormData = [
   {
-    placeholder: 'id',
+    type: 'text',
+    placeholder: '아이디',
     name: 'userId',
   },
   {
-    placeholder: 'password',
+    type: 'password',
+    placeholder: '비밀번호',
     name: 'password',
   },
 ];

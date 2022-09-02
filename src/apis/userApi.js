@@ -18,13 +18,13 @@ const userApi = {
   }),
   postUserInfoForLogIn: methodFormat(async ({ userInfo }) => {
     const options = {
-      params: {
+      data: {
         userId: userInfo.userId,
         userPassword: userInfo.userPassword,
       },
     };
     const response = await client.post(`/${PATH}/login`, options);
-    console.log(response);
+    return response;
   }),
 };
 
