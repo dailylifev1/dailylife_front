@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import EasyLogin from './EasyLogin';
 import LoginBtn from './LoginBtn/index';
 import LoginFind from './LoginFind/index';
 import useLoginForm from './useLoginForm';
@@ -19,8 +20,8 @@ function LoginForm() {
   });
 
   return (
-    <FormContainer>
-      <form
+    <FormWrapper>
+      <StyledForm
         action="/login"
         method="POST"
         onSubmit={handleSubmit}
@@ -28,6 +29,7 @@ function LoginForm() {
         {loading && <LoadingSpinner />}
         {loginFormData.map((data) => (
           <StyledInput
+            key={data.name}
             type={data.type}
             placeholder={data.placeholder}
             name={data.name}
@@ -44,17 +46,18 @@ function LoginForm() {
         ))}
         <LoginBtn />
         <LoginFind />
+        <EasyLogin />
         {/* <p className="message">
             {" "}
             Not registered? <Link to="/SignIn">Create an account</Link>
           </p> */}
-      </form>
-    </FormContainer>
+      </StyledForm>
+    </FormWrapper>
   );
 }
 
 export default LoginForm;
-const FormContainer = styled.form`
+const FormWrapper = styled.div`
   max-width: 320px;
   margin-top: 200px;
   text-align: center;
@@ -63,6 +66,7 @@ const FormContainer = styled.form`
   font-style: normal;
   line-height: 19px;
 `;
+const StyledForm = styled.form``;
 const StyledInput = styled.input`
   width: 100%;
   padding: 15px;
@@ -76,7 +80,7 @@ const StyledInput = styled.input`
 
   letter-spacing: -0.01em;
 
-  &:nth-last-of-type(2) {
+  &:nth-last-of-type(1) {
     margin-top: 6px;
   }
 `;
