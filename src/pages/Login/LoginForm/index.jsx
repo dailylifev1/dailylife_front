@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 import EasyLogin from './EasyLogin';
-import LoginBtn from './LoginBtn/index';
 import LoginFind from './LoginFind/index';
 import useLoginForm from './useLoginForm';
 
+import LoginButton from 'components/buttons/LoginButton';
 import { LoadingSpinner } from 'components/styledComponents/Loading';
 import loginFormData from 'mocks/loginFormData';
 
@@ -44,7 +44,7 @@ function LoginForm() {
             onChange={handleChange}
           />
         ))}
-        <LoginBtn />
+        <LoginButton text="로그인" />
         <LoginFind />
         <EasyLogin />
         {/* <p className="message">
