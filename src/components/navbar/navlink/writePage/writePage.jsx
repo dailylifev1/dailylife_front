@@ -10,6 +10,7 @@ function writePage(props) {
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState('');
 
+  // eslint-disable-next-line consistent-return
   function handleSubmit(e) {
     e.preventDefault();
     if (localStorage.getItem('accessToken') === null) return alert('로그인 후 이용 가능합니다.');
@@ -17,6 +18,7 @@ function writePage(props) {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('thumbNail', thumbNail);
+    // eslint-disable-next-line no-shadow
     imageName.forEach((file) => {
       console.log(file);
       formData.append('imageName', file);
@@ -68,7 +70,7 @@ function writePage(props) {
                             URL.createObjectURL(e.target.files[0]),
                           );
                           // eslint-disable-next-line no-plusplus
-                          for (let i = 0; i < e.target.files.length; i++) setFile(file + ' ' + e.target.files[i].name);
+                          for (let i = 0; i < e.target.files.length; i++) setFile(`${file} ${e.target.files[i].name}`);
                           setImageName([...imageName, ...e.target.files]);
                         }}
                       />
@@ -114,7 +116,13 @@ function writePage(props) {
                   placeholder="내용을 입력해주세요"
                   onChange={(e) => setContent(e.target.value)}
                 />
-                <button type="button" className="submit-btn">게시물 등록</button>
+                <button
+                  type="submit"
+                  className="submit-btn"
+                // onClick={closeModal}
+                >
+                  게시물 등록
+                </button>
               </div>
             </section>
             <button
