@@ -3,11 +3,7 @@
   "semi": true,
   "useTabs": false,
   "tabWidth": 2,
-<<<<<<< HEAD
-  "printWidth": 100,
-=======
   "printWidth": 50,
->>>>>>> 3f5398106d5d091fd231d4c8492da383105a7bf1
   "trailingComma": "all",
   "bracketSpacing": true
 }
