@@ -17,6 +17,21 @@ const postApi = {
     const response = await client.get(`/${PATH}/getboard`, option);
     console.log(response);
   }),
+  /** 임시로 생성,  */
+  getPostDataForNotLoginUser: methodFormat(async ({ postData }) => {
+    const option = {
+      params: {
+        key: postData.key,
+        boardNum: postData.boardNum,
+        src: postData.src,
+        title: postData.title,
+        content: postData.content,
+        heartState: postData.heartState,
+      },
+    };
+    const response = await client.get(`/${PATH}/getboardNotLogin`, option);
+    console.log(response);
+  }),
 };
 
 export default postApi;
