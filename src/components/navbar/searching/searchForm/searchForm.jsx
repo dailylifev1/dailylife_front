@@ -1,8 +1,10 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../Searching.css';
+
+import useAxios from './useAxios';
+
 import { postActions } from 'reducers/post';
 
 function SearchForm() {
@@ -11,6 +13,10 @@ function SearchForm() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+  };
+
+  const getPostData = (url) => {
+    useAxios(url);
   };
 
   return (
@@ -24,15 +30,20 @@ function SearchForm() {
           placeholder="검색"
           onKeyUp={(e) => {
             if (window.event.keyCode === 13) {
-              axios
-                .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`, {})
-                .then((res) => {
-                  dispatch(postActions.updateItems(res.data));
-                  setTypedKeyword(e.target.value);
-                })
-                .catch((res) => {
-                  console.log(res);
-                });
+              getPostData(`process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`);
+              console.log(getPostData);
+              dispatch(postActions.updateItems(getPostData.data));
+              setTypedKeyword(e.target.value);
+              // axios
+              //   .get(`${process.env.REACT_APP_HOST}
+              // /api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`, { })
+              //   .then((res) => {
+              //     dispatch(postActions.updateItems(res.data));
+              //     setTypedKeyword(e.target.value);
+              //   })
+              //   .catch((res) => {
+              //     console.log(res);
+              //   });
             }
           }}
         />
