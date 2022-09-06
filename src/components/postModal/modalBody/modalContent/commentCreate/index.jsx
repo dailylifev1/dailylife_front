@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+import AvatarIcon from '../../../../Icons/avatarIcon';
+
 function CommentCreate() {
   return (
     <CommentCreateWrapper>
-      <Avatar />
+      <AvatarIcon />
       <input
         type="text"
         className="comment-create-text"
@@ -37,10 +39,4 @@ const CommentCreateWrapper = styled.div.attrs({
     font-family: 'Pretendard';
     font-size: 16px;
   }
-`;
-const Avatar = styled.div`
-  border-radius: 50%;
-  width: 38px;
-  aspect-ratio: 1;
-  background-color: purple;
 `;

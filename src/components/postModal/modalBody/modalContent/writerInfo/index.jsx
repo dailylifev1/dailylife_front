@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 import ModalCloseButton from '../../../../buttons/ModalCloseButton';
+import AvatarIcon from '../../../../Icons/avatarIcon';
 
 function WriterInfo() {
   return (
     <div className="writer-info-container">
       <WriterInfoWrapper>
-        <Avatar />
+        <AvatarIcon />
         <Username>작성자닉네임</Username>
         <Follow>팔로우</Follow>
       </WriterInfoWrapper>
@@ -25,12 +26,6 @@ const WriterInfoWrapper = styled.div`
   gap: 10px;
   justify-content: space-around;
   align-items: center;
-`;
-const Avatar = styled.div`
-  border-radius: 50%;
-  width: 38px;
-  aspect-ratio: 1;
-  background-color: purple;
 `;
 const Follow = styled.button`
   width: 68px;
