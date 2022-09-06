@@ -3,6 +3,19 @@ import WriterInfo from './writerInfo';
 function ModalContent(currentPostData) {
   const [title, content, boardNum] =
     currentPostData;
+
+  function contentGenerator(data) {
+    if (data) return data;
+
+    return Array.from({
+      length: 4,
+    }).map((_item) => (
+      <div key={_item}>
+        여기는 내용부분의 영역입니다.
+      </div>
+    ));
+  }
+
   return (
     <div className="modal-content-container">
       <WriterInfo />
@@ -11,16 +24,8 @@ function ModalContent(currentPostData) {
           {title}
         </h1>
         <div className="text-in-modal">
-          {content
-            ? content
-            : Array.from({
-                length: 4,
-              }).map((item, index) => (
-                <div key={index}>
-                  여기는 내용부분의 영역입니다.
-                </div>
-              ))}
-          <button
+          {contentGenerator(content)}
+          {/* <button
             className="delete-board"
             onClick={() => {
               console.log(currentPostData);
@@ -53,7 +58,7 @@ function ModalContent(currentPostData) {
             }}
           >
             글 삭제
-          </button>
+          </button> */}
         </div>
         {/* <div className="text-in-modal">{currentPostData.content}</div> */}
       </div>
