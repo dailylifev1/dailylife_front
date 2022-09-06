@@ -17,7 +17,8 @@ const useForm = (initialValues) => {
   };
 
   const handleSubmit = (event) => {
-    const isValidate = validate(values).length === 0;
+    const isValidate = errors.length === 0;
+    console.log(errors);
     if (isValidate) {
       userApi.postUserInfoForSignUp({
         userId: values.userId,
@@ -27,7 +28,7 @@ const useForm = (initialValues) => {
         userPhoneNumber: values.phoneNumber,
       });
     } else {
-      setErrors(validate(values));
+      alert('회원가입 형식이 올바르지 않습니다. 다시 확인해주세요.');
     }
     event.preventDefault();
   };
