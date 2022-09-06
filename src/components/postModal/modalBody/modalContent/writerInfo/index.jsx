@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ModalCloseButton from '../../../../buttons/ModalCloseButton';
 import AvatarIcon from '../../../../Icons/avatarIcon';
 
-function WriterInfo() {
+function WriterInfo(setModalOpacity) {
   return (
     <div className="writer-info-container">
       <WriterInfoWrapper>
@@ -12,7 +12,9 @@ function WriterInfo() {
         <Follow>팔로우</Follow>
       </WriterInfoWrapper>
       <div className="modal-close-container">
-        <ModalCloseButton />
+        <ModalCloseButton
+          setModalOpacity={setModalOpacity}
+        />
       </div>
     </div>
   );

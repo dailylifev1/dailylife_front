@@ -1,32 +1,27 @@
 import axios from 'axios';
-import ModalCloseButton from 'components/buttons/ModalCloseButton';
 import {
   useEffect,
   useRef,
   useState,
 } from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux/es/exports';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
 import styled from 'styled-components';
+
 import ModalBody from './modalBody';
 
 import './postModal.css';
 // import { postActions } from '../../reducers/post';
 
-function PostModal({
+function PostModal(
   modalOpacity,
   setModalOpacity,
-}) {
+) {
   console.log('executes PostModal');
   const currentPostData = useSelector(
     (state) => state.selectedPostData,
   );
   const [replyList, setReplyList] = useState([]);
-  const [replyHover, setReplyHover] =
-    useState(-1);
+
   const [replyDeleteFlag, setReplyDeleteFlag] =
     useState(-1);
   const [reReplyFlag, setReReplyFlag] = useState(
@@ -305,6 +300,7 @@ function PostModal({
       >
         <ModalBody
           currentPostData={currentPostData}
+          setModalOpacity={setModalOpacity}
         />
         {replyDeleteFlag !== -1 ? (
           <ReplyDeleteModal
@@ -401,79 +397,5 @@ const ModalWindow = styled.div.attrs({
 
   & > div {
     border-radius: 1rem;
-  }
-`;
-
-const ModalSocial = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const CommentContainer = styled.div.attrs({
-  className: 'comment-container',
-})`
-  & > .comment-date-container {
-    display: flex;
-  }
-`;
-const CommentMain = styled.div.attrs({
-  className: 'comment-main',
-})`
-  & > .username {
-    margin-left: 10px;
-    font-weight: 600;
-  }
-  & > .comment-content {
-    flex: 3;
-    margin-left: 10px;
-  }
-  & > .comment-like > svg {
-    width: 14.08px;
-    height: 12.94px;
-  }
-`;
-const CommentDateContainer = styled.div.attrs({
-  className: '.comment-date-container',
-})`
-  & > .empty {
-    width: 38px;
-    aspect-ratio: 1;
-  }
-  & > .comment-date {
-    margin-left: 10px;
-    font-size: 13px;
-    color: #848484;
-  }
-  & > .comment-date > .comment-expand {
-    font-weight: 500;
-  }
-  & > .comment-sub-list {
-    display: flex;
-  }
-`;
-const CommentCreate = styled.div.attrs({
-  className: 'comment-create',
-})`
-  & > .comment-create-text {
-    border: 1px solid #dcdcdc;
-    border-radius: 100px;
-    width: 100%;
-    margin-left: 10px;
-    padding: 10px;
-    font-family: 'Pretendard';
-    font-size: 16px;
-  }
-`;
-const ReplyOption = styled.span.attrs({
-  className: 'reply-option',
-})`
-  background: none;
-  border: none;
-  vertical-align: top;
-  cursor: pointer;
-  margin-left: 5px;
-
-  & > .replyDelete-btn {
-    display: inline;
   }
 `;

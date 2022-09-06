@@ -2,7 +2,10 @@ import CommentSection from './commentSection';
 import ModalSocial from './modalSocial';
 import WriterInfo from './writerInfo';
 
-function ModalContent(currentPostData) {
+function ModalContent(
+  currentPostData,
+  setModalOpacity,
+) {
   const [title, content, boardNum] =
     currentPostData;
 
@@ -20,7 +23,9 @@ function ModalContent(currentPostData) {
 
   return (
     <div className="modal-content-container">
-      <WriterInfo />
+      <WriterInfo
+        setModalOpacity={setModalOpacity}
+      />
       <div className="modal-post-content">
         <h1 className="title-in-modal">
           {title}
