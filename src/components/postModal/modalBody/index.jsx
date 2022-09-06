@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 
-function ModalBody() {
+import ModalImage from './modalImage';
+
+function ModalBody(currentPostData) {
+  const { src } = currentPostData;
   return (
     <ModalBodyWrapper
       onClick={(e) => e.stopPropagation()}
     >
       {/* 이미지는 Carousel로 교체 예정 */}
-      <div
-        className="modal-image"
-        style={{
-          backgroundImage: `url(${currentPostData.src})`,
-        }}
-      ></div>
+      <ModalImage image={src} />
       <div className="modal-content-container">
         <div className="writer-info-container">
           <WriterInfo>

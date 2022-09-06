@@ -11,6 +11,7 @@ import {
 } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ModalBody from './modalBody';
 
 import './postModal.css';
 // import { postActions } from '../../reducers/post';
@@ -302,6 +303,9 @@ function PostModal({
         modalOpacity={modalOpacity}
         id="open-modal"
       >
+        <ModalBody
+          currentPostData={currentPostData}
+        />
         {replyDeleteFlag !== -1 ? (
           <ReplyDeleteModal
             replyDeleteNum={replyDeleteFlag}
