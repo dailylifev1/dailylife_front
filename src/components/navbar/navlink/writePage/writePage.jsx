@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import DeleteIcon from 'components/Icons/deleteIcon';
 import './writePage.scss';
 
 function writePage(props) {
@@ -134,7 +133,7 @@ function writePage(props) {
               src="/assets/x.png"
               alt="newPostModal"
             />
-            <DeleteIcon onClick={setContent} />
+            {/* <DeleteIcon onClick={setContent} /> */}
           </section>
         </section>
       </form>
