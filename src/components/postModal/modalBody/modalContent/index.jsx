@@ -1,16 +1,9 @@
+import WriterInfo from './writerInfo';
+
 function ModalContent() {
   return (
     <div className="modal-content-container">
-      <div className="writer-info-container">
-        <WriterInfo>
-          <Avatar />
-          <Username>작성자닉네임</Username>
-          <Follow>팔로우</Follow>
-        </WriterInfo>
-        <div className="modal-close-container">
-          <ModalCloseButton />
-        </div>
-      </div>
+      <WriterInfo />
       <div className="modal-content">
         <h1 className="title-in-modal">
           {currentPostData.title}
