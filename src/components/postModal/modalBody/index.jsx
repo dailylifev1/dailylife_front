@@ -11,7 +11,9 @@ function ModalBody(currentPostData) {
     >
       {/* 이미지는 Carousel로 교체 예정 */}
       <ModalImage image={src} />
-      <ModalContent />
+      <ModalContent
+        currentPostData={currentPostData}
+      />
     </ModalBodyWrapper>
   );
 }
