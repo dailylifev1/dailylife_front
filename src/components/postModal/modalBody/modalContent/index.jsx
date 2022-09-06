@@ -70,25 +70,6 @@ function ModalContent(currentPostData) {
       {/* 댓글 창 시작 */}
       <CommentSection />
       {/* 댓글 작성칸 */}
-      <CommentCreate>
-        <Avatar />
-        <input
-          type="text"
-          className="comment-create-text"
-          ref={replyInput}
-          placeholder="댓글 달기"
-          onKeyUp={(e) => {
-            if (
-              window.event.keyCode === 13 &&
-              e.target.value !== ''
-            )
-              replyInsertHandler(e);
-          }}
-          onChange={(e) => {
-            reReplyCheckHandler(e);
-          }}
-        />
-      </CommentCreate>
     </div>
   );
 }
