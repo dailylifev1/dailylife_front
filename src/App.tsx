@@ -6,16 +6,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/index';
 import Main from './components/main/Main';
 import MyInfo from './components/myInfo/MyInfo';
-import Navbar from './components/navbar/Navbar';
-import RecentlyViewed from './components/recentlyViewed/recentlyViewed';
-import Searching from './components/search/Searching';
+import Navbar from './components/navbar';
 import SignUp from './components/signUp/SignUp';
-import UserPost from './components/UserPost/UserPost';
-
+import SearchForm from 'components/navbar/searching/searchForm/searchForm';
 function App() {
-  // const dispatch = useDispatch();
-  // const store = useSelector((state) => state);
-  // const cardData = useSelector((state) => state.post);
 
   useEffect(() => {
     console.log('rendered App');
@@ -28,9 +22,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
-        <Route path="/recentlyViewed" element={<RecentlyViewed />} />
-        <Route path="/search" element={<Searching />} />
-        <Route path="/post" element={<UserPost />} />
+        <Route path="/search" element={<SearchForm />} />
         <Route path="/myInfo" element={<MyInfo />} />
       </Routes>
     </BrowserRouter>

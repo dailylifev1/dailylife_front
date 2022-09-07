@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import InputInfo from './InputInfo';
 import useForm from './useForm';
 
-import loginFormData from 'mocks/loginFormData';
+import signupFormData from 'mocks/signupFormData';
 
 function SignUp() {
   const { handleChange, handleSubmit, errors } = useForm({
@@ -24,6 +24,7 @@ function SignUp() {
             data={data}
             handleChange={(event) => handleChange(event, data.name)}
             errorMessage={errors[data.name]}
+
           />
         ))}
         <SubmitBtn type="submit">create</SubmitBtn>
