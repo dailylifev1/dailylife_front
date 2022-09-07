@@ -1,30 +1,7 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { myInfoActions } from 'reducers/myInfo';
+import useSetToken from './useSetToken';
 
 function MyInfoForm() {
-  const dispatch = useDispatch();
-  const userData = useSelector((state) => state.myInfo);
-
-  useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
-      axios
-        .post(
-          `${process.env.REACT_APP_HOST}/api/users/details/${userData.userNum}`,
-          null,
-          {
-            headers: {
-              'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-            },
-          },
-        )
-        .then((res) => dispatch(myInfoActions.updateUserInfo(res.data.data)))
-        .catch((err) => console.log(err));
-    }
-  }, []);
-
+  const userData = useSetToken();
   return (
     <div style={{ textAlign: 'center', marginTop: '60px' }}>
       {userData.userInfo.userName}님의 회원 정보 페이지입니다.
