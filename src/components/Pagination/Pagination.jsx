@@ -1,27 +1,26 @@
+import postApi from 'apis/postApi';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Pagination from 'react-js-pagination';
 import { useDispatch } from 'react-redux';
+
 import { postActions } from '../../reducers/post';
 import './pagination.css';
 
-const Paging = (props) => {
+function Paging() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [rerender, setRerender] = useState('');
   const [totalPostCount, setTotalPostCount] =
     useState('');
 
-  const pageChangeHandler = (page) => {
+  // const pageChangeHandler = (page) => {  // 오류 날시 아래 코드를 이 코드로 뵨굥
+  const pageChangeHandler = () => {
     axios
       .get(
         `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?pg=${page}`,
       )
       .then((res) => {
-        // console.log(res.data);
-        console.log(
-          'AJAX in pageChangeHandler: Pagination.js',
-        );
         dispatch(
           postActions.updateItems(res.data),
         );
@@ -30,22 +29,20 @@ const Paging = (props) => {
       .catch((res) => {
         console.log(res);
       });
-    setPage((prevState) => {
-      setRerender(1);
+    setPage(() => {
+      setRerender(page);
       return page;
     });
   };
   useEffect(() => {
+    postApi.getPostDataForNotLoginUser().then;
+
     axios
       .get(
         `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?pg=${page}`,
       )
-      .then((res) => {
+      .then(() => {
         // console.log(res.data);
-        console.log(
-          'postActions.updatePageNum: Pagination.js',
-        );
-        console.log('page: Pagination.js', page);
         dispatch(postActions.updatePageNum(page));
         setRerender('');
       })
@@ -77,6 +74,6 @@ const Paging = (props) => {
       onChange={pageChangeHandler}
     />
   );
-};
+}
 
 export default Paging;
