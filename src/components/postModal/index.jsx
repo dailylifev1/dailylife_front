@@ -77,7 +77,7 @@ function PostModal(
     return elapsedText;
   };
   /** 서버로부터 댓글 정보를 받아서 replyList 상태에 저장 */
-  function replyInsertHandler(e) {
+  function getReply(e) {
     if (localStorage.getItem('accessToken')) {
       axios
         .get(
