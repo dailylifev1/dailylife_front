@@ -127,7 +127,7 @@ function ModalContent(props) {
         </h1>
         <div className="text-in-modal">
           {contentGenerator(content)}
-          {/* <button
+          <button
             className="delete-board"
             onClick={() => {
               console.log(currentPostData);
@@ -160,7 +160,7 @@ function ModalContent(props) {
             }}
           >
             글 삭제
-          </button> */}
+          </button>
         </div>
         {/* <div className="text-in-modal">{currentPostData.content}</div> */}
       </div>

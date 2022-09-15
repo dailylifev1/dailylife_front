@@ -32,7 +32,7 @@ function Cards() {
       )
       .then((res) => {
         console.log(
-          'postActions.updateIems: Card',
+          'ㄷㄹㄹㅈㄷㄹㅈㄷㄹㅈㄷㄹㅈㄷㄹㅈㄷ: Card',
         );
         console.log(res.data);
         dispatch(
