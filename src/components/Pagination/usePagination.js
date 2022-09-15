@@ -5,7 +5,7 @@ import postApi from 'apis/postApi';
 import { postActions } from 'reducers/post';
 
 function usePagination({
-  itemCountPerPage,
+  boardCountPerPage,
   pageRangeCount,
 }) {
   const dispatch = useDispatch();
@@ -35,10 +35,8 @@ function usePagination({
     setTotalPostCount(boardCount);
   };
   fetchTotalBoardCount();
-
-  console.log(totalPostCount);
   return {
-    itemCountPerPage,
+    boardCountPerPage,
     pageRangeCount,
     totalPostCount,
     handleChange,

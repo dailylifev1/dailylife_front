@@ -11,14 +11,12 @@ export default function Main() {
   useEffect(() => {
     console.log('rendered Main');
   });
-  const itemCountPerPage = 15;
+  const boardCountPerPage = 15;
   const pageRangeCount = 5;
-  const boardPagingInfo = usePagination({ itemCountPerPage, pageRangeCount });
+  const boardPagingInfo = usePagination({ boardCountPerPage, pageRangeCount });
   return (
     <>
       <Cards />
-      {/* <Paging /> */}
-      {/* <pagingProvider {...boardPagingInfo} /> */}
       <PagingProvider {...boardPagingInfo} />
     </>
   );

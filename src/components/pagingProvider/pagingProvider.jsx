@@ -1,12 +1,12 @@
 import Pagination from 'react-js-pagination';
 import '../pagination/pagination.css'
 
-function PagingProvider({ itemCountPerPage, pageRangeCount,
+function PagingProvider({
+  itemCountPerPage,
+  pageRangeCount,
   page,
   totalPostCount,
   handleChange, }) {
-
-  console.log(totalPostCount);
   return (
     <Pagination
       activePage={page}
