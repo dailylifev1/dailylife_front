@@ -2,15 +2,12 @@ import axios from 'axios';
 import { useState } from 'react';
 
 import CloseButtonIcon from 'components/Icons/closeButtonIcon';
-
-
-
 import './writePage.scss';
 
 function writePage(props) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [thumbNail] = useState('st');
+  const [thumbNail] = useState('dummy');
   const [imageName, setImageName] = useState([]);
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState('');
@@ -134,7 +131,6 @@ function writePage(props) {
               type="button"
               className="newPost-modal-close"
               onClick={closeModal}
-              src="/assets/x.png"
               alt="newPostModal"
             ><CloseButtonIcon />
             </button>
