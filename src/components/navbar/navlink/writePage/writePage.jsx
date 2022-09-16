@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
 
+import CloseButtonIcon from 'components/Icons/closeButtonIcon';
+
+
+
 import './writePage.scss';
 
 function writePage(props) {
@@ -76,11 +80,11 @@ function writePage(props) {
                         }}
                       />
                     </label>
-                    {/* <img    // 글 삭제 이미지버튼
-                        src={"/assets/deleteImg.png"}
-                        style={{ cursor: "pointer" }}
-                        onClick={() => deleteFileImage()}
-                      ></img> */}
+                    {/* <img    // 업로드된 사진 삭제 이미지버튼
+                      src={"/assets/deleteImg.png"}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => deleteFileImage()}
+                    ></img> */}
                   </div>
 
                   {fileImage && (
@@ -132,8 +136,8 @@ function writePage(props) {
               onClick={closeModal}
               src="/assets/x.png"
               alt="newPostModal"
-            />
-            {/* <DeleteIcon onClick={setContent} /> */}
+            ><CloseButtonIcon />
+            </button>
           </section>
         </section>
       </form>
