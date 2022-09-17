@@ -3,8 +3,8 @@ import { useEffect, React } from 'react';
 
 import Cards from '../card/card';
 
-import usePagination from 'components/pagination/usePagination';
 import PagingProvider from 'components/pagingProvider/pagingProvider';
+import usePagination from 'hooks/usePagination/usePagination';
 
 export default function Main() {
   console.log('executes Main');

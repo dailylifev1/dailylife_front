@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import useForm from './useForm';
+import useForm from '../../hooks/useForm/useForm';
 
 import signupFormData from 'mocks/signupFormData';
 

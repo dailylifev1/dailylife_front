@@ -9,7 +9,6 @@ function usePagination({
   pageRangeCount,
 }) {
   const dispatch = useDispatch();
-  // const [page] = useState(1);
   const [renderedItems, setRenderedItems] =
     useState([]);
   const [totalPostCount, setTotalPostCount] =

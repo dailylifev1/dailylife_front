@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -17,6 +17,11 @@ function WriterInfo({ setModalOpacity }) {
     // eslint-disable-next-line no-shadow
     setMenu((isOpen) => !isOpen);
   };
+
+  useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen])
+
   return (
     <div className="writer-info-container">
       <WriterInfoWrapper>
@@ -50,6 +55,7 @@ function WriterInfo({ setModalOpacity }) {
                     alert(
                       '게시글이 성공적으로 삭제되었습니다.',
                     );
+                    toggleMenu(); // useEffect는 왜 못쓸까?
                     setModalOpacity(0);
                   }}
                 >

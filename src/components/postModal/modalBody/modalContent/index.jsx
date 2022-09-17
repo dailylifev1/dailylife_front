@@ -127,40 +127,6 @@ function ModalContent(props) {
         </h1>
         <div className="text-in-modal">
           {contentGenerator(content)}
-          <button
-            className="delete-board"
-            onClick={() => {
-              console.log(currentPostData);
-              axios
-                .delete(
-                  `${process.env.REACT_APP_HOST}/api/board/delete/${boardNum}`,
-                  {
-                    headers: {
-                      'X-ACCESS-TOKEN':
-                        localStorage.getItem(
-                          'accessToken',
-                        ),
-                    },
-                  },
-                )
-                .then((res) => {
-                  // console.log(res);
-                  alert(
-                    '게시글이 성공적으로 삭제되었습니다.',
-                  );
-                  setModalOpacity(0);
-                  console.log(
-                    '게시글이 성공적으로 삭제되었습니다.',
-                  );
-                  // boardDelete();
-
-                  // window.location.href = "/";
-                })
-                .catch((res) => console.log(res));
-            }}
-          >
-            글 삭제
-          </button>
         </div>
         {/* <div className="text-in-modal">{currentPostData.content}</div> */}
       </div>
