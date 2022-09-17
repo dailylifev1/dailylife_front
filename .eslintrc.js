@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
   },
 
-  extends: ['plugin:react/recommended', 'standard-with-typescript', 'airbnb', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'standard-with-typescript',
+    'airbnb',
+    'prettier',
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',

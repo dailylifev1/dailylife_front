@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* background-color: pink; */
   border-radius: 10px;
   background-position: center;
   background-size: contain, cover;
@@ -16,6 +15,41 @@
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: right;
+}
+
+.kebab-list-container {
+  padding: 0;
+  width: 214px;
+  /* height: 9.9vh; */
+  height: 165px;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.kebab-list-container>button {
+  top: 30px;
+  height: 55px;
+  line-height: 55px;
+  background: #FFFFFF;
+  border: 0.1px solid #DCDCDC;
+}
+
+.kebab-list-modify-button {
+  color: #6A6A6A;
+}
+
+.kebab-list-delete-button {
+  color: #6A6A6A;
+}
+
+.kebab-list-cancel-button {
+  color: #E50303;
 }
 
 .modal-content-container {
@@ -47,7 +81,7 @@
 }
 
 .modal-post-content>.text-in-modal {
-  height: 15vh;
+  height: 17vh;
   mex-height: 121px;
   overflow-y: auto;
   margin-top: 1.2vh;
