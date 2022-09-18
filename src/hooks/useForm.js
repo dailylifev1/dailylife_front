@@ -9,7 +9,6 @@ const useForm = (initialValues) => {
     initialValues,
   );
   const [errors, setErrors] = useState({});
-  // const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (event, formType) => {
     const { name, value } = event.target;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import PostRender from './postRender';
+import PostRender from './PostRender';
 
 
 function NavLinks() {

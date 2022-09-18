@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import postApi from 'apis/postApi';
 import ModalCloseButton from 'components/buttons/ModalCloseButton';
-import AvatarIcon from 'components/icons/avatarIcon';
-import KebabMenu from 'components/icons/kebabMenu';
+import AvatarIcon from 'components/icons/AvatarIcon';
+import KebabMenu from 'components/icons/KebabMenu';
 
 function WriterInfo({ setModalOpacity }) {
   const selectedPostData = useSelector(

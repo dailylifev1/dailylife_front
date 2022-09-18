@@ -53,16 +53,20 @@
 }
 
 .modal-content-container {
-  position: relative;
   width: 50%;
   margin-left: 20px;
 }
 
-.modal-content-container>.comment-create {
+.modal-content-container>.comments-wrapper {
+  position: relative;
+}
+
+.modal-content-container>.comments-wrapper>.comment-create {
   position: absolute;
   bottom: 0;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .writer-info-container {

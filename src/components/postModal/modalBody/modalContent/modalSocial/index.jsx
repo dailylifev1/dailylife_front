@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import CommentIcon from '../../../../icons/commentIcon';
-import LikeIcon from '../../../../icons/likeIcon';
+import LikeIcon from '../../../../icons/LikeIcon';
+
+import CommentIcon from 'components/icons/CommentIcon';
 
 function ModalSocial(props) {
   const { replyList } = props;

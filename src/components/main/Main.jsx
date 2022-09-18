@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, React } from 'react';
+import { useEffect } from 'react';
 
-import Cards from '../card/card';
+import Cards from '../card/Card';
 
-import PagingProvider from 'components/pagingProvider/pagingProvider';
+import PagingProvider from 'components/pagingProvider/PagingProvider';
 import usePagination from 'hooks/usePagination';
 
 export default function Main() {

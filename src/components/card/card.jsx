@@ -7,7 +7,7 @@ import {
 
 import { postActions } from '../../reducers/post';
 import PostModal from '../postModal/index';
-import CardItem from './cardItem';
+import CardItem from './CardItem';
 import './Cards.css';
 
 function Cards() {
