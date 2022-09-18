@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import '../Searching.css';
 
-import useAxios from '../../../../hooks/useAxios/useAxios';
+import useAxios from '../../../../hooks/useAxios';
 
 import { postActions } from 'reducers/post';
 

@@ -1,4 +1,4 @@
-import KebabMenu from "components/Icons/kebabMenu";
+import KebabMenu from "components/icons/kebabMenu";
 
 function KebabMenuButton() {
   return (

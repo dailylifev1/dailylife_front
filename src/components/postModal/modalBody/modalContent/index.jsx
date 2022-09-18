@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import CommentCreate from '../../../comments/commentCreate';
 import ModalSocial from './modalSocial';
 import WriterInfo from './writerInfo';
 
+import CommentCreate from 'components/comments/commentCreate';
 import CommentSection from 'components/comments/commentSection';
 
 function ModalContent(props) {

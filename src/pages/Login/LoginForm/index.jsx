@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import useLoginForm from '../../../hooks/useLoginForm/useLoginForm';
+import useLoginForm from '../../../hooks/useLoginForm';
 import EasyLogin from './EasyLogin';
 import LoginFind from './LoginFind/index';
 
