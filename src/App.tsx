@@ -1,6 +1,5 @@
 import './index.css';
 import React, { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from './pages/Login/index';
