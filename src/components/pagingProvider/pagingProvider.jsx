@@ -7,7 +7,6 @@ function PagingProvider({
   page,
   totalPostCount,
   handleChange, }) {
-  console.log(`itemCountPerPage ${itemCountPerPage}`);
   return (
     <Pagination
       activePage={page}
