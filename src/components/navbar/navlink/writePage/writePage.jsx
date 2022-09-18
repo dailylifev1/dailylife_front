@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import CloseButtonIcon from 'components/Icons/closeButtonIcon';
+import CloseButtonIcon from 'components/icons/closeButtonIcon';
 import './writePage.scss';
 
 function writePage(props) {

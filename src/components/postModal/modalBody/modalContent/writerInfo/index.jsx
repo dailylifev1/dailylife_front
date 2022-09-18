@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import ModalCloseButton from '../../../../buttons/ModalCloseButton';
-import AvatarIcon from '../../../../Icons/avatarIcon';
-
 import postApi from 'apis/postApi';
-import KebabMenu from 'components/Icons/kebabMenu';
+import ModalCloseButton from 'components/buttons/ModalCloseButton';
+import AvatarIcon from 'components/icons/avatarIcon';
+import KebabMenu from 'components/icons/kebabMenu';
 
 function WriterInfo({ setModalOpacity }) {
   const selectedPostData = useSelector(

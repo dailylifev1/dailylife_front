@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import MainLogoIcon from 'components/Icons/mainLogoIcon';
+import MainLogoIcon from 'components/icons/mainLogoIcon';
 
 function NavLogo() {
   return (

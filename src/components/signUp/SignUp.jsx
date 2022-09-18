@@ -1,4 +1,3 @@
-// 에러처리 아직 안했음
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

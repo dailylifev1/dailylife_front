@@ -76,21 +76,21 @@ function CommentSection(props) {
           {/* 대댓글 목록 */}
           {reReplyFlag[index]
             ? item.reReply.map((data) => (
-                <div
-                  style={{
-                    width: '100%',
-                    height: '30px',
-                  }}
-                >
-                  {data.replyReplyContext}
-                </div>
-              ))
+              <div
+                style={{
+                  width: '100%',
+                  height: '30px',
+                }}
+              >
+                {data.replyReplyContext}
+              </div>
+            ))
             : // <ul className="comment-sub-list">
-              //   <li className="comment-sub-item">
-              //     <div className="avatar"></div>
-              //   </li>
-              // </ul>
-              ''}
+            //   <li className="comment-sub-item">
+            //     <div className="avatar"></div>
+            //   </li>
+            // </ul>
+            ''}
         </CommentContainer>
       ))}
     </div>

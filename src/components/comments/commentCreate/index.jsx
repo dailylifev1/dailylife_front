@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRef } from 'react';
 import styled from 'styled-components';
 
-import AvatarIcon from '../../../../Icons/avatarIcon';
+import AvatarIcon from '../../icons/avatarIcon';
 
 function CommentCreate({
   dateHandler,

@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import CommentCreate from './commentCreate';
-import CommentSection from './commentSection';
+import CommentCreate from '../../../comments/commentCreate';
 import ModalSocial from './modalSocial';
 import WriterInfo from './writerInfo';
+
+import CommentSection from 'components/comments/commentSection';
 
 function ModalContent(props) {
   const { currentPostData, setModalOpacity } =
