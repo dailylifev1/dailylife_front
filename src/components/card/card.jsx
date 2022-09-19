@@ -29,6 +29,7 @@ function Cards() {
               localStorage.getItem('accessToken'),
           },
         },
+
       );
       const items = await getCards.then(
         (res) => res.data,

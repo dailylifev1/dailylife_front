@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import { useEffect, useState } from 'react';
+
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import styled from 'styled-components';
 
@@ -37,9 +39,11 @@ function CardItem({
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
 
+
   useEffect(() => {
     async function fetchItemData() {
       const items = await axios.get(
+
         `${process.env.REACT_APP_HOST}/api/board/getBoard`,
         {
           headers: {
@@ -47,6 +51,7 @@ function CardItem({
               localStorage.getItem('accessToken'),
           },
         },
+
       );
       const itemsData = await items.then(
         (res) => res.data,
