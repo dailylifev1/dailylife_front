@@ -31,7 +31,7 @@ function Cards() {
         },
       )
       .then((res) => {
-        console.log(res.data);
+        console.log('');
         dispatch(
           postActions.updateItems(res.data),
         );

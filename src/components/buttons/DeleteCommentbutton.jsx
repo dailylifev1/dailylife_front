@@ -50,7 +50,7 @@ function DeleteCommentButton(props) {
                         <button
                             type="button"
                             onClick={() => {
-                                setReplyDeleteFlag(-1);
+                                setReplyDeleteFlag(false);
                             }}
                         >
                             취소

@@ -14,7 +14,7 @@ function CommentMain({ item }) {
       <div className="comment-content">
         {item.replyContext}
       </div>
-      <LikeIcon />
+      <LikeIcon replyNum={item.replyNum} />
     </CommentMainWrapper>
   );
 }

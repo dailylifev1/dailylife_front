@@ -10,7 +10,7 @@ function CommentSection({ replyList, setReplyList, reReplyFlag }) {
     <div className="comment-section">
       {replyList.map((item, index) => (
         <Comment
-          key={index.replyNum}
+          key={item.replyNum}
           replyHover={replyHover}
           setReplyHover={setReplyHover}
           replyList={replyList}

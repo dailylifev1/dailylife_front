@@ -28,7 +28,6 @@ function Comments() {
             />
             {/* 댓글 작성칸 */}
             <CommentCreate
-                key={currentPostData.boardNum}
                 replyList={replyList}
                 setReplyList={setReplyList}
                 dateHandler={dateHandler}

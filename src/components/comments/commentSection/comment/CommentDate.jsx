@@ -12,8 +12,9 @@ function CommentDate(props) {
     replyList,
     setReplyList,
   } = props;
+  console.log(item);
   const [replyDeleteFlag, setReplyDeleteFlag] =
-    useState('');
+    useState(false);
 
   const { commentHearts } = useCommentHearts(
     item.replyNum,
@@ -23,10 +24,10 @@ function CommentDate(props) {
     <CommentDateContainer>
       <span className="empty" />
       <span className="comment-date">
-        {`${item.time} ·  `}
+        {`${item.replyTime} ·  `}
         {commentHearts === 0
           ? ''
-          : `좋아요: ${commentHearts}`}
+          : `좋아요: ${item.commentHearts}`}
         {' · '}
         답글 달기
         {item.subCommentCount ? (
@@ -44,7 +45,7 @@ function CommentDate(props) {
         ) : (
           ''
         )}
-        {replyDeleteFlag !== -1 ? (
+        {replyDeleteFlag === true ? (
           <DeleteCommentButton
             setReplyList={setReplyList}
             replyList={replyList}
