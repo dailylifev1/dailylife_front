@@ -16,6 +16,7 @@ const persistConfig = {
 };
 
 export const rootReducer = combineReducers({
+  kebabModal: kebabModal.reducer,
   authToken: authToken.reducer,
   comment: comment.reducer,
   myInfo: myInfo.reducer,

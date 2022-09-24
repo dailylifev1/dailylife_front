@@ -2,7 +2,7 @@ import axios from 'axios';
 import MyInfoButton from 'components/buttons/MyInfoButton';
 import ProfileMenuItem from 'components/buttons/ProfileMenuItem';
 import AvatarIcon from 'components/Icons/AvatarIcon';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../myinfo.scss';
 import MyInfoInput from './MyInfoInput';
@@ -49,7 +49,7 @@ function MyInfoForm() {
         {
           userName: inputName,
           userPassword: inputId,
-          userProfileImg: fileImage
+          userProfileImg: fileImage,
         },
         {
           headers: {
