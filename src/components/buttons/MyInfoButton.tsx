@@ -1,36 +1,18 @@
-import axios from 'axios';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  inputName: string;
-  inputId: string;
   text: string;
   isActive: boolean;
-  requestPath: string;
+  requestPath?: string;
 }
 
 export default function MyInfoButton({ text, isActive, requestPath }: Props) {
-  function handleClick(e: MouseEvent) {
-    e.preventDefault();
-    axios
-      .post(
-        `${process.env.REACT_APP_HOST}/${requestPath}`,
-        {},
-        {
-          headers: {
-            'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-          },
-        },
-      )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  }
-  return (
-    <StyledButton isActive={isActive} onClick={handleClick}>
-      {' '}
-      {text}
-    </StyledButton>
-  );
+  useEffect(() => {
+    console.log('isActive:', isActive);
+  });
+
+  return <StyledButton isActive={isActive}>{text}</StyledButton>;
 }
 
 const StyledButton = styled.button<{ isActive: boolean }>`
