@@ -11,6 +11,7 @@ function CardItem({
   content,
   heartState,
   setModalOpacity,
+  path,
 }) {
 
   const dispatch = useDispatch();
