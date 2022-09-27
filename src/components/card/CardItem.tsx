@@ -56,7 +56,7 @@ function CardItem({
           },
         },
       )
-      .then((res) => {})
+      .then((res) => { })
       .catch((res) => console.log(res));
   };
 
