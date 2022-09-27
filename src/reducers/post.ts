@@ -13,7 +13,10 @@ interface State {
   pageNum: number;
   myValues: IPost[];
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18e24a6041e2cb126b37bf02972a143b89bf9a80
 const post = createSlice({
   name: 'post',
   initialState: {
@@ -22,12 +25,15 @@ const post = createSlice({
     myValues: [] as IPost[],
   },
   reducers: {
+<<<<<<< HEAD
     // updateItems(state, action) {
     //   state.myValues = action.payload;
     // },
     // updatePageNum(state, action) {
     //   state.PageNum = action.payload;
     // },
+=======
+>>>>>>> 18e24a6041e2cb126b37bf02972a143b89bf9a80
     updateItems: (state, action: PayloadAction<IPost[]>): State => ({
       ...state,
       myValues: action.payload,
@@ -40,5 +46,8 @@ const post = createSlice({
 });
 
 export const postActions = post.actions;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18e24a6041e2cb126b37bf02972a143b89bf9a80
 export default post;
