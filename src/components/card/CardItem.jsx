@@ -12,7 +12,6 @@ function CardItem({
   heartState,
   setModalOpacity,
 }) {
-  console.log('executes CardItem');
 
   const dispatch = useDispatch();
   const openModal = () => {
@@ -36,11 +35,10 @@ function CardItem({
   const Emptyheart = '/assets/heart.png';
 
   useEffect(() => {
-    console.log('rendered CardItem');
     async function fetchItemData() {
       const items = await axios
         .get(
-          `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin/${boardNum}`,
+          `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`,
         )
         .then((res) => res.data);
     }
@@ -63,7 +61,6 @@ function CardItem({
         },
       )
       .then((res) => {
-        console.log('AJAX2 in CardItem', res);
       })
       .catch((res) => console.log(res));
   };
