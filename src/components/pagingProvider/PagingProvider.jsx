@@ -9,7 +9,11 @@ function PagingProvider({
   handleChange,
 }) {
   return (
-    <div onClick={() => { window.scrollTo(0, 0) }}>
+    <div
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
       <Pagination
         activePage={page}
         itemsCountPerPage={boardCountPerPage}
@@ -18,7 +22,8 @@ function PagingProvider({
         prevPageText={<img src="/assets/prevPage.png" alt="" />}
         nextPageText={<img src="/assets/nextPage.png" alt="" />}
         onChange={handleChange}
-      /></div>
+      />
+    </div>
   );
 }
 

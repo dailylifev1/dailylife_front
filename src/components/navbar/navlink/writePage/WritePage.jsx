@@ -117,10 +117,10 @@ function WritePage(props) {
                 <button
                   type="submit"
                   className="submit-btn"
-                // onClick={closeModal}
-                //   onClick={() => {
-                //     if (fileImage === '' ? (alert('이미지를 등록해주세요!')))
-                // }}
+                  // onClick={closeModal}
+                  //   onClick={() => {
+                  //     if (fileImage === '' ? (alert('이미지를 등록해주세요!')))
+                  // }}
                 >
                   게시물 등록
                 </button>
