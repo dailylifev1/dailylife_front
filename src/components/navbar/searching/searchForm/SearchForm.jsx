@@ -3,9 +3,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../Searching.scss';
-// eslint-disable-next-line import/order
-
-// import useAxios from '../../../../hooks/useAxios';
 
 import { postActions } from 'reducers/post';
 
@@ -16,9 +13,6 @@ function SearchForm() {
   const submitHandler = (e) => {
     e.preventDefault();
   };
-  // const getPostData = (url) => {
-  //   useAxios(url);
-  // };
 
   return (
     <div id="wrap">
@@ -34,13 +28,9 @@ function SearchForm() {
           }}
           onKeyUp={() => {
             if (window.event.keyCode === 13) {
-              // getPostData(`process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`);
-              // console.log(getPostData);
-              // dispatch(postActions.updateItems(getPostData.data));
-              // setTypedKeyword(e.target.value);
               axios
                 .get(
-                  `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`,
+                  `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}`,
                   {},
                 )
                 .then((res) => {

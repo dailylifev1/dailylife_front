@@ -1,22 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type IResults = string[];
+import { IPost } from './post';
 
 interface IState {
-  results: IResults;
+  results: IPost[];
 }
 
 const searchResult = createSlice({
   name: 'searchResult',
   initialState: {
-    results: [] as IResults,
+    results: [] as IPost[],
   },
   reducers: {
-    bringItems: (state, action: PayloadAction<IResults>): IState => ({
+    bringItems: (state, action: PayloadAction<IPost[]>): IState => ({
       results: [...state.results, ...action.payload],
     }),
   },
 });
 
-export const searchedDataActions = searchResult.actions;
+export const { bringItems } = searchResult.actions;
 export default searchResult;

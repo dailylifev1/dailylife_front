@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'store/hooks';
 
 import { postActions } from '../../reducers/post';
 import PostModal from '../postModal/index';
@@ -22,19 +23,19 @@ export interface CardProps {
 
 function Cards() {
   const dispatch = useDispatch();
-  const cardData = useSelector((state) => state.post);
+  const cardData = useAppSelector((state) => state.post);
   const [modalOpacity, setModalOpacity] = useState<number>(0);
 
   useEffect(() => {
-    async function fetchCards() {
-      const getCards = await axios
-        .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`)
-        .then((res) => res.data);
-
-      dispatch(postActions.updateItems(getCards));
-    }
-    fetchCards();
-  }, [modalOpacity]);
+    axios
+      .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`)
+      .then((res) => {
+        dispatch(postActions.updateItems(res.data));
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }, []);
 
   return (
     <div className="cards">
@@ -49,7 +50,6 @@ function Cards() {
                 title={data.title}
                 content={data.content}
                 heartState={data.heart}
-                path={data.path}
                 setModalOpacity={setModalOpacity}
               />
             ))}
