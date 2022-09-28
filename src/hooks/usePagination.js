@@ -1,19 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-
 import postApi from 'apis/postApi';
 import { postActions } from 'reducers/post';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useEffect, useState } from 'react';
 
 function usePagination({ boardCountPerPage, pageRangeCount }) {
-  const dispatch = useDispatch();
-  const [totalPostCount, setTotalPostCount] = useState('');
+  const dispatch = useAppDispatch();
+  const store = useAppSelector((state) => state);
+  const [postCount, setPostCount] = useState(0);
 
-  const store = useAppSelector((state) => state.post);
-  let currentTotalPostCount = store.myValues.length;
   useEffect(() => {
-    currentTotalPostCount = postApi.getTotalPostCount();
-  }, []);
+    // console.log('usePagination');
+    console.log(store.post.myValues);
+    async function foo() {
+      const x = await fetchTotalBoardCount();
+      setPostCount(() => x);
+    }
+    if (store.searchResult.result) {
+      setPostCount(() => store.post.myValues.length);
+    } else foo();
+  }, [store.post.myValues]);
 
   const handleChange = (selectedPage) => {
     const fetchPages = async () => {
@@ -23,19 +28,18 @@ function usePagination({ boardCountPerPage, pageRangeCount }) {
     };
     fetchPages();
   };
-
   const fetchTotalBoardCount = async () => {
-    // const { data: boardCount } = await postApi.getTotalPostCount();
-    // currentTotalPostCount
-    //   ? setTotalPostCount(currentTotalPostCount)
-    //   : setTotalPostCount(boardCount);
+    const { data: boardCount } = await postApi.getTotalPostCount();
+    // setTotalPostCount(boardCount);
+    return boardCount;
   };
-  fetchTotalBoardCount();
+
   return {
     boardCountPerPage,
     pageRangeCount,
-    totalPostCount,
+    postCount,
     handleChange,
+    fetchTotalBoardCount,
   };
 }
 
