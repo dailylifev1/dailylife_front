@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IPost {
+export interface IPost {
   boardNum: number;
   content: string;
   heart: boolean;
