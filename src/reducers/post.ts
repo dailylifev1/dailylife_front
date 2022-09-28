@@ -17,7 +17,6 @@ const post = createSlice({
   name: 'post',
   initialState: {
     pageNum: 1,
-    // isOpenWritePostModal: false,
     myValues: [] as IPost[],
   },
   reducers: {
@@ -33,4 +32,8 @@ const post = createSlice({
 });
 
 export const postActions = post.actions;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 198a7c820ea1641c89d123d57e23133bef9b57f9
 export default post;
