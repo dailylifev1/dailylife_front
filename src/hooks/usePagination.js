@@ -20,6 +20,12 @@ function usePagination({ boardCountPerPage, pageRangeCount }) {
     }
   }, [store.searchResult.result]);
 
+  const store = useAppSelector((state) => state.post);
+  let currentTotalPostCount = store.myValues.length;
+  useEffect(() => {
+    currentTotalPostCount = postApi.getTotalPostCount();
+  }, []);
+
   const handleChange = (selectedPage) => {
     const fetchPages = async () => {
       const { data: postedItems } = await postApi.getItemByPage(selectedPage);

@@ -23,14 +23,9 @@ function SearchForm() {
           placeholder="검색"
           onKeyUp={(e) => {
             if (window.event.keyCode === 13) {
-              dispatch(updateSearchedKeyword(e.target.value));
-              // getPostData(`process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`);
-              // console.log(getPostData);
-              // dispatch(postActions.updateItems(getPostData.data));
-              // setTypedKeyword(e.target.value);
               axios
                 .get(
-                  `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${e.target.value}`,
+                  `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}`,
                   {},
                 )
                 .then((res) => {
