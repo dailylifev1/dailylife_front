@@ -52,7 +52,7 @@ function CardItem({
         },
         {
           headers: {
-            // 'X-ACCESS-TOKEN': localStorage.getItem('accessToken')!,
+            'X-ACCESS-TOKEN': localStorage.getItem('accessToken')!,
           },
         },
       )

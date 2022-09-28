@@ -14,7 +14,6 @@ interface State {
   pageNum: number;
   myValues: IPost[];
 }
-
 const post = createSlice({
   name: 'post',
   initialState: {
