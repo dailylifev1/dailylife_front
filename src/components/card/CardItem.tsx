@@ -12,10 +12,6 @@ function CardItem({
   heartState,
   setModalOpacity,
 }) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 8ac450a5530c726ccfda2644ffa966260fe0c235
   const dispatch = useDispatch();
   const openModal = () => {
     setModalOpacity(1);
@@ -37,28 +33,6 @@ function CardItem({
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
 
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   async function fetchItemData() {
-  //     const items = await axios
-  //       .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`)
-  //       .then((res) => res.data);
-  //   }
-  //   fetchItemData();
-  // }, [like]);
-=======
-  useEffect(() => {
-    async function fetchItemData() {
-      const items = await axios
-        .get(
-          `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`,
-        )
-        .then((res) => res.data);
-    }
-    fetchItemData();
-  }, [like]);
->>>>>>> 8ac450a5530c726ccfda2644ffa966260fe0c235
-
   const clickHeartEvent = (e) => {
     e.stopPropagation();
     setLike(!like);
@@ -74,12 +48,8 @@ function CardItem({
           },
         },
       )
-<<<<<<< HEAD
-      .then((res) => {})
-=======
       .then((res) => {
       })
->>>>>>> 8ac450a5530c726ccfda2644ffa966260fe0c235
       .catch((res) => console.log(res));
   };
 
