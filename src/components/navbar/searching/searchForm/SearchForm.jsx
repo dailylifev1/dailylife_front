@@ -29,7 +29,6 @@ function SearchForm() {
                   {},
                 )
                 .then((res) => {
-                  console.log('in SearchForm', res.data);
                   dispatch(postActions.updateItems(res.data));
                   dispatch(updateSearchedKeyword(e.target.value));
                 })

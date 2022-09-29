@@ -15,16 +15,8 @@ function usePagination({ boardCountPerPage, pageRangeCount }) {
     }
     if (store.searchResult.result) {
       setPostCount(() => store.post.myValues.length);
-    } else {
-      foo();
-    }
+    } else foo();
   }, [store.searchResult.result]);
-
-  const store = useAppSelector((state) => state.post);
-  let currentTotalPostCount = store.myValues.length;
-  useEffect(() => {
-    currentTotalPostCount = postApi.getTotalPostCount();
-  }, []);
 
   const handleChange = (selectedPage) => {
     const fetchPages = async () => {
