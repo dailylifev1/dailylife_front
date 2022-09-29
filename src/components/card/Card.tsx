@@ -36,7 +36,6 @@ function Cards() {
       .catch((res) => {
         console.log(res);
       });
-    console.log(store.isLogoClicked);
   }, [store.isLogoClicked]);
 
   return (
