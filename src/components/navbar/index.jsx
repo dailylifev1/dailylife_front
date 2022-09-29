@@ -5,10 +5,12 @@ import Searching from './searching';
 
 function Navbar() {
   return (
-    <div className="nav">
-      <NavLogo />
-      <Searching />
-      <NavLinks />
+    <div className='nav-container'>
+      <div className="nav">
+        <NavLogo />
+        <Searching />
+        <NavLinks />
+      </div>
     </div>
   );
 }
