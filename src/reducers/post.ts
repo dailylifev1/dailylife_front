@@ -13,6 +13,7 @@ interface State {
   pageNum: number;
   myValues: IPost[];
 }
+
 const post = createSlice({
   name: 'post',
   initialState: {
@@ -32,8 +33,4 @@ const post = createSlice({
 });
 
 export const postActions = post.actions;
-<<<<<<< HEAD
-=======
-
->>>>>>> 198a7c820ea1641c89d123d57e23133bef9b57f9
 export default post;

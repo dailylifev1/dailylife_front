@@ -32,7 +32,16 @@ function CardItem({
 
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
-
+  useEffect(() => {
+    async function fetchItemData() {
+      const items = await axios
+        .get(
+          `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`,
+        )
+        .then((res) => res.data);
+    }
+    fetchItemData();
+  }, [like]);
   const clickHeartEvent = (e) => {
     e.stopPropagation();
     setLike(!like);
