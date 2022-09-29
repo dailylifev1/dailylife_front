@@ -13,7 +13,7 @@ function NavLogo() {
         dispatch(updateSearchedKeyword(''))
       }} type="button">
         <Link to="/">
-          <img src='/assets/logo.png' alt='logo' />
+          <img src='/assets/logo.png' alt='mainLogo' />
         </Link>
       </button>
     </div>
