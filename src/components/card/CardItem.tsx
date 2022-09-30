@@ -2,9 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import styled from 'styled-components/macro';
-import selectedPostData, {
-  selectedPostActions,
-} from '../../reducers/selectedPostData';
+import { selectedPostActions } from '../../reducers/selectedPostData';
 
 function CardItem({
   boardNum,
@@ -54,7 +52,7 @@ function CardItem({
         },
         {
           headers: {
-            'X-ACCESS-TOKEN': localStorage.getItem('accessToken')!,
+            // 'X-ACCESS-TOKEN': localStorage.getItem('accessToken')!,
           },
         },
       )
