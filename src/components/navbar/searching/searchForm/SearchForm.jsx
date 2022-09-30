@@ -4,16 +4,18 @@ import '../Searching.scss';
 import { postActions } from 'reducers/post';
 import { useAppDispatch } from 'store/hooks';
 import { updateSearchedKeyword } from 'reducers/searchResult';
+import { useNavigate } from 'react-router-dom';
 
 function SearchForm() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div id="wrap">
+    <div id="search-wrap">
       <form action="" onSubmit={submitHandler} autoComplete="on">
         <input
           className="searchBar"
@@ -23,19 +25,15 @@ function SearchForm() {
           placeholder="검색"
           onKeyUp={(e) => {
             if (window.event.keyCode === 13) {
-              dispatch(updateSearchedKeyword(e.target.value));
-              // getPostData(`process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`);
-              // console.log(getPostData);
-              // dispatch(postActions.updateItems(getPostData.data));
-              // setTypedKeyword(e.target.value);
               axios
                 .get(
                   `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${e.target.value}`,
                   {},
                 )
                 .then((res) => {
-                  console.log('in SearchForm', res.data);
+                  navigate(`search=${e.target.value}`)
                   dispatch(postActions.updateItems(res.data));
+                  dispatch(updateSearchedKeyword(e.target.value));
                 })
                 .catch((res) => {
                   console.log(res);
