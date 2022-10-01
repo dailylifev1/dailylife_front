@@ -7,9 +7,8 @@ import Navbar from './components/navbar';
 import SearchForm from 'components/navbar/searching/searchForm/SearchForm';
 import Main from 'components/main/Main';
 import SignUp from 'components/signUp/SignUp';
-import MyInfo from 'components/myInfo/MyInfo';
+import MyInfo from 'components/myPage/MyIPage';
 function App() {
-
   useEffect(() => {
     console.log('rendered App');
   }, []);
