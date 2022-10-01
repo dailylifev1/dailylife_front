@@ -1,39 +1,19 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import { postActions } from '../../reducers/post';
 import PostModal from '../postModal/index';
 import CardItem from './CardItem';
-import './Cards.css';
+import useCards from './useCards';
 
 function Cards() {
-  const dispatch = useDispatch();
+  const { modalOpacity, setModalOpacity } = useCards();
   const cardData = useSelector((state) => state.post);
-  const [modalOpacity, setModalOpacity] = useState(0);
-
-  useEffect(() => {
-    async function fetchCards() {
-      const getCards = await axios
-        .get(`${process.env.REACT_APP_HOST}/api/board/getBoard`, {
-          headers: {
-            'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-          },
-        })
-        .then((res) => res.data);
-        
-      dispatch(postActions.updateItems(getCards));
-    }
-    fetchCards();
-  }, [modalOpacity]);
-
   return (
-    <div className="cards">
-      {/* <Searching cardData={cardData} /> */}
-      <div className="cards__container">
-        <div className="cards__wrapper">
-          <div className="cards__items">
-            {cardData.myValues.map((data) => (
+    <CardsWrapper>
+      <CardsContainer>
+        <CardsStyled>
+          <CardsItems>
+            {cardData?.myValues.map((data) => (
               <CardItem
                 key={data.boardNum}
                 boardNum={data.boardNum}
@@ -49,10 +29,40 @@ function Cards() {
               setModalOpacity={setModalOpacity}
               modalOpacity={modalOpacity}
             />
-          </div>
-        </div>
-      </div>
-    </div>
+          </CardsItems>
+        </CardsStyled>
+      </CardsContainer>
+    </CardsWrapper>
   );
 }
+const CardsItems = styled.div.attrs({
+  className: 'cards_itmes',
+})`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
+  gap: 15px;
+  margin-bottom: 50px;
+  padding: 0;
+  justify-content: center;
+  list-style: none;
+`;
+
+const CardsStyled = styled.div`
+  margin: 50px 0 45px;
+  width: 100%;
+`;
+const CardsWrapper = styled.div.attrs({
+  className: 'cards',
+})`
+  padding: 4rem;
+  background: rgb(255, 255, 255);
+`;
+const CardsContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 55%;
+  margin: 0 auto;
+`;
 export default Cards;
