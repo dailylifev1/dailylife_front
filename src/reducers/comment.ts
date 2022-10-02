@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Icomment {
+export interface Icomment {
   boardNum: number;
   replyContext: string;
   replyNum: number;
