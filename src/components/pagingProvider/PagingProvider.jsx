@@ -1,21 +1,18 @@
-import { useEffect } from 'react';
 import Pagination from 'react-js-pagination';
-
-import '../Pagination/pagination.css';
+import 'components/pagingProvider/pagingProvider.scss';
 
 function PagingProvider({
-  itemCountPerPage,
+  boardCountPerPage,
   pageRangeCount,
   page,
-  totalPostCount,
+  postCount,
   handleChange,
 }) {
-  useEffect(() => {});
   return (
     <Pagination
       activePage={page}
-      itemsCountPerPage={itemCountPerPage}
-      totalItemsCount={Number(totalPostCount)}
+      itemsCountPerPage={boardCountPerPage}
+      totalItemsCount={postCount}
       pageRangeDisplayed={pageRangeCount}
       prevPageText={<img src="/assets/prevPage.png" alt="" />}
       nextPageText={<img src="/assets/nextPage.png" alt="" />}

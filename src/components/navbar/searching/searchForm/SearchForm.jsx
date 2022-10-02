@@ -1,27 +1,21 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
-import '../Searching.css';
-// eslint-disable-next-line import/order
-
-// import useAxios from '../../../../hooks/useAxios';
+import '../Searching.scss';
 
 import { postActions } from 'reducers/post';
+import { useAppDispatch } from 'store/hooks';
+import { updateSearchedKeyword } from 'reducers/searchResult';
+import { useNavigate } from 'react-router-dom';
 
 function SearchForm() {
-  const dispatch = useDispatch();
-  const [typedKeyword, setTypedKeyword] = useState();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
   };
-  // const getPostData = (url) => {
-  //   useAxios(url);
-  // };
 
   return (
-    <div id="wrap">
+    <div id="search-wrap">
       <form action="" onSubmit={submitHandler} autoComplete="on">
         <input
           className="searchBar"
@@ -29,19 +23,17 @@ function SearchForm() {
           name="search"
           type="text"
           placeholder="검색"
-          onChange={(e) => {
-            setTypedKeyword(e.target.value);
-          }}
-          onKeyUp={() => {
+          onKeyUp={(e) => {
             if (window.event.keyCode === 13) {
-              // getPostData(`process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`);
-              // console.log(getPostData);
-              // dispatch(postActions.updateItems(getPostData.data));
-              // setTypedKeyword(e.target.value);
               axios
-                .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${typedKeyword}&pg=1`, {})
+                .get(
+                  `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${e.target.value}`,
+                  {},
+                )
                 .then((res) => {
+                  navigate(`search=${e.target.value}`);
                   dispatch(postActions.updateItems(res.data));
+                  dispatch(updateSearchedKeyword(e.target.value));
                 })
                 .catch((res) => {
                   console.log(res);

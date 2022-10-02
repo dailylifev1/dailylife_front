@@ -4,7 +4,7 @@ import { useState } from 'react';
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
 import './WritePage.scss';
 
-function writePage(props) {
+function WritePage(props) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [thumbNail] = useState('dummy');
@@ -12,7 +12,6 @@ function writePage(props) {
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState('');
 
-  // eslint-disable-next-line consistent-return
   function handleSubmit(e) {
     e.preventDefault();
     if (localStorage.getItem('accessToken') === null)
@@ -33,11 +32,15 @@ function writePage(props) {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        window.location.replace("/");
+      })
       .catch((err) => console.log(err));
+    closeModal();
   }
   const closeModal = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     props.changeOpenPostModal(false);
   };
   return (
@@ -56,7 +59,6 @@ function writePage(props) {
                 <div className="newPost-body-example-container">
                   <div className="newPost-body-example-pic-list">
                     <label className="select-img-btn" htmlFor="selectImg">
-                      {/* <div className="btn-upload" src={}></div> */}
                       <img
                         src="/assets/addPicture.png"
                         style={{ cursor: 'pointer', marginLeft: '10px' }}
@@ -70,18 +72,12 @@ function writePage(props) {
                         accept="image/*"
                         onChange={(e) => {
                           setFileImage(URL.createObjectURL(e.target.files[0]));
-                          // eslint-disable-next-line no-plusplus
                           for (let i = 0; i < e.target.files.length; i++)
                             setFile(`${file} ${e.target.files[i].name}`);
                           setImageName([...imageName, ...e.target.files]);
                         }}
                       />
                     </label>
-                    {/* <img    // 업로드된 사진 삭제 이미지버튼
-                      src={"/assets/deleteImg.png"}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => deleteFileImage()}
-                    ></img> */}
                   </div>
 
                   {fileImage && (
@@ -121,7 +117,10 @@ function writePage(props) {
                 <button
                   type="submit"
                   className="submit-btn"
-                  // onClick={closeModal}
+                // onClick={closeModal}
+                //   onClick={() => {
+                //     if (fileImage === '' ? (alert('이미지를 등록해주세요!')))
+                // }}
                 >
                   게시물 등록
                 </button>
@@ -142,4 +141,4 @@ function writePage(props) {
   );
 }
 
-export default writePage;
+export default WritePage;

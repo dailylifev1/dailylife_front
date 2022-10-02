@@ -1,16 +1,14 @@
-import { useSelector } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import styled from 'styled-components';
 
-import ModalBody from './modalBody';
-
+import ModalBody from 'components/postModal/ModalBody';
 import './PostModal.scss';
+import { updateModalStatus } from 'reducers/kebab.postModal';
 
 function PostModal(props) {
+  const dispatch = useDispatch();
   const { modalOpacity, setModalOpacity } = props;
-  console.log('executes PostModal');
-  const currentPostData = useSelector(
-    (state) => state.selectedPostData,
-  );
+  const currentPostData = useSelector((state) => state.selectedPostData);
 
   return (
     <div className="container">
@@ -19,11 +17,13 @@ function PostModal(props) {
         id="open-modal"
         onClick={() => {
           setModalOpacity(0);
+          dispatch(updateModalStatus(false));
         }}
       >
         <ModalBody
           currentPostData={currentPostData}
           setModalOpacity={setModalOpacity}
+          modalOpacity={modalOpacity}
         />
       </ModalWindow>
     </div>
@@ -44,8 +44,7 @@ const ModalWindow = styled.div.attrs({
   z-index: 999;
   visibility: visible;
   opacity: ${(props) => props.modalOpacity};
-  pointer-events: ${(props) =>
-    props.modalOpacity === 0 ? 'none' : 'auto'};
+  pointer-events: ${(props) => (props.modalOpacity === 0 ? 'none' : 'auto')};
   transition: all 0.3s;
 
   font-family: 'Pretendard';
