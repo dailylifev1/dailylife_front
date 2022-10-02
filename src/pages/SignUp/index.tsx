@@ -101,7 +101,7 @@ function SignUp() {
 
   return (
     <SignUpWrapper>
-      <form action="/signin" method="POST" onSubmit={() => handleSubmit()}>
+      <form action="/signin" method="POST" onSubmit={(e) => handleSubmit(e)}>
         <div className="register-form-wrapper">
           <p className="register-info-title">계정 생성</p>
           <div className="register-avatar-wrapper">
@@ -117,7 +117,7 @@ function SignUp() {
               onChange={(e) => {
                 if (e.target.files !== null) {
                   setFileImage(URL.createObjectURL(e.target.files[0]));
-                  for (let i = 0; i < e.target.files.length; i++)
+                  for (let i = 0; i < e.target.files.length; i += 1)
                     setFile(`${file} ${e.target.files[i].name}`);
                   setImageName([...imageName]);
                 }

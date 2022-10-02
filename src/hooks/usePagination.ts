@@ -10,22 +10,23 @@ function usePagination({ boardCountPerPage, pageRangeCount }) {
   const [postCount, setPostCount] = useState(0);
   const [page, setPage] = useState(1);
   useEffect(() => {
-    async function fetchTotalPostCount() {
-      const { data } = await postApi.getTotalPostCount();
-      setPostCount(data);
-    }
-    if (store.searchResult.result) {
+    if (store.searchResult.result !== '') {
       setPostCount(store.post.myValues.length);
-    } else fetchTotalPostCount();
+    } else
+      postApi
+        .getTotalPostCount()
+        .then((res) => setPostCount(res.data))
+        .catch((err) => console.log(err));
   }, [store.searchResult.result]);
 
-  const handleChange = (selectedPage) => {
-    const fetchPages = async () => {
-      const { data: postedItems } = await postApi.getItemByPage(selectedPage);
-      dispatch(postActions.updateItems(postedItems));
-    };
-    fetchPages();
-    setPage(selectedPage);
+  const handleChange = (selectedPage: number) => {
+    postApi
+      .getItemByPage(selectedPage)
+      .then((res) => {
+        dispatch(postActions.updateItems(res.data));
+        setPage(selectedPage);
+      })
+      .catch((err) => console.log(err));
   };
 
   return {

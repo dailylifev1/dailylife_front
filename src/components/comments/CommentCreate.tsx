@@ -5,13 +5,18 @@ import AvatarIcon from 'components/Icons/AvatarIcon';
 import useComments from 'hooks/useComments';
 import useCommentUpload from 'hooks/useCommentUpload';
 import { updateReplyList } from 'reducers/comment';
+import { ISelectedPostData } from 'reducers/selectedPostData';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
-function CommentCreate(props) {
+interface Props {
+  currentPostData: ISelectedPostData;
+}
+
+function CommentCreate({ currentPostData }: Props) {
   const dispatch = useAppDispatch();
   const selectedPostData = useAppSelector((state) => state.selectedPostData);
   const replyInput = useRef<HTMLInputElement>(null);
-  const { addCommentProcess } = useCommentUpload(props);
+  const { addCommentProcess } = useCommentUpload(currentPostData);
   const { fetchComments } = useComments();
 
   /** 댓글, 대댓글 작성 api 통신 함수 */
