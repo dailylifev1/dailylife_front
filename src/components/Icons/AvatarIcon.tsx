@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 interface AvatarProps {
-  width: number | undefined;
-  height: number | undefined;
+  width?: number | undefined;
+  height?: number | undefined;
   image?: string | undefined;
 }
 

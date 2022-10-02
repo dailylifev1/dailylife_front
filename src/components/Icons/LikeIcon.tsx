@@ -1,22 +1,17 @@
-import axios from "axios";
+import likeApi from "apis/likeApi";
 import { useState } from 'react';
 
 function LikeIcon({ replyNum }) {
   const [likeState, setLikeState] = useState(false);
   const handleClick = () => {
-    axios.post(`${process.env.REACT_APP_HOST}/api/heart/replyHeartPlus`,
-      {
-        replyNum,
-      },
-      {
-        headers: {
-          'X-ACCESS-TOKEN':
-            localStorage.getItem('accessToken'),
-        },
-      }).then(res => {
-        setLikeState(res.data);
-      });
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) fetchCommentHeart();
+    else alert('로그인 후 이용가능합니다.')
 
+    async function fetchCommentHeart() {
+      const data = await likeApi.updateCommentHeart(replyNum, accessToken);
+      setLikeState(data.ok);
+    };
   }
   return (
     <button type="button" onClick={handleClick}>
