@@ -1,11 +1,13 @@
-import likeApi from "apis/likeApi";
 import { useState } from 'react';
+
+import likeApi from "apis/likeApi";
+
 
 function LikeIcon({ replyNum }) {
   const [likeState, setLikeState] = useState(false);
   const handleClick = () => {
     const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) fetchCommentHeart();
+    if (accessToken !== null) fetchCommentHeart().then((res) => res).catch((err) => err);
     else alert('로그인 후 이용가능합니다.')
 
     async function fetchCommentHeart() {

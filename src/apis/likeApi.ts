@@ -1,5 +1,6 @@
-import { methodFormat } from 'common/utils';
 import client from './client';
+
+import { methodFormat } from 'common/utils';
 
 const PATH = `api/heart`;
 
