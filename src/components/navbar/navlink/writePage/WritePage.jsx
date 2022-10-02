@@ -51,8 +51,12 @@ function WritePage(props) {
         method="post"
         onSubmit={handleSubmit}
       >
-        <section className="newPost-modal">
-          <section className="newPost-boarding">
+        <section className="newPost-modal" onClick={() => {
+          closeModal();
+        }}>
+          <section className="newPost-boarding" onClick={(e) => {
+            e.stopPropagation();
+          }}>
             <div className="newPost-title">게시글 작성</div>
             <section className="newPost-body">
               <div className="newPost-body-pic">

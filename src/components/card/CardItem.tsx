@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import styled from 'styled-components/macro';
+
 import { selectedPostActions } from '../../reducers/selectedPostData';
 
 function CardItem({
@@ -34,7 +35,7 @@ function CardItem({
   const Emptyheart = '/assets/heart.png';
 
   const clickHeartEvent = (e) => {
-    e.stopPropagation();
+    Propagation();
     setLike(!like);
     axios
       .post(
@@ -48,8 +49,6 @@ function CardItem({
           },
         },
       )
-      .then((res) => {
-      })
       .catch((res) => console.log(res));
   };
 
@@ -71,7 +70,6 @@ function CardItem({
     </CardWrapper>
   );
 }
-
 const CardWrapper = styled.li`
   position: relative;
   border-radius: 10px;
@@ -90,6 +88,7 @@ const CardWrapper = styled.li`
     height: 100%;
   }
 `;
+
 const Thumbnail = styled.img`
   top: 0;
   right: 0;

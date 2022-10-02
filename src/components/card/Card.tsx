@@ -1,21 +1,23 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from 'store/hooks';
 
 import { postActions } from '../../reducers/post';
 import PostModal from '../postModal/index';
 import CardItem from './CardItem';
+
+import { useAppSelector } from 'store/hooks';
+
 import './Cards.scss';
 
-export type CardItemData = {
+export interface CardItemData {
   boardNum?: number;
   src?: string;
   title: string;
   content: string;
   heartState: number;
   path: string;
-};
+}
 
 export interface CardProps {
   data: CardItemData;
@@ -29,7 +31,7 @@ function Cards() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin`)
+      .get(`http://146.56.39.196:8080/api/board/getBoardNotLogin`)
       .then((res) => {
         dispatch(postActions.updateItems(res.data));
       })
@@ -37,7 +39,7 @@ function Cards() {
         console.log(res);
       });
     console.log(store.isLogoClicked);
-  }, [store.isLogoClicked]);
+  }, [store.isLogoClicked, dispatch]);
 
   return (
     <div className="cards">
