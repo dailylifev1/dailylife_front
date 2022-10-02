@@ -1,4 +1,8 @@
-function ModalImage(image: string) {
+interface Props {
+  image: string;
+}
+
+function ModalImage({ image }: Props) {
   return (
     <div
       className="modal-image"

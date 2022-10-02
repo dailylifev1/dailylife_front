@@ -3,13 +3,12 @@ import styled from 'styled-components';
 AvatarIcon.defaultProps = {
   width: 38,
   height: 38,
-  image: ''
 }
 
 interface AvatarProps {
   width?: number | undefined;
   height?: number | undefined;
-  image?: string;
+  image: string;
 }
 
 function AvatarIcon({ width = 38, height = 38, image }: AvatarProps) {

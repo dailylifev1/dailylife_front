@@ -1,9 +1,19 @@
+import React from 'react';
 import styled from 'styled-components/macro';
 
 import ModalContent from './ModalContent';
 import ModalImage from './ModalImage';
 
-function ModalBody(props) {
+import { OpacityType } from 'components/card/useCards';
+import { ISelectedPostData } from 'reducers/selectedPostData';
+
+interface Props {
+  currentPostData: ISelectedPostData;
+  modalOpacity: 0 | 1,
+  setModalOpacity: React.Dispatch<React.SetStateAction<OpacityType>>
+}
+
+function ModalBody(props: Props) {
   const { currentPostData, modalOpacity, setModalOpacity } = props;
   const { src } = currentPostData;
   return (

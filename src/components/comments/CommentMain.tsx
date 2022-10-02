@@ -15,7 +15,7 @@ function CommentMain({ item }: Props) {
   }, [item]);
   return (
     <CommentMainWrapper>
-      <AvatarIcon />
+      <AvatarIcon image='' />
       <div className="username">{item.userName}</div>
       <div className="comment-content">{item.replyContext}</div>
       <LikeIcon replyNum={item.replyNum} />
