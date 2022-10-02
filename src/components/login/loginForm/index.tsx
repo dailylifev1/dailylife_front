@@ -16,7 +16,7 @@ function LoginForm() {
 
   return (
     <FormWrapper>
-      <StyledForm action="/login" method="POST" onSubmit={handleSubmit}>
+      <StyledForm action="/login" method="POST" onSubmit={(e) => handleSubmit(e)}>
         {loading && <LoadingSpinner />}
         {loginFormData.map((data) => (
           <StyledInput
@@ -26,7 +26,7 @@ function LoginForm() {
             placeholder={data.placeholder}
             name={data.name}
             style={
-              formData.userId
+              formData.userId !== ''
                 ? {
                   border: '1px solid #FCC401',
                   color: '#1A1A1A',

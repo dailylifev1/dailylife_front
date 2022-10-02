@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import userApi from '../apis/userApi';
@@ -14,7 +14,7 @@ interface InitialValues {
 
 const useLoginForm = (initialValues: InitialValues) => {
   const [formData, setFormData] = useState(initialValues);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -26,23 +26,27 @@ const useLoginForm = (initialValues: InitialValues) => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     setLoading(true);
-    const result = await userApi.postUserInfoForLogIn({
-      userId: formData.userId,
-      userPassword: formData.userPassword,
-    });
-    setLoading(false);
-    if (result.ok === true) {
-      const response = result.data;
-      localStorage.setItem('accessToken', response.data.data.accessToken);
-      dispatch(SET_TOKEN(response.data.data.accessToken));
-      dispatch(myInfoActions.updateUserNum(response.data.data.userNum));
-      navigate('/');
-    } else if (result.ok === false) {
-      console.log(result.message);
-    }
+    userApi
+      .postUserInfoForLogIn({
+        userId: formData.userId,
+        userPassword: formData.userPassword,
+      })
+      .then((result) => {
+        setLoading(false);
+        if (result.ok) {
+          const response = result.data;
+          localStorage.setItem('accessToken', response.data.data.accessToken);
+          dispatch(SET_TOKEN(response.data.data.accessToken));
+          dispatch(myInfoActions.updateUserNum(response.data.data.userNum));
+          navigate('/');
+        } else {
+          console.log(result.message);
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return {

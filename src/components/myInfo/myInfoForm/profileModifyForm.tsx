@@ -84,7 +84,6 @@ function ProfileModifyForm({ textArr }) {
                 <p className="profile-modify-input">프로필 이름</p>
                 <MyInfoInput
                   formType='username'
-                  state={inputName}
                   setState={setInputName}
                   description='
                     최대 12글자(공백포함)까지 이름으로 등록 가능합니다.
@@ -95,7 +94,6 @@ function ProfileModifyForm({ textArr }) {
                 <p className="profile-modify-input">프로필 아이디</p>
                 <MyInfoInput
                   formType='userId'
-                  state={inputId}
                   setState={setInputId}
                   description=
                   '사람들에게 회원님의 계정을 찾을 수 있도록 변경해주세요. '
