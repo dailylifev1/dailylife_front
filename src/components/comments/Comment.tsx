@@ -1,23 +1,23 @@
 import React from 'react';
-import { type Icomment } from 'reducers/comment';
 import styled from 'styled-components';
 
 import CommentDate from './CommentDate';
 import CommentMain from './CommentMain';
-import ReplyList from './ReplyList';
+
+import { type Icomment } from 'reducers/comment';
 
 interface Props {
   replyHover: number;
   setReplyHover: React.Dispatch<React.SetStateAction<number>>;
   // reReplyFlag: boolean;
-  index: number;
+  // index: number;
   item: Icomment;
 }
 
 function Comment({ replyHover,
   setReplyHover,
   // reReplyFlag,
-  index,
+  // index,
   item
 }: Props) {
   return (

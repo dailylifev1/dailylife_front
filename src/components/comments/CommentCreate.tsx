@@ -1,14 +1,16 @@
-import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { KeyboardEvent, useRef } from 'react';
 import styled from 'styled-components/macro';
 
 import AvatarIcon from 'components/Icons/AvatarIcon';
 import useComments from 'hooks/useComments';
 import useCommentUpload from 'hooks/useCommentUpload';
+import { updateReplyList } from 'reducers/comment';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 function CommentCreate(props) {
-  const selectedPostData = useSelector((state) => state.selectedPostData);
-  const replyInput = useRef();
+  const dispatch = useAppDispatch();
+  const selectedPostData = useAppSelector((state) => state.selectedPostData);
+  const replyInput = useRef<HTMLInputElement>(null);
   const { addCommentProcess } = useCommentUpload(props);
   const { fetchComments } = useComments();
 
@@ -26,7 +28,7 @@ function CommentCreate(props) {
 
   /** 대댓글 작성 해제 */
   const replyCheckHandler = (e) => {
-    if (e.target.value === '' && sessionStorage.length) {
+    if (e.target.value === '' && sessionStorage.length > 0) {
       sessionStorage.removeItem('replyInfo');
     }
   };
@@ -39,10 +41,12 @@ function CommentCreate(props) {
         className="comment-create-text"
         ref={replyInput}
         placeholder="댓글 달기"
-        onKeyUp={(e) => {
-          if (window.event.keyCode === 13 && e.target.value !== '') {
-            addCommentProcess(e);
-            fetchComments(selectedPostData.boardNum);
+        onKeyUp={(event: KeyboardEvent<HTMLInputElement>) => {
+          if (event.code === 'Enter' && replyInput.current?.value !== '') {
+            addCommentProcess(event);
+            fetchComments(selectedPostData.boardNum).then((updatedTimeList) => {
+              dispatch(updateReplyList(updatedTimeList));
+            }).catch((err) => err);
           }
         }}
         onChange={(e) => {

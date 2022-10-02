@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { useAppSelector } from 'store/hooks';
 
 import CommentCreate from './CommentCreate';
 import CommentSection from './CommentSection';
 
+import { OpacityType } from 'components/card/useCards';
 import ModalSocial from 'components/postModal/ModalSocial';
 import useComments from 'hooks/useComments';
-import { OpacityType } from 'components/card/useCards';
+import { updateReplyList } from 'reducers/comment';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 interface Props {
   modalOpacity: OpacityType;
@@ -14,10 +15,18 @@ interface Props {
 
 function Comments({ modalOpacity }: Props) {
   const currentPostData = useAppSelector((state) => state.selectedPostData);
-  const { dateHandler, fetchComments } = useComments();
+  const { fetchComments } = useComments();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (modalOpacity) fetchComments(currentPostData.boardNum);
+    if (modalOpacity === 1) {
+      fetchComments(currentPostData.boardNum)
+        .then((updatedTimeList) => {
+          dispatch(updateReplyList(updatedTimeList));
+        }).catch((err) => {
+          console.log(err);
+        })
+    };
   }, [modalOpacity, currentPostData.boardNum, fetchComments]);
 
   return (
@@ -29,7 +38,6 @@ function Comments({ modalOpacity }: Props) {
       <CommentSection />
       {/* 댓글 작성칸 */}
       <CommentCreate
-        dateHandler={dateHandler}
         currentPostData={currentPostData}
       />
     </div>

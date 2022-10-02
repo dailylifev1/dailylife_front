@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAppSelector } from 'store/hooks';
 
 import Comment from 'components/comments/Comment';
+import { useAppSelector } from 'store/hooks';
 
 function CommentSection() {
   const { replyList } = useAppSelector((state) => state.comment);
@@ -9,12 +9,15 @@ function CommentSection() {
 
   return (
     <div className="comment-section">
-      {replyList.map((item, index) => (
+      {replyList.map((
+        item,
+        // index
+      ) => (
         <Comment
           key={item.replyNum}
           replyHover={replyHover}
           setReplyHover={setReplyHover}
-          index={index}
+          // index={index}
           item={item}
         />
       ))}
