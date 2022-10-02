@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { postActions } from '../../reducers/post';
 
 import { selectedPostActions } from 'reducers/selectedPostData';
+import likeApi from 'apis/likeApi';
 
 function useCardItem({
   heartState,
@@ -46,25 +46,12 @@ function useCardItem({
   //   fetchItemData();
   // }, [like]);
 
-  const clickHeartEvent = (e) => {
+  const clickHeartEvent = (e: MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
     setLike(!like);
-    axios
-      .post(
-        `${process.env.REACT_APP_HOST}/api/heart/boardHeartPlus`,
-        {
-          boardNum,
-        },
-        {
-          headers: {
-            'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-          },
-        },
-      )
-      .then((res) => {
-        console.log('AJAX2 in CardItem', res);
-      })
-      .catch((res) => console.log(res));
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) likeApi.updateBoardHeart(boardNum, accessToken);
+    else alert('회원가입 후 이용하실 수 있습니다.');
   };
   return { handleClick, clickHeartEvent, like };
 }
