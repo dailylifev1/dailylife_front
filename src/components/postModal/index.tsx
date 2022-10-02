@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux/es/exports';
 import styled from 'styled-components';
 
 import ModalBody from 'components/postModal/ModalBody';
 import './PostModal.scss';
 import { updateModalStatus } from 'reducers/kebab.postModal';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 function PostModal(props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { modalOpacity, setModalOpacity } = props;
-  const currentPostData = useSelector((state) => state.selectedPostData);
+  const currentPostData = useAppSelector((state) => state.selectedPostData);
 
   return (
     <div className="container">
@@ -34,7 +34,7 @@ export default PostModal;
 
 const ModalWindow = styled.div.attrs({
   className: 'ModalWindow',
-})`
+}) <{ modalOpacity: 0 | 1 }>`
   position: fixed;
   background-color: rgba(0, 0, 0, 0.25);
   top: 0;

@@ -6,9 +6,8 @@ import postData from 'mocks/postData';
 function ModalContent(props) {
   const { currentPostData, modalOpacity, setModalOpacity } = props;
   const { title, content } = currentPostData;
-  function contentGenerator(data) {
-    if (data) return data;
-
+  function contentGenerator(data: string) {
+    if (data !== '') return data;
     return postData.map((item) => <div key={item.id}>item.content</div>);
   }
 

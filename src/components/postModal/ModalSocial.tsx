@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import LikeIcon from '../Icons/LikeIcon';
 
 import CommentIcon from 'components/Icons/CommentIcon';
+import { useAppSelector } from 'store/hooks';
 
 function ModalSocial() {
-  const replyList = useSelector(state => state.comment.replyList)
+  const replyList = useAppSelector(state => state.comment.replyList)
   return (
     <ModalSocialWrapper>
       <div className="social-icons-container">

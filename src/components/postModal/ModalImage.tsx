@@ -1,10 +1,9 @@
-function ModalImage(image) {
-  const deliveredData = image;
+function ModalImage(image: string) {
   return (
     <div
       className="modal-image"
       style={{
-        backgroundImage: `url(${deliveredData.image})`,
+        backgroundImage: `url(${image})`,
       }}
     />
   );

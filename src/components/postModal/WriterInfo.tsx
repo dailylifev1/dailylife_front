@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import postApi from 'apis/postApi';
@@ -6,11 +5,12 @@ import ModalCloseButton from 'components/buttons/ModalCloseButton';
 import AvatarIcon from 'components/Icons/AvatarIcon';
 import KebabMenu from 'components/Icons/KebabMenu';
 import { updateModalStatus } from 'reducers/kebab.postModal';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 function WriterInfo({ setModalOpacity }) {
-  const dispatch = useDispatch();
-  const kebabModal = useSelector((state) => state.kebabModal);
-  const selectedPostData = useSelector((state) => state.selectedPostData);
+  const dispatch = useAppDispatch();
+  const kebabModal = useAppSelector((state) => state.kebabModal);
+  const selectedPostData = useAppSelector((state) => state.selectedPostData);
   const toggleMenu = () => dispatch(updateModalStatus(!kebabModal.isOpen));
 
   return (
@@ -28,14 +28,16 @@ function WriterInfo({ setModalOpacity }) {
         >
           <KebabMenu />
           <KebabListContainer>
-            {kebabModal.isOpen === true ? (
+            {kebabModal.isOpen ? (
               <KebabList onMouseLeave={toggleMenu}>
                 <ModifyButton type="button">수정하기</ModifyButton>
                 <DeleteButton
                   type="button"
                   className="kebab-list-delete-button"
                   onClick={() => {
-                    postApi.deleteBoardData(selectedPostData.boardNum);
+                    postApi.deleteBoardData(selectedPostData.boardNum)
+                      .then((res) => console.log(res))
+                      .catch((err) => console.log(err));
                     alert('게시글이 성공적으로 삭제되었습니다.');
                     toggleMenu();
                     setModalOpacity(0);

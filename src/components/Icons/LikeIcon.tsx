@@ -2,8 +2,11 @@ import { useState } from 'react';
 
 import likeApi from "apis/likeApi";
 
+interface Props {
+  replyNum?: number;
+}
 
-function LikeIcon({ replyNum }) {
+function LikeIcon({ replyNum }: Props) {
   const [likeState, setLikeState] = useState(false);
   const handleClick = () => {
     const accessToken = localStorage.getItem('accessToken');
