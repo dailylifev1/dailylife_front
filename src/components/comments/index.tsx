@@ -1,14 +1,19 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'store/hooks';
 
 import CommentCreate from './CommentCreate';
 import CommentSection from './CommentSection';
 
 import ModalSocial from 'components/postModal/ModalSocial';
 import useComments from 'hooks/useComments';
+import { OpacityType } from 'components/card/useCards';
 
-function Comments({ modalOpacity }) {
-  const currentPostData = useSelector((state) => state.selectedPostData);
+interface Props {
+  modalOpacity: OpacityType;
+}
+
+function Comments({ modalOpacity }: Props) {
+  const currentPostData = useAppSelector((state) => state.selectedPostData);
   const { dateHandler, fetchComments } = useComments();
 
   useEffect(() => {
@@ -21,7 +26,7 @@ function Comments({ modalOpacity }) {
       <ModalSocial />
       <hr />
       {/* 댓글 창 시작 */}
-      <CommentSection currentPostData={currentPostData} />
+      <CommentSection />
       {/* 댓글 작성칸 */}
       <CommentCreate
         dateHandler={dateHandler}

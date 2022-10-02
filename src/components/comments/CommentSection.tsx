@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'store/hooks';
 
 import Comment from 'components/comments/Comment';
 
 function CommentSection() {
-  const { replyList } = useSelector((state) => state.comment);
+  const { replyList } = useAppSelector((state) => state.comment);
   const [replyHover, setReplyHover] = useState(-1);
 
   return (
@@ -14,7 +14,6 @@ function CommentSection() {
           key={item.replyNum}
           replyHover={replyHover}
           setReplyHover={setReplyHover}
-          replyList={replyList}
           index={index}
           item={item}
         />

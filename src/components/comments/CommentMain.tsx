@@ -3,11 +3,16 @@ import styled from 'styled-components';
 import AvatarIcon from 'components/Icons/AvatarIcon';
 import LikeIcon from 'components/Icons/LikeIcon';
 import { useEffect } from 'react';
+import { type Icomment } from 'reducers/comment';
 
-function CommentMain({ item }) {
+interface Props {
+  item: Icomment;
+}
+
+function CommentMain({ item }: Props) {
   useEffect(() => {
     console.log(item);
-  }, [item])
+  }, [item]);
   return (
     <CommentMainWrapper>
       <AvatarIcon />

@@ -1,28 +1,34 @@
+import React from 'react';
+import { type Icomment } from 'reducers/comment';
 import styled from 'styled-components';
 
 import CommentDate from './CommentDate';
 import CommentMain from './CommentMain';
 import ReplyList from './ReplyList';
 
-function Comment({
-  replyHover,
+interface Props {
+  replyHover: number;
+  setReplyHover: React.Dispatch<React.SetStateAction<number>>;
+  // reReplyFlag: boolean;
+  index: number;
+  item: Icomment;
+}
+
+function Comment({ replyHover,
   setReplyHover,
-  reReplyFlag,
+  // reReplyFlag,
   index,
-  item,
-}) {
+  item
+}: Props) {
   return (
     <CommentContainer
       onMouseOver={() => setReplyHover(item.replyNum)}
       onMouseOut={() => setReplyHover(-1)}
     >
       <CommentMain item={item} />
-      <CommentDate
-        item={item}
-        replyHover={replyHover}
-      />
+      <CommentDate item={item} replyHover={replyHover} />
       {/* 대댓글 목록 */}
-      <ReplyList reReplyFlag={reReplyFlag} item={item} index={index} />
+      {/* <ReplyList reReplyFlag={reReplyFlag} item={item} index={index} /> */}
     </CommentContainer>
   );
 }
