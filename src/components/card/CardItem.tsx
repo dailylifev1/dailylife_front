@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import useCardItem from './useCardItem';
 import { type OpacityType } from './useCards';
 
@@ -19,16 +20,14 @@ function CardItem({
   heartState,
   setModalOpacity,
 }: Props) {
-  const { handleClick, clickHeartEvent, like } = useCardItem(
-    {
-      heartState,
-      setModalOpacity,
-      boardNum,
-      src,
-      title,
-      content,
-    }
-  );
+  const { handleClick, clickHeartEvent, like } = useCardItem({
+    heartState,
+    setModalOpacity,
+    boardNum,
+    src,
+    title,
+    content,
+  });
 
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
@@ -36,7 +35,7 @@ function CardItem({
   return (
     <CardWrapper onClick={handleClick}>
       <ImgWrapper>
-        {src ? <Thumbnail alt="img" src={src} /> : ''}
+        {src.length > 0 ? <Thumbnail alt="img" src={src} /> : ''}
         <UnderInfo img={src}>{content}</UnderInfo>
         <Text img={src}>{title}</Text>
         <GradientBar img={src} />
@@ -44,14 +43,13 @@ function CardItem({
       <CardInfo>
         <LikeButton
           onClick={clickHeartEvent}
-          src={like ? Fullheart : Emptyheart}
+          src={like === true ? Fullheart : Emptyheart}
           alt="like"
         />
       </CardInfo>
     </CardWrapper>
   );
 }
-
 const CardWrapper = styled.li`
   position: relative;
   border-radius: 10px;
@@ -70,6 +68,7 @@ const CardWrapper = styled.li`
     height: 100%;
   }
 `;
+
 const Thumbnail = styled.img`
   top: 0;
   right: 0;
@@ -99,8 +98,7 @@ const GradientBar = styled.div<{ img: string }>`
   bottom: 0;
   opacity: 0.6;
   background: ${(props) =>
-    props.img
-      ? `linear-gradient(
+    props.img.length > 0 ? `linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.7) 91.15%
@@ -118,7 +116,7 @@ const Text = styled.h5<{ img: string }>`
   position: absolute;
   margin-left: 0.7vw;
   z-index: 4;
-  color: ${(props) => (props.img ? 'white' : 'black')};
+  color: ${(props) => (props.img.length > 0 ? 'white' : 'black')};
   line-height: 30px;
   display: block;
   text-overflow: ellipsis;
@@ -134,7 +132,7 @@ const UnderInfo = styled.p<{ img: string }>`
   position: absolute;
   margin-left: 0.7vw;
   z-index: 5;
-  color: ${(props) => (props.img ? 'white' : 'black')};
+  color: ${(props) => (props.img.length > 0 ? 'white' : 'black')};
   width: 80%;
   font-size: 0.9vw;
   font-weight: 300;

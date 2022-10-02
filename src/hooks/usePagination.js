@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+
 import postApi from 'apis/postApi';
 import { postActions } from 'reducers/post';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { useEffect, useState } from 'react';
 
 function usePagination({ boardCountPerPage, pageRangeCount }) {
   const dispatch = useAppDispatch();
