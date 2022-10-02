@@ -106,4 +106,10 @@ const getCommentDate = (replyDate: string) => {
   return elapsedText;
 };
 
-export { methodFormat, validate, getCommentDate };
+const getAccessToken = (): string => {
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken !== null) return accessToken;
+  return 'No Access Token';
+};
+
+export { methodFormat, validate, getCommentDate, getAccessToken };
