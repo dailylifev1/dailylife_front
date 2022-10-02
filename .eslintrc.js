@@ -51,6 +51,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-alert': 'off',
+    'no-use-before-define': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 0,
     indent: 0,

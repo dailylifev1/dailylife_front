@@ -1,9 +1,6 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
-import { selectedPostActions } from '../../reducers/selectedPostData';
+import useCardItem from './useCardItem';
 
 function CardItem({
   boardNum,
@@ -13,44 +10,17 @@ function CardItem({
   heartState,
   setModalOpacity,
 }) {
-  const dispatch = useDispatch();
-  const openModal = () => {
-    setModalOpacity(1);
-  };
-  const handleClick = () => {
-    openModal();
-    dispatch(
-      selectedPostActions.updateData({
-        boardNum,
-        src,
-        title,
-        content,
-      }),
-    );
-  };
-
-  const [like, setLike] = useState(heartState);
+  const { handleClick, clickHeartEvent, like } = useCardItem({
+    heartState,
+    setModalOpacity,
+    boardNum,
+    src,
+    title,
+    content,
+  });
 
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
-
-  const clickHeartEvent = (e) => {
-    Propagation();
-    setLike(!like);
-    axios
-      .post(
-        `${process.env.REACT_APP_HOST}/api/heart/boardHeartPlus`,
-        {
-          boardNum,
-        },
-        {
-          headers: {
-            'X-ACCESS-TOKEN': localStorage.getItem('accessToken')!,
-          },
-        },
-      )
-      .catch((res) => console.log(res));
-  };
 
   return (
     <CardWrapper onClick={handleClick}>
