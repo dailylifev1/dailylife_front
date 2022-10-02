@@ -12,7 +12,6 @@ function usePagination({ boardCountPerPage, pageRangeCount }) {
   useEffect(() => {
     async function fetchTotalPostCount() {
       const { data } = await postApi.getTotalPostCount();
-      console.log('data:', data);
       setPostCount(data);
     }
     if (store.searchResult.result) {
