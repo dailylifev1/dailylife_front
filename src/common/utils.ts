@@ -1,22 +1,25 @@
-const methodFormat = (callbackfunc) => {
-  const method = async (...args) => {
+const methodFormat = (callbackfunc: Function) => {
+  const method = async (...args: any[]) => {
     try {
       const data = await callbackfunc(...args);
       return {
         ok: true,
         data,
       };
-    } catch (error) {
-      return {
-        ok: false,
-        message: error.message,
-      };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return {
+          ok: false,
+          message: error.message,
+        };
+      }
     }
+    return Promise;
   };
   return method;
 };
 
-const validate = (value, formType) => {
+const validate = (value: string, formType: string) => {
   let isValidate = true;
   const userIdRegex = /^[a-z][a-z\d]{3,11}$/;
   const userIdNumberRegex = /[0-9]/;
@@ -63,7 +66,7 @@ const validate = (value, formType) => {
   return validtaionResult;
 };
 
-const getCommentDate = (replyDate) => {
+const getCommentDate = (replyDate: number[]) => {
   const [sec, min, hour, day, week] = [
     1,
     60,
