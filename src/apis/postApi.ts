@@ -23,7 +23,7 @@ const postApi = {
   }),
 
   /** 로그인 되어있지 않을 때 게시글 정보 받아오는 API */
-  getItemByPage: methodFormat(async (currentPage) => {
+  getItemByPage: methodFormat(async (currentPage: number) => {
     const response = await client.get(
       `/${PATH}/getBoardNotLogin?pg=${currentPage}`,
     );
@@ -36,13 +36,15 @@ const postApi = {
     return response.data;
   }),
 
-  deleteBoardData: methodFormat(async (boardNum) => {
-    const response = await client.delete(`/${PATH}/delete/${boardNum}`, {
-      headers: {
-        'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-      },
-    });
-    return response.data;
-  }),
+  deleteBoardData: methodFormat(
+    async (boardNum: number, accessToken: string) => {
+      const response = await client.delete(`/${PATH}/delete/${boardNum}`, {
+        headers: {
+          'X-ACCESS-TOKEN': accessToken,
+        },
+      });
+      return response.data;
+    },
+  ),
 };
 export default postApi;

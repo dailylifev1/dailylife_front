@@ -6,15 +6,15 @@ const PATH = {
   heart: 'api/heart',
 };
 const commentApi = {
-  getComments: methodFormat(async (boardNum) => {
+  getComments: methodFormat(async (boardNum: number, accessToken: string) => {
     const response = await client.get(`/${PATH.reply}/getReply/${boardNum}`, {
       headers: {
-        'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
+        'X-ACCESS-TOKEN': accessToken,
       },
     });
     return response;
   }),
-  getCommentHeart: methodFormat(async (replyNum) => {
+  getCommentHeart: methodFormat(async (replyNum: number) => {
     const response = await client.get(
       `/${PATH.heart}/countHeartReply/${replyNum}`,
     );
