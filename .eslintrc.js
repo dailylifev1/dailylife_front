@@ -46,6 +46,7 @@ module.exports = {
       2,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
+    'react/require-default-props': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/prop-types': 'off',
     'react/jsx-one-expression-per-line': 'off',

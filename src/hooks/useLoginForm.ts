@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import userApi from '../apis/userApi';
@@ -7,13 +7,18 @@ import { myInfoActions } from '../reducers/myInfo';
 
 import { useAppDispatch } from 'store/hooks';
 
-const useLoginForm = (initialValues) => {
+interface InitialValues {
+  userId: string;
+  userPassword: string;
+}
+
+const useLoginForm = (initialValues: InitialValues) => {
   const [formData, setFormData] = useState(initialValues);
   const [loading, setLoading] = useState();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -24,7 +29,6 @@ const useLoginForm = (initialValues) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    // eslint-disable-next-line operator-linebreak
     const result = await userApi.postUserInfoForLogIn({
       userId: formData.userId,
       userPassword: formData.userPassword,

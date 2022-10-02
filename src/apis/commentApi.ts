@@ -1,4 +1,4 @@
-import { methodFormat } from '../common/utils';
+import { getAccessToken, methodFormat } from '../common/utils';
 import client from './client';
 
 const PATH = {
@@ -6,10 +6,10 @@ const PATH = {
   heart: 'api/heart',
 };
 const commentApi = {
-  getComments: methodFormat(async (boardNum: number, accessToken: string) => {
+  getComments: methodFormat(async (boardNum: number) => {
     const response = await client.get(`/${PATH.reply}/getReply/${boardNum}`, {
       headers: {
-        'X-ACCESS-TOKEN': accessToken,
+        'X-ACCESS-TOKEN': getAccessToken(),
       },
     });
     return response;

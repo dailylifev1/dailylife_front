@@ -17,7 +17,7 @@ const methodFormat = (callbackfunc: Function) => {
       };
     } catch (error: unknown) {
       if (error instanceof Error) {
-        return {
+        result = {
           ok: false,
           message: error.message,
         };
@@ -27,6 +27,13 @@ const methodFormat = (callbackfunc: Function) => {
   };
   return method;
 };
+
+interface IValidationResult<T> {
+  userId: T;
+  password: T;
+  username: T;
+  email: T;
+}
 
 const validate = (value: string, formType: string) => {
   let isValidate = true;
@@ -42,7 +49,12 @@ const validate = (value: string, formType: string) => {
     username: '닉네임은 2글자 이상입니다.',
     email: '이메일 형식이 아닙니다. 다시 입력해주세요.',
   };
-  const validtaionResult = {};
+  const validtaionResult: IValidationResult<string | undefined> = {
+    userId: undefined,
+    password: undefined,
+    username: undefined,
+    email: undefined,
+  };
 
   if (formType === 'userId') {
     if (!(userIdRegex.test(value) || userIdNumberRegex.test(value))) {
