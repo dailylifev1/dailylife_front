@@ -40,7 +40,7 @@ function CommentCreate({ currentPostData }: Props) {
 
   return (
     <CommentCreateWrapper>
-      <AvatarIcon />
+      <AvatarIcon image='' />
       <input
         type="text"
         className="comment-create-text"

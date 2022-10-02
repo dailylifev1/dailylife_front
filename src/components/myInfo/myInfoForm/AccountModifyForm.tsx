@@ -34,7 +34,6 @@ function AccountModifyForm({ textArr }) {
           <p className="account-modify-input">현재 비밀번호</p>
           <MyInfoInput
             type='password'
-            state={inputCurrentPassword}
             formType='password'
             setState={setInputCurrentPassword}
           />
@@ -43,7 +42,6 @@ function AccountModifyForm({ textArr }) {
           <p className="account-modify-input">새 비밀번호</p>
           <MyInfoInput
             type='password'
-            state={inputNewPassword}
             formType='password'
             setState={setInputNewPassword}
           />
@@ -52,7 +50,6 @@ function AccountModifyForm({ textArr }) {
           <p className="account-modify-input">새 비밀번호 확인</p>
           <MyInfoInput
             type='password'
-            state={inputConfirmPassword}
             formType='password'
             setState={setInputConfirmPassword}
           />

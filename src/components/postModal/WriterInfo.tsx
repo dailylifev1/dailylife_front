@@ -16,7 +16,7 @@ function WriterInfo({ setModalOpacity }) {
   return (
     <div className="writer-info-container">
       <WriterInfoWrapper>
-        <AvatarIcon />
+        <AvatarIcon image='' />
         <Username>작성자닉네임</Username>
         <Follow>팔로우</Follow>
       </WriterInfoWrapper>
