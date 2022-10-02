@@ -1,8 +1,17 @@
+interface Result {
+  ok: boolean;
+  data?: any;
+  message?: string;
+}
+
 const methodFormat = (callbackfunc: Function) => {
   const method = async (...args: any[]) => {
+    let result: Result = {
+      ok: false,
+    };
     try {
       const data = await callbackfunc(...args);
-      return {
+      result = {
         ok: true,
         data,
       };
@@ -14,7 +23,7 @@ const methodFormat = (callbackfunc: Function) => {
         };
       }
     }
-    return Promise;
+    return result;
   };
   return method;
 };
@@ -66,7 +75,7 @@ const validate = (value: string, formType: string) => {
   return validtaionResult;
 };
 
-const getCommentDate = (replyDate: number[]) => {
+const getCommentDate = (replyDate: string) => {
   const [sec, min, hour, day, week] = [
     1,
     60,
