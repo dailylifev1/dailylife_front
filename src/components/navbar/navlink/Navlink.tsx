@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux';
-
-import MyPageIcon from 'components/Icons/MyPageIcon';
 import PostRender from './PostRender';
+import MyPageIcon from 'components/Icons/MyPageIcon';
+import { useAppSelector } from 'store/hooks';
 
 function NavLinks() {
-  const tokenInfo = useSelector((state) => state.authToken);
+  const tokenInfo = useAppSelector((state) => state.authToken);
 
   return (
     <div className="nav-links">

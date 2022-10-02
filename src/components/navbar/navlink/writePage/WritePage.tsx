@@ -1,18 +1,21 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
+import { getAccessToken } from 'common/utils';
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
 import './WritePage.scss';
 
+
 function WritePage(props) {
+  const { changeOpenPostModal } = props;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [thumbNail] = useState('dummy');
-  const [imageName, setImageName] = useState([]);
+  const [imageName, setImageName] = useState<File[]>([]);
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState('');
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (localStorage.getItem('accessToken') === null)
       return alert('로그인 후 이용 가능합니다.');
@@ -22,25 +25,27 @@ function WritePage(props) {
     formData.append('thumbNail', thumbNail);
     // eslint-disable-next-line no-shadow
     imageName.forEach((file) => {
-      console.log(file);
       formData.append('imageName', file);
     });
-    axios
-      .post(`${process.env.REACT_APP_HOST}/api/board/create`, formData, {
-        headers: {
-          'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        window.location.replace('/');
-      })
-      .catch((err) => console.log(err));
-    closeModal();
+    if (process.env.REACT_APP_HOST !== undefined) {
+      axios
+        .post(`${process.env.REACT_APP_HOST}/api/board/create`, formData, {
+          headers: {
+            'X-ACCESS-TOKEN': getAccessToken(),
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(() => {
+          window.location.replace('/');
+        })
+        .catch((err) => console.log(err));
+      closeModal();
+    }
+    return undefined;
   }
-  const closeModal = (e) => {
+  const closeModal = () => {
     // e.stopPropagation();
-    props.changeOpenPostModal(false);
+    changeOpenPostModal(false);
   };
   return (
     <div className="newPost-container">
@@ -48,11 +53,13 @@ function WritePage(props) {
         className="post-form"
         action="/"
         method="post"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => handleSubmit(e)}
       >
-        <section className="newPost-modal" onClick={() => {
-          closeModal();
-        }}>
+        <section className="newPost-modal"
+          onClick={
+            () => closeModal()
+          }
+        >
           <section className="newPost-boarding" onClick={(e) => {
             e.stopPropagation();
           }}>
@@ -74,16 +81,18 @@ function WritePage(props) {
                         type="file"
                         accept="image/*"
                         onChange={(e) => {
-                          setFileImage(URL.createObjectURL(e.target.files[0]));
-                          for (let i = 0; i < e.target.files.length; i++)
-                            setFile(`${file} ${e.target.files[i].name}`);
-                          setImageName([...imageName, ...e.target.files]);
+                          if (e.target.files !== null) {
+                            setFileImage(URL.createObjectURL(e.target.files[0]));
+                            for (let i = 0; i < e.target.files.length; i += 1)
+                              setFile(`${file} ${e.target.files[i].name}`);
+                            setImageName([...imageName, ...e.target.files]);
+                          }
                         }}
                       />
                     </label>
                   </div>
 
-                  {fileImage && (
+                  {fileImage !== '' && (
                     <img
                       className="newPost-body-example-pic"
                       alt="sample"
@@ -91,12 +100,12 @@ function WritePage(props) {
                     />
                   )}
                 </div>
-                {!fileImage && (
+                {fileImage !== '' && (
                   <p className="newPost-body-pic-explain">
                     아래 버튼을 클릭하여 이미지를 추가해주세요.
                   </p>
                 )}
-                {!fileImage && (
+                {fileImage !== '' && (
                   <img
                     className="newPost-body-pic-cloudPic"
                     src="/assets/cloud-upload.png"
@@ -126,7 +135,6 @@ function WritePage(props) {
               type="button"
               className="newPost-modal-close"
               onClick={closeModal}
-              alt="newPostModal"
             >
               <CloseButtonIcon />
             </button>

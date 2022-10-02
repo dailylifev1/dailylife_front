@@ -11,7 +11,7 @@ function PostRender() {
   };
 
   useEffect(() => {
-    if (openPostModal === true) document.body.style.overflow = 'hidden';
+    if (openPostModal) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
   }, [openPostModal]);
 
