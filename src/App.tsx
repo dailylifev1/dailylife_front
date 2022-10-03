@@ -9,13 +9,12 @@ import Main from 'components/main/Main';
 import SignUp from 'components/signUp/SignUp';
 import MyInfo from 'components/myInfo/MyInfo';
 function App() {
-
   useEffect(() => {
     console.log('rendered App');
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Navbar />
       <Routes>
         <Route path="/" element={<Main />} />
