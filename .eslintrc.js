@@ -12,6 +12,8 @@ module.exports = {
   ],
   overrides: [],
   parserOptions: {
+    project: ['./tsconfig.json'],
+    tsconfigRootDir: __dirname,
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
@@ -31,23 +33,38 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'react/jsx-filename-extension': [
+      2,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'react/require-default-props': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'react/prop-types': 'off',
-
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-alert': 'off',
+    'no-use-before-define': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 0,
+    'no-console': 'off',
     indent: 0,
     'import/order': [
       'error',
       {
-        groups: [
-          'builtin',
-          'external',
-          ['parent', 'sibling'],
-          'index',
-        ],
+        groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
         pathGroups: [
           {
             pattern: 'angular',
