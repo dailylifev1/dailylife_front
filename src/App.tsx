@@ -5,9 +5,9 @@ import Navbar from './components/navbar';
 import Login from './pages/Login/index';
 
 import Main from 'components/main/Main';
-import MyInfo from 'components/myInfo/MyInfo';
 import MyInfoForm from 'components/myInfo/myInfoForm';
-import SearchForm from 'components/navbar/searching/searchForm/SearchForm';
+import MyPage from 'components/myPage/MyPage';
+import SearchForm from 'components/navbar/SearchForm';
 import SignUp from 'pages/SignUp';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/search" element={<SearchForm />} />
-        <Route path="/myInfo" element={<MyInfo />} />
+        <Route path="/myPage" element={<MyPage />} />
         <Route path="/profileModify" element={<MyInfoForm />} />
         <Route path="/findAccount" element={<MyInfoForm />} />
       </Routes>
