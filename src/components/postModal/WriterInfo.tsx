@@ -79,6 +79,7 @@ const KebabListContainer = styled.div`
   background: #ffffff;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
+  z-index: 1;
 `;
 
 const WriterInfoWrapper = styled.div`

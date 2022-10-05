@@ -6,6 +6,7 @@ import ModalImage from './ModalImage';
 
 import { OpacityType } from 'components/card/useCards';
 import { ISelectedPostData } from 'reducers/selectedPostData';
+import devices from 'styles/device';
 
 interface Props {
   currentPostData: ISelectedPostData;
@@ -34,12 +35,26 @@ const ModalBodyWrapper = styled.div`
   position: absolute;
   padding: 1em;
   display: flex;
-  width: 90%;
-  max-width: 1183px;
-  height: 650px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   visibility: visible;
+
+  @media ${devices.mobileS} {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+    height: auto;
+  }
+  @media ${devices.tablet} {
+    width: 60%;
+  }
+  @media ${devices.laptop} {
+    max-width: 1183px;
+    width: 90%;
+    height: 650px;
+    flex-direction: row;
+  }
 `;
