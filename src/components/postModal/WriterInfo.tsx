@@ -167,6 +167,8 @@ const Follow = styled.button`
   font-size: 16px;
   line-height: 23px;
 
+  background-color: #F0F0F0;
+
   @media ${devices.mobileS} {
     font-size: small;
   }
