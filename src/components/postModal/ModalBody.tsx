@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import ModalContent from './ModalContent';
 import ModalImage from './ModalImage';
 
+import ModalCloseButton, { ModalClose } from 'components/buttons/ModalCloseButton';
 import { OpacityType } from 'components/card/useCards';
 import { ISelectedPostData } from 'reducers/selectedPostData';
 import devices from 'styles/device';
@@ -19,6 +20,9 @@ function ModalBody(props: Props) {
   const { src } = currentPostData;
   return (
     <ModalBodyWrapper onClick={(e) => e.stopPropagation()}>
+      <ModalCloseButtonWrapper>
+        <ModalCloseButton setModalOpacity={setModalOpacity}/>
+      </ModalCloseButtonWrapper>
       <ModalImage image={src} />
       <ModalContent
         currentPostData={currentPostData}
@@ -56,5 +60,17 @@ const ModalBodyWrapper = styled.div`
     width: 90%;
     height: 650px;
     flex-direction: row;
+    & > .close-button-wrapper {
+      display: none;
+    }
   }
-`;
+  `;
+const ModalCloseButtonWrapper = styled.div.attrs({className: 'close-button-wrapper'})`
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-right: 10px;
+  & > ${ModalClose} > svg > path {
+      stroke: #42413C;
+  }
+`
