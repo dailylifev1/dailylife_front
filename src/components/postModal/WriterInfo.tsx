@@ -166,5 +166,19 @@ const Follow = styled.button`
   font-weight: 400;
   font-size: 16px;
   line-height: 23px;
+
+  @media ${devices.mobileS} {
+    font-size: small;
+  }
+  @media ${devices.mobileM} {
+    font-size: inherit;
+  }
 `;
-const Username = styled.div``;
+const Username = styled.div`
+  @media ${devices.mobileS} {
+    font-size: small;
+  }
+  @media ${devices.mobileM} {
+    font-size: inherit;
+  }
+`;

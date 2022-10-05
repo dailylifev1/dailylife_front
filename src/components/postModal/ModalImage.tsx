@@ -8,35 +8,33 @@ interface Props {
 
 function ModalImage({ image }: Props) {
   return (
-    <Image
-      style={{
-        backgroundImage: `url(${image})`,
-      }}
-    />
+    <ImageWrapper>
+      <Image src={image}/>
+    </ImageWrapper>
   );
 }
 
 export default ModalImage;
 
-const Image = styled.div.attrs({className: 'modal-image'})`
+const ImageWrapper = styled.div.attrs({className: 'modal-image'})`
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 10px;
-  background-position: center;
-  background-size: contain, cover;
-  background-repeat: no-repeat;
-
   @media ${devices.mobileS} {
     width: 90%;
     height: 200px;
   }
-  @media ${devices.tablet} {
+  @media ${devices.mobileL} {
     height: 300px;
   }
   @media ${devices.laptop} {
     width: 50%;
     height: 100%;
   }
+`
+const Image = styled.img`
+  border-radius: 10px;
+  width: 100%;
 `

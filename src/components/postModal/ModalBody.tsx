@@ -56,10 +56,10 @@ const ModalBodyWrapper = styled.div`
     width: 60%;
   }
   @media ${devices.laptop} {
+    flex-direction: row;
     max-width: 1183px;
     width: 90%;
     height: 650px;
-    flex-direction: row;
     & > .close-button-wrapper {
       display: none;
     }

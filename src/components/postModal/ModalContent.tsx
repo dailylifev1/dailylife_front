@@ -37,7 +37,7 @@ const Container = styled.div.attrs({className: 'modal-content-container'})`
   @media ${devices.laptop} {
     width: 50%;
     margin-left: 20px;
-    height: 90%;
+    height: 100%;
   }
 `
 const Content = styled.div.attrs({className: 'modal-post-content'})`
@@ -46,7 +46,13 @@ const Content = styled.div.attrs({className: 'modal-post-content'})`
 `
 const Title = styled.h1`
   text-align: start;
-  font-size: xx-large;
+  
+  @media ${devices.mobileS} {
+    font-size: 25px;
+  }
+  @media ${devices.mobileM} {
+    font-size: xx-large;
+  }
 `
 const Text = styled.div`
   max-height: 121px;
