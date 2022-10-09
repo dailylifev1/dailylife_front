@@ -18,7 +18,11 @@ function NavLogo() {
         type="button"
       >
         <Link to="/">
-          <img src="/assets/logo.png" alt="mainLogo" />
+          <img
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+            alt="mainLogo"
+          />
         </Link>
       </button>
     </div>
