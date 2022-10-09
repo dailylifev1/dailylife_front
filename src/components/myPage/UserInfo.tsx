@@ -29,8 +29,10 @@ function UserInfo() {
       <UserImage>
         <img src="" alt="userImage" />
       </UserImage>
+
       <UserName>{userData.userName}</UserName>
       <UserId>{userData.userId}</UserId>
+
       <FollowInfo>
         <Followers>팔로워 0명</Followers>
         <Followings>팔로잉 0명</Followings>
