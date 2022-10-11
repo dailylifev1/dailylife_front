@@ -30,7 +30,7 @@ function Searching() {
               if (process.env.REACT_APP_HOST !== undefined) {
                 axios
                   .get(
-                    `${process.env.REACT_APP_HOST}api/board/getBoardNotLogin?keyword=${element.value}`,
+                    `${process.env.REACT_APP_HOST}/api/board/getBoardNotLogin?keyword=${element.value}`,
                     {},
                   )
                   .then((res) => {
