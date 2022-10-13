@@ -7,7 +7,7 @@ const PATH = {
 };
 const commentApi = {
   getComments: methodFormat(async (boardNum: number) => {
-    const response = await client.get(`/${PATH.reply}/getReply/${boardNum}`, {
+    const response = await client.get(`/${PATH.reply}/getComment/${boardNum}`, {
       headers: {
         'X-ACCESS-TOKEN': getAccessToken(),
       },
