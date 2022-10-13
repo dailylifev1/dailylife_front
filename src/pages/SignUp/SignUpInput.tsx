@@ -5,7 +5,6 @@ import { type PayloadType } from './index';
 
 import { validate } from 'common/utils';
 
-
 interface SizeType<T> {
   width: T;
   height: T;
@@ -83,7 +82,7 @@ export default SignUpInput;
 
 const StyledWrapper = styled.div`
   display: grid;
-`
+`;
 const Section = styled.div<{ isValid: boolean | undefined }>`
   display: grid;
   grid-template-rows: 0 1fr;
@@ -92,11 +91,11 @@ const Section = styled.div<{ isValid: boolean | undefined }>`
     switch (props.isValid) {
       case true:
         return css`
-          border: 1px solid #cf990c;
+          border: 1px solid #44c9ce;
         `;
       case false:
         return css`
-          border: 1px solid #e50303;
+          border: 1px solid black;
         `;
       default:
         return css`
@@ -149,4 +148,4 @@ const Description = styled.p<{ isValid: boolean | undefined }>`
   font-weight: 300;
   line-height: 14.4px;
   margin-top: 5px;
-`
+`;

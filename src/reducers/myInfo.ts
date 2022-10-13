@@ -11,6 +11,7 @@ const myInfo = createSlice({
   initialState: {
     userNum: -1,
     userName: '',
+    userId: '',
   },
 
   reducers: {

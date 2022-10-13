@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { getAccessToken } from 'common/utils';
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
 import './WritePage.scss';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 function WritePage(props) {
   const { changeOpenPostModal } = props;
@@ -13,8 +14,10 @@ function WritePage(props) {
   const [imageName, setImageName] = useState<File[]>([]);
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(e: FormEvent) {
+    setLoading(true);
     e.preventDefault();
     if (localStorage.getItem('accessToken') === null)
       return alert('로그인 후 이용 가능합니다.');
@@ -36,6 +39,7 @@ function WritePage(props) {
         })
         .then(() => {
           window.location.replace('/');
+          setLoading(false);
         })
         .catch((err) => console.log(err));
       closeModal();
@@ -48,6 +52,7 @@ function WritePage(props) {
   };
   return (
     <div className="newPost-container">
+      {loading && <LoadingSpinner />}
       <form
         className="post-form"
         action="/"
