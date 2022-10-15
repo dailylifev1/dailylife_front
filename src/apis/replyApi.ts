@@ -1,13 +1,13 @@
 import { methodFormat } from '../common/utils';
 import client from './client';
 
-const PATH = 'api/reply';
+const PATH = 'api/comment';
 const replyApi = {
   postCreateReply: methodFormat(async () => {
     const options = {
       params: {},
     };
-    const response = await client.post(`${PATH}insert`, options);
+    const response = await client.post(`${PATH}/insert`, options);
     console.log(response);
   }),
 };

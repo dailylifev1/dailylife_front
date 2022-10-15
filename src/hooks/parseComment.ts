@@ -5,6 +5,7 @@ import { Icomment } from 'reducers/comment';
 export default function parseComments() {
   const fetchComments = async (boardNum: number) => {
     const { data: res } = await commentApi.getComments(boardNum);
+
     // res.data = [{replyTime: '1시간'}, {replyTime: '2시간'}, {replyTime: '1분'}]
     // ['1시간', '2시간', '1분']
     const updatedTimeList = res.data.map((item: Icomment) => ({

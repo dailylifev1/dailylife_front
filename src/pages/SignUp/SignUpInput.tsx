@@ -91,11 +91,11 @@ const Section = styled.div<{ isValid: boolean | undefined }>`
     switch (props.isValid) {
       case true:
         return css`
-          border: 1px solid #44c9ce;
+          border: 1px solid #cf990c;
         `;
       case false:
         return css`
-          border: 1px solid black;
+          /* border: 1px solid #e50303; */
         `;
       default:
         return css`

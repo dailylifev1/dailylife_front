@@ -19,7 +19,7 @@ function useCommentUpload(selectedPostData: ISelectedPostData) {
         if (process.env.REACT_APP_HOST !== undefined) {
           axios
             .post(
-              `${process.env.REACT_APP_HOST}/api/reply/insert`,
+              `${process.env.REACT_APP_HOST}/api/comment/insert`,
               {
                 boardNum: selectedPostData.boardNum,
                 replyContext: element.value,
@@ -31,8 +31,10 @@ function useCommentUpload(selectedPostData: ISelectedPostData) {
               },
             )
             .then((res) => {
+              console.log(res);
+
               element.value = '';
-              res.data.replyTime = getCommentDate(res.data.replyTime);
+              res.data.commentTime = getCommentDate(res.data.commentTime);
               const tempList = [...replyList, res.data];
               tempList.sort((a, b) => {
                 if (a.replyNum > b.replyNum) return 1;

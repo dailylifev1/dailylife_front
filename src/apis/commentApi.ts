@@ -2,16 +2,19 @@ import { getAccessToken, methodFormat } from '../common/utils';
 import client from './client';
 
 const PATH = {
-  reply: 'api/reply',
+  comment: 'api/comment',
   heart: 'api/heart',
 };
 const commentApi = {
   getComments: methodFormat(async (boardNum: number) => {
-    const response = await client.get(`/${PATH.reply}/getComment/${boardNum}`, {
-      headers: {
-        'X-ACCESS-TOKEN': getAccessToken(),
+    const response = await client.get(
+      `/${PATH.comment}/getComment/${boardNum}`,
+      {
+        headers: {
+          'X-ACCESS-TOKEN': getAccessToken(),
+        },
       },
-    });
+    );
     return response;
   }),
   getCommentHeart: methodFormat(async (replyNum: number) => {
