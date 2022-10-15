@@ -34,11 +34,10 @@ function CardItem({
 
   const Fullheart = '/assets/fullHeart.png';
   const Emptyheart = '/assets/heart.png';
-
   return (
     <CardWrapper type={type} onClick={handleClick}>
       <ImgWrapper>
-        {src !== '' ? <Thumbnail alt="img" src={src} /> : ''}
+        {src !== undefined ? <Thumbnail alt="img" src={src} /> : ''}
         <InfoWrapper>
           <UnderInfo img={src}>{content}</UnderInfo>
           <Text img={src}>{title}</Text>
@@ -111,7 +110,7 @@ const GradientBar = styled.div<{ img: string }>`
   bottom: 0;
   opacity: 0.6;
   background: ${(props) =>
-    props.img !== ''
+    props.img !== undefined
       ? `linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 0%,
@@ -129,8 +128,8 @@ const CardInfo = styled.div`
 const Text = styled.h5<{ img: string }>`
   position: absolute;
   margin-left: 0.7vw;
-  z-index: 4;
-  color: ${(props) => (props.img !== '' ? 'white' : 'black')};
+  z-index: 1;
+  color: ${(props) => (props.img !== undefined ? 'white' : 'black')};
   line-height: 30px;
   display: block;
   text-overflow: ellipsis;
@@ -145,8 +144,8 @@ const Text = styled.h5<{ img: string }>`
 const UnderInfo = styled.p<{ img: string }>`
   position: absolute;
   margin-left: 0.7vw;
-  z-index: 5;
-  color: ${(props) => (props.img !== '' ? 'white' : 'black')};
+  z-index: 1;
+  color: ${(props) => (props.img !== undefined ? 'white' : 'black')};
   width: 80%;
   font-size: 0.9vw;
   font-weight: 300;
