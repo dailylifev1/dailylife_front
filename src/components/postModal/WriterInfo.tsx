@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import devices from 'styles/device';
 
 function WriterInfo({ setModalOpacity }) {
+  const store = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const kebabModal = useAppSelector((state) => state.kebabModal);
   const selectedPostData = useAppSelector((state) => state.selectedPostData);
@@ -20,7 +21,7 @@ function WriterInfo({ setModalOpacity }) {
     <div className="writer-info-container">
       <WriterInfoWrapper>
         <AvatarIcon image="" />
-        <Username>dailyLife1</Username>
+        <Username>{store.myInfo.userName}</Username>
         <Follow>팔로우</Follow>
       </WriterInfoWrapper>
       <CloseContainer>
