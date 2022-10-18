@@ -1,19 +1,21 @@
 import { KeyboardEvent, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
+import { getAccessToken } from 'common/utils';
 import AvatarIcon from 'components/Icons/AvatarIcon';
-// import useComments from 'hooks/useComments';
 import useCommentUpload from 'hooks/useCommentUpload';
-// import { updateReplyList } from 'reducers/comment';
+import { setLoading } from 'reducers/loading';
 import { ISelectedPostData } from 'reducers/selectedPostData';
-// import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useAppDispatch } from 'store/hooks';
 
 interface Props {
   currentPostData: ISelectedPostData;
 }
 
 function CommentCreate({ currentPostData }: Props) {
-  // const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   // const selectedPostData = useAppSelector((state) => state.selectedPostData);
   const replyInput = useRef<HTMLInputElement>(null);
   const { addCommentProcess } = useCommentUpload(currentPostData);
@@ -48,7 +50,10 @@ function CommentCreate({ currentPostData }: Props) {
         placeholder="댓글 달기"
         onKeyUp={(event: KeyboardEvent<HTMLInputElement>) => {
           if (event.code === 'Enter' && replyInput.current?.value !== '') {
-            addCommentProcess(event);
+            if (getAccessToken() === 'No Access Token') {
+              dispatch(setLoading(false));
+              navigate('/login');
+            } else addCommentProcess(event);
             // fetchComments(selectedPostData.boardNum).then((updatedTimeList) => {
             //   dispatch(updateReplyList(updatedTimeList));
             // }).catch((err) => err);

@@ -13,7 +13,10 @@ function PostRender() {
     <div>
       <WritePageButton setOpenPostModal={setOpenPostModal} />
       {openPostModal && (
-        <NewUserPost changeOpenPostModal={changeOpenPostModal} />
+        <NewUserPost
+          setOpenPostModal={setOpenPostModal}
+          changeOpenPostModal={changeOpenPostModal}
+        />
       )}
     </div>
   );

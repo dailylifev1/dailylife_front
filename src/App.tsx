@@ -1,4 +1,5 @@
 import './index.scss';
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/navbar';
@@ -14,6 +15,9 @@ import { useAppSelector } from 'store/hooks';
 
 function App() {
   const loading = useAppSelector((state) => state.loading);
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
   return (
     <BrowserRouter>
       <Navbar />

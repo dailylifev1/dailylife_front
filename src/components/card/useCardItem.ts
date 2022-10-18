@@ -42,14 +42,14 @@ function useCardItem({
 
   const clickHeartEvent = (e: MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
-    setLike(!like);
     const accessToken: string | null = localStorage.getItem('accessToken');
     if (accessToken !== null) {
+      setLike(!like);
       likeApi
         .updateBoardHeart(boardNum, accessToken)
         .then((res) => res)
         .catch((err) => err);
-    } else alert('회원가입 후 이용하실 수 있습니다.');
+    } else alert('로그인 후 이용하실 수 있습니다.');
   };
   return { handleClick, clickHeartEvent, like };
 }
