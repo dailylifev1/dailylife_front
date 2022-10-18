@@ -22,38 +22,38 @@ function ModalContent(props) {
         <Text>{contentGenerator(content)}</Text>
         {/* <div className="text-in-modal">{currentPostData.content}</div> */}
       </Content>
-      <Comments modalOpacity={modalOpacity}/>
+      <Comments modalOpacity={modalOpacity} />
     </Container>
   );
 }
 
 export default ModalContent;
 
-const Container = styled.div.attrs({className: 'modal-content-container'})`
+const Container = styled.div.attrs({ className: 'modal-content-container' })`
   position: relative;
   @media ${devices.mobileS} {
-    width: 90%;    
+    width: 90%;
   }
   @media ${devices.laptop} {
     width: 50%;
     margin-left: 20px;
     height: 100%;
   }
-`
-const Content = styled.div.attrs({className: 'modal-post-content'})`
+`;
+const Content = styled.div.attrs({ className: 'modal-post-content' })`
   text-align: start;
   margin-top: 12px;
-`
+`;
 const Title = styled.h1`
   text-align: start;
-  
+
   @media ${devices.mobileS} {
     font-size: 25px;
   }
   @media ${devices.mobileM} {
     font-size: xx-large;
   }
-`
+`;
 const Text = styled.div`
   max-height: 121px;
   overflow-y: auto;
@@ -61,9 +61,8 @@ const Text = styled.div`
   margin-bottom: 0.5vh;
 
   @media ${devices.mobileS} {
-
   }
   @media ${devices.laptop} {
     height: 17vh;
   }
-`
+`;

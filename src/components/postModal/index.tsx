@@ -34,14 +34,14 @@ export default PostModal;
 
 const ModalWindow = styled.div.attrs({
   className: 'ModalWindow',
-}) <{ modalOpacity: 0 | 1 }>`
+})<{ modalOpacity: 0 | 1 }>`
   position: fixed;
   background-color: rgba(0, 0, 0, 0.25);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 5;
   visibility: visible;
   opacity: ${(props) => props.modalOpacity};
   pointer-events: ${(props) => (props.modalOpacity === 0 ? 'none' : 'auto')};
