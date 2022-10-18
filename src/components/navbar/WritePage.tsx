@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { getAccessToken } from 'common/utils';
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
@@ -7,9 +8,9 @@ import './WritePage.scss';
 import { setLoading } from 'reducers/loading';
 import { useAppDispatch } from 'store/hooks';
 
-function WritePage(props) {
+function WritePage({ setOpenPostModal, changeOpenPostModal }) {
   const dispatch = useAppDispatch();
-  const { changeOpenPostModal } = props;
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [thumbNail] = useState('dummy');
@@ -19,9 +20,12 @@ function WritePage(props) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (localStorage.getItem('accessToken') === null) {
+      navigate('/login');
+      setOpenPostModal(false);
+      return '';
+    }
     dispatch(setLoading(true));
-    if (localStorage.getItem('accessToken') === null)
-      return alert('로그인 후 이용 가능합니다.');
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
