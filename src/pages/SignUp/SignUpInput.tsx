@@ -48,7 +48,9 @@ function SignUpInput({
       ...prevState,
       [reqId]: e.target.value,
     }));
-    if (validateResult[formType] !== undefined)
+    console.log(validateResult[formType]);
+
+    if (validateResult[formType] !== '')
       setResult({ isValid: false, error: validateResult[formType] });
     else setResult({ isValid: true, error: '' });
     if (e.target.value.length === 0)
@@ -91,11 +93,11 @@ const Section = styled.div<{ isValid: boolean | undefined }>`
     switch (props.isValid) {
       case true:
         return css`
-          border: 1px solid #44c9ce;
+          border: 1px solid #cf990c;
         `;
       case false:
         return css`
-          border: 1px solid black;
+          border: 1px solid red;
         `;
       default:
         return css`
