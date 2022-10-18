@@ -3,13 +3,13 @@ import { KeyboardEvent } from 'react';
 
 import { getAccessToken, getCommentDate } from 'common/utils';
 import { updateReplyList } from 'reducers/comment';
+import { setLoading } from 'reducers/loading';
 import { ISelectedPostData } from 'reducers/selectedPostData';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 function useCommentUpload(selectedPostData: ISelectedPostData) {
   const dispatch = useAppDispatch();
   const { replyList } = useAppSelector((state) => state.comment);
-  // const replyInput = useRef();
 
   function addCommentProcess(e: KeyboardEvent<HTMLInputElement>) {
     const element = e.target as HTMLInputElement;
@@ -17,6 +17,7 @@ function useCommentUpload(selectedPostData: ISelectedPostData) {
       if (sessionStorage.getItem('replyInfo') === null) {
         // 댓글 업로드
         if (process.env.REACT_APP_HOST !== undefined) {
+          dispatch(setLoading(true));
           axios
             .post(
               `${process.env.REACT_APP_HOST}/api/comment/insert`,
@@ -32,7 +33,7 @@ function useCommentUpload(selectedPostData: ISelectedPostData) {
             )
             .then((res) => {
               console.log(res);
-
+              dispatch(setLoading(false));
               element.value = '';
               res.data.commentTime = getCommentDate(res.data.commentTime);
               const tempList = [...replyList, res.data];

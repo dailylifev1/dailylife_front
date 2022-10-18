@@ -5,6 +5,7 @@ import userApi from '../apis/userApi';
 import { SET_TOKEN } from '../reducers/authToken';
 import { myInfoActions } from '../reducers/myInfo';
 
+import { setLoading } from 'reducers/loading';
 import { useAppDispatch } from 'store/hooks';
 
 interface InitialValues {
@@ -14,7 +15,6 @@ interface InitialValues {
 
 const useLoginForm = (initialValues: InitialValues) => {
   const [formData, setFormData] = useState(initialValues);
-  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -28,14 +28,14 @@ const useLoginForm = (initialValues: InitialValues) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setLoading(true);
+    dispatch(setLoading(true));
     userApi
       .postUserInfoForLogIn({
         userId: formData.userId,
         userPassword: formData.userPassword,
       })
       .then((result) => {
-        setLoading(false);
+        dispatch(setLoading(false));
         if (result.ok) {
           const response = result.data;
           localStorage.setItem('accessToken', response.data.data.accessToken);
@@ -54,7 +54,6 @@ const useLoginForm = (initialValues: InitialValues) => {
     formData,
     handleChange,
     handleSubmit,
-    loading,
   };
 };
 

@@ -7,20 +7,26 @@ import LoginFind from './loginFind/index';
 import LoginButton from 'components/buttons/LoginButton';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import loginFormData from 'mocks/loginFormData';
+import { useAppSelector } from 'store/hooks';
 
 function LoginForm() {
-  const { formData, handleChange, handleSubmit, loading } = useLoginForm({
+  const loading = useAppSelector((state) => state.loading);
+  const { formData, handleChange, handleSubmit } = useLoginForm({
     userId: '',
     userPassword: '',
   });
 
   return (
     <FormWrapper>
-      <StyledForm action="/login" method="POST" onSubmit={(e) => handleSubmit(e)}>
-        {loading && <LoadingSpinner />}
+      <StyledForm
+        action="/login"
+        method="POST"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        {loading.isLoading && <LoadingSpinner />}
         {loginFormData.map((data) => (
           <StyledInput
-            autoComplete='none'
+            autoComplete="none"
             key={data.name}
             type={data.type}
             placeholder={data.placeholder}
@@ -28,9 +34,9 @@ function LoginForm() {
             style={
               formData.userId !== ''
                 ? {
-                  border: '1px solid #FCC401',
-                  color: '#1A1A1A',
-                }
+                    border: '1px solid #FCC401',
+                    color: '#1A1A1A',
+                  }
                 : { border: '1px solid #d7d7d7' }
             }
             onChange={handleChange}

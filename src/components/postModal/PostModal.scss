@@ -1,5 +1,5 @@
 .modal-content-container > .comments-wrapper > .comment-create {
-  position: absolute;
+  margin-top: 15px;
   bottom: 0;
   width: 100%;
   display: flex;
@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-around;
 }
+
 .social-icons-container {
   display: flex;
   align-items: center;
@@ -24,8 +25,12 @@
 }
 
 .comment-create {
-  position: absolute;
-  bottom: 0;
+  // position: ;
+  // bottom: 0;
+}
+
+.comment-section {
+  height: 100px;
 }
 
 .comment-section > .comment-container {

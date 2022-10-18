@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import authToken from './authToken';
 import comment from './comment';
 import kebabModal from './kebab.postModal';
+import loading from './loading';
 import myInfo from './myInfo';
 import post from './post';
 import searchResult from './searchResult';
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   kebabModal: kebabModal.reducer,
   authToken: authToken.reducer,
   comment: comment.reducer,
+  loading: loading.reducer,
   myInfo: myInfo.reducer,
   post: post.reducer,
   searchResult: searchResult.reducer,
