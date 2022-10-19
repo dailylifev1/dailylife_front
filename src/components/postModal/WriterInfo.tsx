@@ -21,7 +21,7 @@ function WriterInfo({ setModalOpacity }) {
     <div className="writer-info-container">
       <WriterInfoWrapper>
         <AvatarIcon image="" />
-        <Username>{store.myInfo.userName}</Username>
+        <Username>{store.selectedPostData.userName}</Username>
         <Follow>팔로우</Follow>
       </WriterInfoWrapper>
       <CloseContainer>
@@ -44,6 +44,7 @@ function WriterInfo({ setModalOpacity }) {
                       .then((res) => console.log(res))
                       .catch((err) => console.log(err));
                     alert('게시글이 성공적으로 삭제되었습니다.');
+                    window.location.href = '/';
                     toggleMenu();
                     setModalOpacity(0);
                   }}
