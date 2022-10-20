@@ -11,6 +11,7 @@ function useCardItem({
   heartState,
   setModalOpacity,
   boardNum,
+  userName,
   src,
   title,
   content,
@@ -33,6 +34,7 @@ function useCardItem({
     dispatch(
       selectedPostActions.updateData({
         boardNum,
+        userName,
         src,
         title,
         content,
