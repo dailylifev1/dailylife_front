@@ -22,7 +22,6 @@ export default function MyPage() {
     fetchPost()
       .then((res) => res)
       .catch((err) => err);
-    console.log(myPost);
   });
   return (
     <MyInfoWrapper>

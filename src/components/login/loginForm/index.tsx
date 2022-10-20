@@ -16,9 +16,6 @@ function LoginForm() {
     userId: '',
     userPassword: '',
   });
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
   const formIsEmpty = () => {
     if (formData.userId !== '' && formData.userPassword !== '') return true;
     return false;
