@@ -48,7 +48,6 @@ function SignUpInput({
       ...prevState,
       [reqId]: e.target.value,
     }));
-    console.log(validateResult[formType]);
 
     if (validateResult[formType] !== '')
       setResult({ isValid: false, error: validateResult[formType] });
