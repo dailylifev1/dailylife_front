@@ -8,7 +8,7 @@ import UserInfo from './UserInfo';
 import { getAccessToken } from 'common/utils';
 
 export default function MyPage() {
-  const [myPost, setMyPost] = useState<string[]>();
+  const [, setMyPost] = useState<string[]>();
   const accessToken = getAccessToken();
   useEffect(() => {
     async function fetchPost() {
