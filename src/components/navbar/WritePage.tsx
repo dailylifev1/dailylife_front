@@ -46,7 +46,10 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
           dispatch(setLoading(false));
           window.location.replace('/');
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          dispatch(setLoading(false));
+        });
       closeModal();
     }
     return undefined;
