@@ -10,6 +10,7 @@ interface Props {
   title: string;
   content: string;
   heartState: boolean;
+  userName: string;
   type?: string;
   setModalOpacity: React.Dispatch<React.SetStateAction<OpacityType>>;
 }
@@ -18,6 +19,7 @@ function CardItem({
   boardNum,
   src,
   title,
+  userName,
   content,
   heartState,
   setModalOpacity,
@@ -27,6 +29,7 @@ function CardItem({
     heartState,
     setModalOpacity,
     boardNum,
+    userName,
     src,
     title,
     content,

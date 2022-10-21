@@ -4,7 +4,7 @@ import useLoginForm from '../../../hooks/useLoginForm';
 import EasyLogin from './easyLogin';
 import LoginFind from './loginFind/index';
 
-import LoginButton from 'components/buttons/LoginButton';
+import SubmitButton from 'components/buttons/SubmitButton';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import loginFormData from 'mocks/loginFormData';
 import { useAppSelector } from 'store/hooks';
@@ -15,6 +15,10 @@ function LoginForm() {
     userId: '',
     userPassword: '',
   });
+  const formIsEmpty = () => {
+    if (formData.userId !== '' && formData.userPassword !== '') return true;
+    return false;
+  };
 
   return (
     <FormWrapper>
@@ -42,19 +46,27 @@ function LoginForm() {
             onChange={handleChange}
           />
         ))}
-        <LoginButton text="로그인" />
+        <SubmitButtonWrapper>
+          <SubmitButton
+            text="로그인"
+            height="50px"
+            fontSize="17px"
+            isActive={formIsEmpty()}
+            width="100%"
+          />
+        </SubmitButtonWrapper>
         <LoginFind />
         <EasyLogin />
-        {/* <p className="message">
-            {" "}
-            Not registered? <Link to="/SignIn">Create an account</Link>
-          </p> */}
       </StyledForm>
     </FormWrapper>
   );
 }
 
 export default LoginForm;
+const SubmitButtonWrapper = styled.div`
+  margin: 36px 0 20px 0;
+`;
+
 const FormWrapper = styled.div`
   max-width: 320px;
   margin-top: 200px;

@@ -29,15 +29,13 @@ function SignUp() {
   const [inputValues, setInputValues] = useState(signUpData);
   const activator = () => {
     const firstErrorMsg =
-      validate(inputValues.username, 'username').username !== undefined;
-    const secondErrorMsg =
-      validate(inputValues.email, 'email').email !== undefined;
-    const thirdErrorMsg =
-      validate(inputValues.userId, 'userId').userId !== undefined;
+      validate(inputValues.username, 'username').username !== '';
+    const secondErrorMsg = validate(inputValues.email, 'email').email !== '';
+    const thirdErrorMsg = validate(inputValues.userId, 'userId').userId !== '';
     const fourthErrorMsg =
-      validate(inputValues.password, 'password').password !== undefined;
+      validate(inputValues.password, 'password').password !== '';
     const fifthErrorMsg =
-      validate(inputValues.passwordConfirm, 'password').password !== undefined;
+      validate(inputValues.passwordConfirm, 'password').password !== '';
 
     if (
       firstErrorMsg ||

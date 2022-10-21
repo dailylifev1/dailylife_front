@@ -16,8 +16,6 @@ function UserInfo() {
   useEffect(() => {
     async function fetchData() {
       const { data: userInfo } = await userApi.getUserInfo(userData.userNum);
-      console.log(userData.userNum);
-      console.log(userInfo.data.data);
       dispatch(myInfoActions.updateUserNum(userInfo.data.data));
     }
     fetchData()

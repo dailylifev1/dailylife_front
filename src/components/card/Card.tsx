@@ -25,6 +25,7 @@ function Cards({ type = 'default' }: cardProps) {
                 boardNum={data.boardNum}
                 src={data.serverFileUrl[0]}
                 title={data.title}
+                userName={data.userName}
                 content={data.content}
                 heartState={data.heart}
                 setModalOpacity={setModalOpacity}
