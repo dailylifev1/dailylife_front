@@ -1,31 +1,26 @@
+import styled from 'styled-components';
+
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
 import useWritePage from 'hooks/useWritepPage';
-import './WritePage.scss';
 
 function WritePage({ setOpenPostModal, changeOpenPostModal }) {
   const { handleSubmit, closeModal, formValues, setFormValues, updateFiles } =
     useWritePage(setOpenPostModal, changeOpenPostModal);
   return (
-    <div className="newPost-container">
-      <form
-        className="post-form"
-        action="/"
-        method="post"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <section className="newPost-modal" onClick={() => closeModal()}>
-          <section
-            className="newPost-boarding"
+    <Container>
+      <Form action="/" method="post" onSubmit={(e) => handleSubmit(e)}>
+        <Modal onClick={() => closeModal()}>
+          <Boarding
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
-            <div className="newPost-title">게시글 작성</div>
-            <section className="newPost-body">
-              <div className="newPost-body-pic">
-                <div className="newPost-body-example-container">
-                  <div className="newPost-body-example-pic-list">
-                    <label className="select-img-btn" htmlFor="selectImg">
+            <Title>게시글 작성</Title>
+            <Body>
+              <Picture>
+                <ExampleContainer>
+                  <ExamplePhotoList>
+                    <ImageLabel htmlFor="selectImg">
                       <img
                         src="/assets/addPicture.png"
                         style={{ cursor: 'pointer', marginLeft: '10px' }}
@@ -39,33 +34,24 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
                         accept="image/*"
                         onChange={updateFiles}
                       />
-                    </label>
-                  </div>
+                    </ImageLabel>
+                  </ExamplePhotoList>
 
                   {formValues.fileImage !== '' && (
-                    <img
-                      className="newPost-body-example-pic"
-                      alt="sample"
-                      src={formValues.fileImage}
-                    />
+                    <ExampleImage alt="sample" src={formValues.fileImage} />
                   )}
-                </div>
+                </ExampleContainer>
                 {formValues.fileImage === '' && (
-                  <p className="newPost-body-pic-explain">
+                  <PhotoExplain>
                     아래 버튼을 클릭하여 이미지를 추가해주세요.
-                  </p>
+                  </PhotoExplain>
                 )}
                 {formValues.fileImage === '' && (
-                  <img
-                    className="newPost-body-pic-cloudPic"
-                    src="/assets/cloud-upload.png"
-                    alt=""
-                  />
+                  <CloudeImage src="/assets/cloud-upload.png" alt="" />
                 )}
-              </div>
-              <div className="newPost-body-content-container">
-                <input
-                  className="newPost-body-title"
+              </Picture>
+              <ContentContainer>
+                <BodyTitle
                   name="title"
                   placeholder="제목을 입력해주세요"
                   onChange={(e) =>
@@ -75,8 +61,7 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
                     }))
                   }
                 />
-                <textarea
-                  className="newPost-body-content"
+                <BodyContent
                   name="content"
                   placeholder="내용을 입력해주세요"
                   onChange={(e) =>
@@ -86,23 +71,227 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
                     }))
                   }
                 />
-                <button type="submit" className="submit-btn">
-                  게시물 등록
-                </button>
-              </div>
-            </section>
-            <button
-              type="button"
-              className="newPost-modal-close"
-              onClick={closeModal}
-            >
+                <SubmitButton>게시물 등록</SubmitButton>
+              </ContentContainer>
+            </Body>
+            <ModalClose type="button" onClick={closeModal}>
               <CloseButtonIcon />
-            </button>
-          </section>
-        </section>
-      </form>
-    </div>
+            </ModalClose>
+          </Boarding>
+        </Modal>
+      </Form>
+    </Container>
   );
 }
 
 export default WritePage;
+
+const Container = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  cursor: default;
+  transition: all 1s;
+  visibility: visible;
+  // overflow-y: scroll;
+`;
+const Form = styled.form``;
+const Modal = styled.section`
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: visible;
+  opacity: 1;
+  font-family: 'Pretendard';
+  transition: all 0.3s;
+`;
+const Boarding = styled.section`
+  position: absolute;
+  width: 90%;
+  max-width: 990px;
+  height: 650px;
+  padding: 1.5em;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  visibility: visible;
+  transition: all 0.3s;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+`;
+const Title = styled.div`
+  position: absolute;
+  width: 91px;
+  height: 24px;
+  left: 3vh;
+  top: 4vh;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height */
+  letter-spacing: -0.01em;
+  color: #909090;
+`;
+const Body = styled.section`
+  position: relative;
+  top: 5vh;
+  width: 100vh;
+  height: 58vh;
+`;
+const Picture = styled.div`
+  position: absolute;
+  display: flex;
+  width: 64%;
+  max-width: 560px;
+  height: 58vh;
+  max-height: 520px;
+  left: 0;
+  align-items: center;
+
+  background: #f4f4f4;
+  border: 1.5px solid #eaeaea;
+  border-radius: 12px;
+  box-sizing: border-box;
+`;
+const ContentContainer = styled.div`
+  position: absolute;
+  float: left;
+  right: 0;
+  width: 36%;
+  height: 100%;
+  max-height: 520px;
+`;
+const CloudeImage = styled.img`
+  position: absolute;
+  left: 49%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+`;
+const ExampleContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+const ExampleImage = styled.img`
+  z-index: 2;
+  object-fit: cover;
+  width: 100%;
+  max-width: 557px;
+  height: 100%;
+  max-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: 10px;
+  background-position: center;
+  background-size: contain, cover;
+  background-repeat: no-repeat;
+`;
+const ImageLabel = styled.label`
+  float: left;
+`;
+const ExamplePhotoList = styled.div`
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 4%);
+  bottom: 1.5vh;
+  width: 96%;
+  height: 18%;
+  background: rgba(0, 0, 0, 0.42);
+  align-items: center;
+  opacity: 1;
+  border: 1px solid #eaeaea;
+  border-radius: 6px;
+`;
+const PhotoExplain = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 46px;
+  top: 50%;
+  margin: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #909090;
+`;
+const BodyTitle = styled.input`
+  position: absolute;
+  width: 100%;
+  right: 0.2vh;
+  top: 4px;
+  border: 0;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+
+  &::placeholder {
+    color: #bcbcbc;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+const BodyContent = styled.textarea`
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  right: 1px;
+  top: 5vh;
+  border: none;
+  resize: none;
+  border-bottom: 1px solid #eaeaea;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  /* line-height: 23px; */
+  letter-spacing: -0.01em;
+  &::placeholder {
+    color: #bcbcbc;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+const SubmitButton = styled.button`
+  position: absolute;
+  width: 102px;
+  height: 34px;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 17px;
+  line-height: 20px;
+  color: #ffffff;
+  background: #ff9500;
+  border-radius: 6px;
+  border: none;
+  &:hover {
+    color: #000000;
+  }
+`;
+const ModalClose = styled.button`
+  position: absolute;
+  right: 1.3vw;
+  cursor: pointer;
+`;
