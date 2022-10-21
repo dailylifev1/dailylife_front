@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
 import useWritePage from 'hooks/useWritepPage';
+import devices from 'styles/device';
 
 function WritePage({ setOpenPostModal, changeOpenPostModal }) {
   const { handleSubmit, closeModal, formValues, setFormValues, updateFiles } =
@@ -93,7 +94,6 @@ const Container = styled.div`
   left: 0;
   top: 0;
   cursor: default;
-  transition: all 1s;
   visibility: visible;
   // overflow-y: scroll;
 `;
@@ -109,15 +109,11 @@ const Modal = styled.section`
   visibility: visible;
   opacity: 1;
   font-family: 'Pretendard';
-  transition: all 0.3s;
 `;
 const Boarding = styled.section`
   position: absolute;
-  width: 90%;
   max-width: 990px;
-  height: 650px;
   padding: 1.5em;
-  display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -126,9 +122,14 @@ const Boarding = styled.section`
   transition: all 0.3s;
   box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
+  @media ${devices.mobileS} {
+    width: 80%;
+  }
+  @media ${devices.tablet} {
+    width: 90%;
+  }
 `;
 const Title = styled.div`
-  position: absolute;
   width: 91px;
   height: 24px;
   left: 3vh;
@@ -142,33 +143,40 @@ const Title = styled.div`
   color: #909090;
 `;
 const Body = styled.section`
-  position: relative;
-  top: 5vh;
-  width: 100vh;
-  height: 58vh;
+  display: flex;
+  gap: 2vh;
+  margin-top: 2vh;
+  @media ${devices.mobileS} {
+    flex-direction: column;
+  }
+  @media ${devices.tablet} {
+    flex-direction: row;
+  }
 `;
 const Picture = styled.div`
-  position: absolute;
-  display: flex;
-  width: 64%;
+  position: relative;
   max-width: 560px;
-  height: 58vh;
-  max-height: 520px;
-  left: 0;
+  aspect-ratio: 1;
   align-items: center;
-
   background: #f4f4f4;
   border: 1.5px solid #eaeaea;
   border-radius: 12px;
   box-sizing: border-box;
+  @media ${devices.mobileS} {
+    width: auto;
+  }
+  @media ${devices.tablet} {
+    width: 64%;
+  }
 `;
 const ContentContainer = styled.div`
-  position: absolute;
-  float: left;
-  right: 0;
-  width: 36%;
-  height: 100%;
-  max-height: 520px;
+  position: relative;
+  @media ${devices.mobileS} {
+    width: 100%;
+  }
+  @media ${devices.tablet} {
+    width: 36%;
+  }
 `;
 const CloudeImage = styled.img`
   position: absolute;
@@ -229,7 +237,6 @@ const PhotoExplain = styled.div`
   color: #909090;
 `;
 const BodyTitle = styled.input`
-  position: absolute;
   width: 100%;
   right: 0.2vh;
   top: 4px;
@@ -250,7 +257,7 @@ const BodyTitle = styled.input`
   }
 `;
 const BodyContent = styled.textarea`
-  position: absolute;
+  margin-top: 10px;
   width: 100%;
   height: 50%;
   right: 1px;
@@ -270,13 +277,16 @@ const BodyContent = styled.textarea`
   &:focus {
     outline: none;
   }
+  @media ${devices.mobileS} {
+    height: 155px;
+  }
+  @media ${devices.tablet} {
+    height: 50%;
+  }
 `;
 const SubmitButton = styled.button`
-  position: absolute;
   width: 102px;
   height: 34px;
-  right: 0;
-  bottom: 0;
   cursor: pointer;
   font-family: 'Pretendard';
   font-style: normal;
@@ -289,9 +299,18 @@ const SubmitButton = styled.button`
   &:hover {
     color: #000000;
   }
+  @media ${devices.mobileS} {
+    float: right;
+  }
+  @media ${devices.tablet} {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `;
 const ModalClose = styled.button`
   position: absolute;
   right: 1.3vw;
+  top: 1.3vw;
   cursor: pointer;
 `;
