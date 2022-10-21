@@ -14,11 +14,12 @@ interface Props {
   item: Icomment;
 }
 
-function Comment({ replyHover,
+function Comment({
+  replyHover,
   setReplyHover,
   // reReplyFlag,
   // index,
-  item
+  item,
 }: Props) {
   return (
     <CommentContainer
@@ -35,9 +36,9 @@ function Comment({ replyHover,
 
 export default Comment;
 
-const CommentContainer = styled.div.attrs({
-  className: 'comment-container',
-})`
+const CommentContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   & > .comment-date-container {
     display: flex;
   }

@@ -50,7 +50,7 @@ function Comments({ modalOpacity }) {
 }
 
 export default Comments;
-const Wrapper = styled.div.attrs({ className: 'comments-wrapper' })`
+const Wrapper = styled.div`
   @media ${devices.laptop} {
     position: absolute;
     width: 100%;
