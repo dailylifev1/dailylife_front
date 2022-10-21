@@ -11,6 +11,12 @@ const MainWrapper = styled.div.attrs({ className: 'main-wrapper' })`
     .searchBar {
       width: 100%;
     }
+    .card-text {
+      bottom: 3.5vw;
+    }
+    .card-underInfo {
+      bottom: 0.5vw;
+    }
   }
 
   @media ${devices.tablet} {
@@ -18,10 +24,16 @@ const MainWrapper = styled.div.attrs({ className: 'main-wrapper' })`
     .searchBar {
       width: 110%;
     }
+    .card-text {
+      bottom: 2.4vw;
+    }
   }
 
   @media ${devices.laptopL} {
     width: 55%;
+  }
+  .card-text {
+    /* bottom: 3.5vw; */
   }
 `;
 
