@@ -32,9 +32,12 @@ function CommentSection() {
 
 export default CommentSection;
 
-const Container = styled.div.attrs({ className: 'comment-section' })<{
+const Container = styled.div<{
   commentList: Icomment[];
 }>`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100px;
   margin-top: 1vh;
   overflow-y: auto;
 

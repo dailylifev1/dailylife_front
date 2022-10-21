@@ -43,9 +43,8 @@ function CommentCreate({ currentPostData }: Props) {
   return (
     <CommentCreateWrapper>
       <AvatarIcon image="" />
-      <input
+      <TextInput
         type="text"
-        className="comment-create-text"
         ref={replyInput}
         placeholder="댓글 달기"
         onKeyUp={(event: KeyboardEvent<HTMLInputElement>) => {
@@ -68,16 +67,19 @@ function CommentCreate({ currentPostData }: Props) {
 }
 
 export default CommentCreate;
-const CommentCreateWrapper = styled.div.attrs({
-  className: 'comment-create',
-})`
-  & > .comment-create-text {
-    border: 1px solid #dcdcdc;
-    border-radius: 100px;
-    width: 100%;
-    margin-left: 10px;
-    padding: 10px;
-    font-family: 'Pretendard';
-    font-size: 16px;
-  }
+const CommentCreateWrapper = styled.div`
+  margin-top: 15px;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+const TextInput = styled.input`
+  border: 1px solid #dcdcdc;
+  border-radius: 100px;
+  width: 100%;
+  margin-left: 10px;
+  padding: 10px;
+  font-family: 'Pretendard';
+  font-size: 16px;
 `;

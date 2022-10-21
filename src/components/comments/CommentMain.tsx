@@ -11,18 +11,19 @@ interface Props {
 function CommentMain({ item }: Props) {
   return (
     <CommentMainWrapper>
-      <AvatarIcon image='' />
-      <div className="username">{item.userName}</div>
-      <div className="comment-content">{item.replyContext}</div>
+      <AvatarIcon image="" />
+      <Username>{item.userName}</Username>
+      <CommentContent>{item.replyContext}</CommentContent>
       <LikeIcon replyNum={item.replyNum} />
     </CommentMainWrapper>
   );
 }
 
 export default CommentMain;
-const CommentMainWrapper = styled.div.attrs({
-  className: 'comment-main',
-})`
+const CommentMainWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   & > .username {
     margin-left: 10px;
     font-weight: 600;
@@ -36,3 +37,5 @@ const CommentMainWrapper = styled.div.attrs({
     height: 12.94px;
   }
 `;
+const Username = styled.div``;
+const CommentContent = styled.div``;

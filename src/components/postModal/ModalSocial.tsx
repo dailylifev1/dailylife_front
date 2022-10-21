@@ -6,17 +6,17 @@ import CommentIcon from 'components/Icons/CommentIcon';
 import { useAppSelector } from 'store/hooks';
 
 function ModalSocial() {
-  const replyList = useAppSelector(state => state.comment.replyList)
+  const replyList = useAppSelector((state) => state.comment.replyList);
   return (
     <ModalSocialWrapper>
-      <div className="social-icons-container">
+      <SocialIconsContainer>
         <LikeIcon />
         <CommentIcon />
-      </div>
-      <div className="social-count-container">
-        <span className="likes-count">좋아요 {10}개</span>
-        <span className="comments-count">댓글 {replyList.length}개</span>
-      </div>
+      </SocialIconsContainer>
+      <SocialCountContainer>
+        <LikeCount>좋아요 {10}개</LikeCount>
+        <CommentCount>댓글 {replyList.length}개</CommentCount>
+      </SocialCountContainer>
     </ModalSocialWrapper>
   );
 }
@@ -27,4 +27,13 @@ const ModalSocialWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+const SocialIconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const SocialCountContainer = styled.div``;
+const LikeCount = styled.span``;
+const CommentCount = styled.span`
+  margin-left: 10px;
 `;
