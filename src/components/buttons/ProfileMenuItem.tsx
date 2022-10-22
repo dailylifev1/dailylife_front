@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { type TextObj } from 'components/myInfo/myInfoForm';
+import devices from 'styles/device';
 
 interface Props extends TextObj {
   setTextArr: Function;
@@ -31,12 +32,18 @@ function ProfileMenuItem({ id, data, isActive, path, setTextArr }: Props) {
 export default ProfileMenuItem;
 const StyledButton = styled.button<{ isActive: boolean | undefined }>`
   display: block;
-  margin: 3vh 3vh 3vh 2vh;
   padding: 0;
   font-family: Pretendard;
   font-size: 15px;
   font-weight: ${(props) => (props.isActive === true ? 600 : 400)};
   line-height: 18px;
   color: #3e3e3e;
-  border-bottom: ${(props) => (props.isActive === true ? '2px solid black' : 'none')};
+  border-bottom: ${(props) =>
+    props.isActive === true ? '2px solid black' : 'none'};
+  @media ${devices.mobileS} {
+    margin: 3vh auto 3vh 1vh;
+  }
+  @media ${devices.tablet} {
+    margin: 3vh auto 3vh 2vh;
+  }
 `;

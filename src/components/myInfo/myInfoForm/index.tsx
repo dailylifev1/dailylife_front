@@ -1,10 +1,13 @@
 import './accountManage.scss';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 import AccountModifyForm from './AccountModifyForm';
 import ProfileMenu from './profileMenu';
 import ProfileModifyForm from './profileModifyForm';
+
+import devices from 'styles/device';
 
 export interface TextObj {
   id: number;
@@ -43,11 +46,35 @@ function MyInfoForm() {
     }
   };
   return (
-    <div className="form-container">
+    <Wrapper>
       <ProfileMenu textArr={textArr} setTextArr={setTextArr} />
       <div className="form-body-container">{handlePage()}</div>
-    </div>
+    </Wrapper>
   );
 }
 
 export default MyInfoForm;
+
+const Wrapper = styled.div`
+  display: grid;
+  position: relative;
+  top: 7vh;
+  margin: auto;
+  height: 600px;
+
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  @media ${devices.mobileS} {
+    grid-template-columns: 2fr 8fr;
+    width: 90%;
+  }
+  @media ${devices.tablet} {
+    width: 100%;
+  }
+  @media ${devices.laptop} {
+    grid-template-columns: 3fr 7fr;
+    width: 740px;
+  }
+`;

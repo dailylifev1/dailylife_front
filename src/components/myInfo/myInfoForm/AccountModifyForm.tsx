@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 import './accountManage.scss';
 import MyInfoInput from './MyInfoInput';
@@ -7,6 +8,7 @@ import MyInfoTitle from './MyInfoTitle';
 
 import { validate } from 'common/utils';
 import MyInfoButton from 'components/buttons/SubmitButton';
+import devices from 'styles/device';
 
 function AccountModifyForm({ textArr }) {
   const location = useLocation();
@@ -33,30 +35,30 @@ function AccountModifyForm({ textArr }) {
         <p className="account-password-info-title">비밀번호 변경</p>
       </div>
       <div className="account-modify-input-wrapper">
-        <div className="row">
+        <Row>
           <p className="account-modify-input">현재 비밀번호</p>
           <MyInfoInput
             type="password"
             formType="password"
             setState={setInputCurrentPassword}
           />
-        </div>
-        <div className="row">
+        </Row>
+        <Row>
           <p className="account-modify-input">새 비밀번호</p>
           <MyInfoInput
             type="password"
             formType="password"
             setState={setInputNewPassword}
           />
-        </div>
-        <div className="row">
+        </Row>
+        <Row>
           <p className="account-modify-input">새 비밀번호 확인</p>
           <MyInfoInput
             type="password"
             formType="password"
             setState={setInputConfirmPassword}
           />
-        </div>
+        </Row>
         <div className="profile-form-submit-button-wrapper">
           <MyInfoButton
             width="85px"
@@ -72,3 +74,16 @@ function AccountModifyForm({ textArr }) {
 }
 
 export default AccountModifyForm;
+
+const Row = styled.div.attrs({ className: 'row' })`
+  display: grid;
+  align-items: center;
+  & > div {
+    align-items: center;
+  }
+  @media ${devices.mobileS} {
+  }
+  @media ${devices.laptop} {
+    grid-template-columns: 1fr 3fr;
+  }
+`;
