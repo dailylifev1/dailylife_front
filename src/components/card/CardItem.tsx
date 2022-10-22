@@ -4,6 +4,8 @@ import styled from 'styled-components/macro';
 import useCardItem from './useCardItem';
 import { type OpacityType } from './useCards';
 
+import devices from 'styles/device';
+
 interface Props {
   boardNum: number;
   src: string;
@@ -140,9 +142,15 @@ const Text = styled.h5.attrs({ className: 'card-text' })<{ img: string }>`
   white-space: nowrap;
   overflow: hidden;
   bottom: 2vw;
-  font-size: 1vw;
   font-weight: 500;
   width: 80%;
+
+  @media ${devices.mobileS} {
+    font-size: 12px;
+  }
+  @media ${devices.laptop} {
+    font-size: 1vw;
+  }
 `;
 const UnderInfo = styled.p.attrs({ className: 'card-underInfo' })<{
   img: string;
@@ -152,7 +160,6 @@ const UnderInfo = styled.p.attrs({ className: 'card-underInfo' })<{
   z-index: 1;
   color: ${(props) => (props.img !== undefined ? 'white' : 'black')};
   width: 80%;
-  font-size: 0.9vw;
   font-weight: 300;
   cursor: pointer;
   font-family: 'pretendard';
@@ -162,13 +169,25 @@ const UnderInfo = styled.p.attrs({ className: 'card-underInfo' })<{
   overflow: hidden;
   text-overflow: ellipsis;
   bottom: 0.5vw;
+  @media ${devices.mobileS} {
+    font-size: 11px;
+  }
+  @media ${devices.laptop} {
+    font-size: 0.9vw;
+  }
 `;
 const LikeButton = styled.img`
   z-index: 1;
   position: absolute;
-  width: 1.4vw;
-  height: 1.4vw;
-  top: 0.2vw;
   right: 0.75vw;
+  width: 26.78px;
+  height: 26.78px;
+  @media ${devices.mobileS} {
+    bottom: 10px;
+  }
+  @media ${devices.laptop} {
+    top: 0.2vw;
+    bottom: auto;
+  }
 `;
 export default CardItem;

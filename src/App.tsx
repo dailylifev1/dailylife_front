@@ -40,7 +40,7 @@ const MainWrapper = styled.div.attrs({ className: 'main-wrapper' })`
   width: 95%;
   margin: auto;
 
-  @media ${devices.mobileM} {
+  @media ${devices.mobileL} {
     width: 95%;
     .searchBar {
       width: 100%;
