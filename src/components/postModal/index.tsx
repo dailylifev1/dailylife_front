@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import ModalBody from 'components/postModal/ModalBody';
-import './PostModal.scss';
 import { updateModalStatus } from 'reducers/kebab.postModal';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 

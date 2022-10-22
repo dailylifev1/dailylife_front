@@ -18,7 +18,7 @@ function WriterInfo({ setModalOpacity }) {
   const toggleMenu = () => dispatch(updateModalStatus(!kebabModal.isOpen));
 
   return (
-    <div className="writer-info-container">
+    <Container>
       <WriterInfoWrapper>
         <AvatarIcon image="" />
         {/* <Username>{store.selectedPostData.userName}</Username>
@@ -66,11 +66,16 @@ function WriterInfo({ setModalOpacity }) {
         </KebabMenuContainer>
         <ModalCloseButton setModalOpacity={setModalOpacity} />
       </CloseContainer>
-    </div>
+    </Container>
   );
 }
 
 export default WriterInfo;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 const CloseContainer = styled.div`
   flex: 1;
