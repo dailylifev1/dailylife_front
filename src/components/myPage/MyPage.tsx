@@ -12,12 +12,17 @@ export default function MyPage() {
   const accessToken = getAccessToken();
   useEffect(() => {
     async function fetchPost() {
-      const response = await axios.get('/api/board/myBoard', {
-        headers: {
-          'X-ACCESS-TOKEN': accessToken,
-        },
-      });
-      setMyPost(response.data);
+      if (process.env.REACT_APP_HOST !== undefined) {
+        const response = await axios.get(
+          `${process.env.REACT_APP_HOST}/api/board/myBoard`,
+          {
+            headers: {
+              'X-ACCESS-TOKEN': accessToken,
+            },
+          },
+        );
+        setMyPost(response.data);
+      }
     }
     fetchPost()
       .then((res) => res)
