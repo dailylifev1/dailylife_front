@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import PostModal from '../postModal/index';
 import CardItem from './CardItem';
@@ -62,14 +62,13 @@ const CardsStyled = styled.div`
 const CardsWrapper = styled.div.attrs({
   className: 'cards',
 })`
-  padding: 4rem;
   background: rgb(255, 255, 255);
 `;
 const CardsContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 55%;
+  width: 100%;
   margin: 0 auto;
 `;
 export default Cards;
