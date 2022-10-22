@@ -35,6 +35,8 @@ const useLoginForm = (initialValues: InitialValues) => {
         userPassword: formData.userPassword,
       })
       .then((result) => {
+        console.log(result);
+
         dispatch(setLoading(false));
         if (result.ok) {
           const response = result.data;

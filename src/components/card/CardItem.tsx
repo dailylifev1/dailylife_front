@@ -128,7 +128,7 @@ const CardInfo = styled.div`
   width: 100%;
 `;
 
-const Text = styled.h5<{ img: string }>`
+const Text = styled.h5.attrs({ className: 'card-text' })<{ img: string }>`
   position: absolute;
   margin-left: 0.7vw;
   z-index: 1;
@@ -144,7 +144,9 @@ const Text = styled.h5<{ img: string }>`
   font-weight: 500;
   width: 80%;
 `;
-const UnderInfo = styled.p<{ img: string }>`
+const UnderInfo = styled.p.attrs({ className: 'card-underInfo' })<{
+  img: string;
+}>`
   position: absolute;
   margin-left: 0.7vw;
   z-index: 1;
