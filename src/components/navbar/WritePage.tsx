@@ -144,7 +144,7 @@ const Title = styled.div`
 `;
 const Body = styled.section`
   display: flex;
-  gap: 2vh;
+  justify-content: space-between;
   margin-top: 2vh;
   @media ${devices.mobileS} {
     flex-direction: column;
