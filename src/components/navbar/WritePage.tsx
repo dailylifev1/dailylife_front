@@ -1,62 +1,10 @@
-import axios from 'axios';
-import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { getAccessToken } from 'common/utils';
 import CloseButtonIcon from 'components/Icons/CloseButtonIcon';
+import useWritePage from 'hooks/useWritepPage';
 import './WritePage.scss';
-import { setLoading } from 'reducers/loading';
-import { useAppDispatch } from 'store/hooks';
 
 function WritePage({ setOpenPostModal, changeOpenPostModal }) {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [thumbNail] = useState('dummy');
-  const [imageName, setImageName] = useState<File[]>([]);
-  const [file, setFile] = useState('');
-  const [fileImage, setFileImage] = useState('');
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (localStorage.getItem('accessToken') === null) {
-      navigate('/login');
-      setOpenPostModal(false);
-      return '';
-    }
-    dispatch(setLoading(true));
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('thumbNail', thumbNail);
-    // eslint-disable-next-line no-shadow
-    imageName.forEach((file) => {
-      formData.append('imageName', file);
-    });
-    if (process.env.REACT_APP_HOST !== undefined) {
-      axios
-        .post(`${process.env.REACT_APP_HOST}/api/board/create`, formData, {
-          headers: {
-            'X-ACCESS-TOKEN': getAccessToken(),
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then(() => {
-          dispatch(setLoading(false));
-          window.location.replace('/');
-        })
-        .catch((err) => {
-          console.log(err);
-          dispatch(setLoading(false));
-        });
-      closeModal();
-    }
-    return undefined;
-  }
-  const closeModal = () => {
-    changeOpenPostModal(false);
-  };
+  const { handleSubmit, closeModal, formValues, setFormValues, updateFiles } =
+    useWritePage(setOpenPostModal, changeOpenPostModal);
   return (
     <div className="newPost-container">
       <form
@@ -89,34 +37,25 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
                         name="imgUpload"
                         type="file"
                         accept="image/*"
-                        onChange={(e) => {
-                          if (e.target.files !== null) {
-                            setFileImage(
-                              URL.createObjectURL(e.target.files[0]),
-                            );
-                            for (let i = 0; i < e.target.files.length; i += 1)
-                              setFile(`${file} ${e.target.files[i].name}`);
-                            setImageName([...imageName, ...e.target.files]);
-                          }
-                        }}
+                        onChange={updateFiles}
                       />
                     </label>
                   </div>
 
-                  {fileImage !== '' && (
+                  {formValues.fileImage !== '' && (
                     <img
                       className="newPost-body-example-pic"
                       alt="sample"
-                      src={fileImage}
+                      src={formValues.fileImage}
                     />
                   )}
                 </div>
-                {fileImage === '' && (
+                {formValues.fileImage === '' && (
                   <p className="newPost-body-pic-explain">
                     아래 버튼을 클릭하여 이미지를 추가해주세요.
                   </p>
                 )}
-                {fileImage === '' && (
+                {formValues.fileImage === '' && (
                   <img
                     className="newPost-body-pic-cloudPic"
                     src="/assets/cloud-upload.png"
@@ -129,13 +68,23 @@ function WritePage({ setOpenPostModal, changeOpenPostModal }) {
                   className="newPost-body-title"
                   name="title"
                   placeholder="제목을 입력해주세요"
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) =>
+                    setFormValues((prevState) => ({
+                      ...prevState,
+                      title: e.target.value,
+                    }))
+                  }
                 />
                 <textarea
                   className="newPost-body-content"
                   name="content"
                   placeholder="내용을 입력해주세요"
-                  onChange={(e) => setContent(e.target.value)}
+                  onChange={(e) =>
+                    setFormValues((prevState) => ({
+                      ...prevState,
+                      content: e.target.value,
+                    }))
+                  }
                 />
                 <button type="submit" className="submit-btn">
                   게시물 등록
