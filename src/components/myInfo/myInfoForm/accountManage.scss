@@ -43,14 +43,3 @@
 
   color: #3E3E3E;
 }
-
-.row {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  align-items: center;
-}
-
-.row>div {
-  // display: flex;
-  align-items: center;
-}

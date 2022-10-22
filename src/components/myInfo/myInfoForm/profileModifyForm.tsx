@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 import '../myinfo.scss';
 import MyInfoInput from './MyInfoInput';
@@ -9,6 +10,7 @@ import MyInfoTitle from './MyInfoTitle';
 import { getAccessToken, validate } from 'common/utils';
 import MyInfoButton from 'components/buttons/SubmitButton';
 import AvatarIcon from 'components/Icons/AvatarIcon';
+import devices from 'styles/device';
 
 function ProfileModifyForm({ textArr }) {
   const location = useLocation();
@@ -51,7 +53,7 @@ function ProfileModifyForm({ textArr }) {
   }
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
-      <div className="profile-modify-container">
+      <ProfileModifyContainer>
         <div className="profile-introduce-container">
           <MyInfoTitle path={location.pathname} textArr={textArr} />
           <div className="profile-pic-container">
@@ -79,9 +81,9 @@ function ProfileModifyForm({ textArr }) {
               />
             </div>
           </div>
-          <div className="profile-modify-input-container">
+          <ProfileModifyInputContainer>
             <div className="profile-input-wrapper">
-              <div className="row">
+              <Row>
                 <p className="profile-modify-input">프로필 이름</p>
                 <MyInfoInput
                   formType="username"
@@ -90,17 +92,17 @@ function ProfileModifyForm({ textArr }) {
                     최대 12글자(공백포함)까지 이름으로 등록 가능합니다.
                   "
                 />
-              </div>
-              <div className="row">
+              </Row>
+              <Row>
                 <p className="profile-modify-input">프로필 아이디</p>
                 <MyInfoInput
                   formType="userId"
                   setState={setInputId}
                   description="사람들에게 회원님의 계정을 찾을 수 있도록 변경해주세요. "
                 />
-              </div>
+              </Row>
             </div>
-          </div>
+          </ProfileModifyInputContainer>
           <div className="profile-form-submit-button-wrapper">
             <MyInfoButton
               width="69px"
@@ -112,9 +114,41 @@ function ProfileModifyForm({ textArr }) {
             />
           </div>
         </div>
-      </div>
+      </ProfileModifyContainer>
     </form>
   );
 }
 
 export default ProfileModifyForm;
+
+const ProfileModifyContainer = styled.div`
+  position: absolute;
+  padding-right: 10%;
+  right: 0;
+  width: 70%;
+  height: 100%;
+
+  @media ${devices.mobileS} {
+    padding-right: 2.5vh;
+  }
+  @media ${devices.tablet} {
+    padding-right: 4vh;
+  }
+`;
+const ProfileModifyInputContainer = styled.div`
+  width: 100%;
+  padding: 3vh 0 4vh 0;
+`;
+
+const Row = styled.div.attrs({ className: 'row' })`
+  display: grid;
+  align-items: center;
+  & > div {
+    align-items: center;
+  }
+  @media ${devices.mobileS} {
+  }
+  @media ${devices.tablet} {
+    grid-template-columns: 1fr 3fr;
+  }
+`;

@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 import { validate } from 'common/utils';
+import devices from 'styles/device';
 
 interface Props {
   type?: string;
@@ -75,6 +76,13 @@ const StyledInput = styled.input<Props>`
   font-weight: 300;
   line-height: 19px;
   letter-spacing: 0.02em;
+
+  @media ${devices.mobileS} {
+    margin-top: 5px;
+  }
+  @media ${devices.laptop} {
+    margin-top: 0;
+  }
 `;
 
 const Description = styled.p<{ isValid: boolean }>`
