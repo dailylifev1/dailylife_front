@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface Ireplies {
+  id: number;
+  content: string;
+}
 export interface Icomment {
-  boardNum: number;
-  replyContext: string;
-  replyNum: number;
-  replyTime: string;
+  id: number;
   userName: string;
-  userNum: number;
+  content: string;
+  date: string;
+  replies: Ireplies[]
 }
 
 interface IcommentState {

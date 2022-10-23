@@ -14,13 +14,12 @@ interface Props {
 function CommentDate(props: Props) {
   const { item, replyHover } = props;
   const [replyDeleteFlag, setReplyDeleteFlag] = useState<boolean>(false);
-  const { commentHearts } = useCommentHearts(item.replyNum);
+  const { commentHearts } = useCommentHearts(item.id);
 
   return (
     <CommentDateContainer>
-      <span className="empty" />
       <span className="comment-date">
-        {`${item.replyTime} ·  `}
+        {`${item.date} ·  `}
         {commentHearts === 0 ? '' : `좋아요: 0`}
         {' · '}
         답글 달기
@@ -31,16 +30,14 @@ function CommentDate(props: Props) {
         ) : (
           ''
         )} */}
-        {replyHover === item.replyNum ? (
-          <ReplyOptionButton
-            setReplyDeleteFlag={setReplyDeleteFlag}
-          />
+        {replyHover === item.id ? (
+          <ReplyOptionButton setReplyDeleteFlag={setReplyDeleteFlag} />
         ) : (
           ''
         )}
         {replyDeleteFlag ? (
           <DeleteCommentPopup
-            replyDeleteFlag={item.replyNum}
+            replyDeleteFlag={item.id}
             setReplyDeleteFlag={setReplyDeleteFlag}
           />
         ) : (

@@ -19,7 +19,7 @@ function DeleteCommentPopup(props) {
         })
         .then(() => {
           const idx = commentList.findIndex(
-            (item: { replyNum: number }) => item.replyNum === replyNum,
+            (item: { id: number }) => item.id === replyNum,
           );
           const newCommentList = [...commentList];
           newCommentList.splice(idx, 1);
