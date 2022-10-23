@@ -18,7 +18,7 @@ function CommentSection() {
           // index
         ) => (
           <Comment
-            key={item.replyNum}
+            key={item.id}
             replyHover={replyHover}
             setReplyHover={setReplyHover}
             // index={index}
