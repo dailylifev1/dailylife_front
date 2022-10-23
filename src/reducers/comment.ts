@@ -10,11 +10,11 @@ export interface Icomment {
 }
 
 interface IcommentState {
-  replyList: Icomment[];
+  commentList: Icomment[];
   reReplyFlag: string[];
 }
 const initialState: IcommentState = {
-  replyList: [],
+  commentList: [],
   reReplyFlag: [],
 };
 const comment = createSlice({
@@ -22,9 +22,9 @@ const comment = createSlice({
   initialState,
 
   reducers: {
-    updateReplyList: (state, action: PayloadAction<Icomment[]>) => ({
+    updateCommentList: (state, action: PayloadAction<Icomment[]>) => ({
       ...state,
-      replyList: action.payload,
+      commentList: action.payload,
     }),
 
     updateReReplyFlag: (state, action: PayloadAction<string[]>) => ({
@@ -34,6 +34,6 @@ const comment = createSlice({
   },
 });
 
-export const { updateReplyList, updateReReplyFlag } = comment.actions;
+export const { updateCommentList, updateReReplyFlag } = comment.actions;
 
 export default comment;

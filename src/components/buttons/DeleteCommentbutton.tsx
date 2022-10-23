@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 import { getAccessToken } from 'common/utils';
-import { updateReplyList } from 'reducers/comment';
+import { updateCommentList } from 'reducers/comment';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 
 function DeleteCommentPopup(props) {
   const dispatch = useAppDispatch();
-  const { replyList } = useAppSelector((state) => state.comment);
+  const { commentList } = useAppSelector((state) => state.comment);
   const { setReplyDeleteFlag, replyDeleteFlag } = props;
 
   const handleDeleteComment = (replyNum: number) => {
@@ -18,12 +18,12 @@ function DeleteCommentPopup(props) {
           },
         })
         .then(() => {
-          const idx = replyList.findIndex(
+          const idx = commentList.findIndex(
             (item: { replyNum: number }) => item.replyNum === replyNum,
           );
-          const newReplyList = [...replyList];
-          newReplyList.splice(idx, 1);
-          dispatch(updateReplyList(newReplyList));
+          const newCommentList = [...commentList];
+          newCommentList.splice(idx, 1);
+          dispatch(updateCommentList(newCommentList));
           setReplyDeleteFlag(-1);
         })
         .catch((err) => console.log(err));
