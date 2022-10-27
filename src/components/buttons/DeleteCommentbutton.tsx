@@ -1,4 +1,5 @@
 import axios from 'axios';
+import styled from 'styled-components';
 
 import { getAccessToken } from 'common/utils';
 import { updateCommentList } from 'reducers/comment';
@@ -31,33 +32,31 @@ function DeleteCommentPopup(props) {
   };
 
   return (
-    <div className="reply-delete-modal">
-      <div className="reply-delete-container">
-        <div className="reply-delete-box">
-          <div>
-            <button
-              type="button"
-              onClick={() => {
-                handleDeleteComment(replyDeleteFlag);
-              }}
-            >
-              삭제
-            </button>
-          </div>
-          <div>
-            <button
-              type="button"
-              onClick={() => {
-                setReplyDeleteFlag(false);
-              }}
-            >
-              취소
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <Button
+        type="button"
+        onClick={() => {
+          handleDeleteComment(replyDeleteFlag);
+        }}
+      >
+        삭제
+      </Button>
+      <Button
+        type="button"
+        onClick={() => {
+          setReplyDeleteFlag(false);
+        }}
+      >
+        취소
+      </Button>
+    </Container>
   );
 }
 
 export default DeleteCommentPopup;
+
+const Container = styled.div`
+  position: absolute;
+`;
+
+const Button = styled.button``;
