@@ -52,10 +52,7 @@ export default CommentDate;
 const CommentDateContainer = styled.div.attrs({
   className: '.comment-date-container',
 })`
-  & > .empty {
-    width: 38px;
-    aspect-ratio: 1;
-  }
+  height: 30px;
   & > .comment-date {
     margin-left: 10px;
     font-size: 13px;
