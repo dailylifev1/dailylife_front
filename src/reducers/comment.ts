@@ -1,20 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface Ireplies {
+  id: number;
+  content: string;
+}
 export interface Icomment {
-  boardNum: number;
-  replyContext: string;
-  replyNum: number;
-  replyTime: string;
+  id: number;
   userName: string;
-  userNum: number;
+  content: string;
+  date: string;
+  replies: Ireplies[]
 }
 
 interface IcommentState {
-  replyList: Icomment[];
+  commentList: Icomment[];
   reReplyFlag: string[];
 }
 const initialState: IcommentState = {
-  replyList: [],
+  commentList: [],
   reReplyFlag: [],
 };
 const comment = createSlice({
@@ -22,9 +25,9 @@ const comment = createSlice({
   initialState,
 
   reducers: {
-    updateReplyList: (state, action: PayloadAction<Icomment[]>) => ({
+    updateCommentList: (state, action: PayloadAction<Icomment[]>) => ({
       ...state,
-      replyList: action.payload,
+      commentList: action.payload,
     }),
 
     updateReReplyFlag: (state, action: PayloadAction<string[]>) => ({
@@ -34,6 +37,6 @@ const comment = createSlice({
   },
 });
 
-export const { updateReplyList, updateReReplyFlag } = comment.actions;
+export const { updateCommentList, updateReReplyFlag } = comment.actions;
 
 export default comment;

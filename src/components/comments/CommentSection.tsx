@@ -7,12 +7,12 @@ import { useAppSelector } from 'store/hooks';
 import devices from 'styles/device';
 
 function CommentSection() {
-  const { replyList } = useAppSelector((state) => state.comment);
+  const { commentList } = useAppSelector((state) => state.comment);
   const [replyHover, setReplyHover] = useState(-1);
 
   return (
-    <Container commentList={replyList}>
-      {replyList.map(
+    <Container commentList={commentList}>
+      {commentList.map(
         (
           item,
           // index
@@ -35,8 +35,6 @@ export default CommentSection;
 const Container = styled.div<{
   commentList: Icomment[];
 }>`
-  display: grid;
-  grid-template-rows: 1fr 1fr;
   height: 100px;
   margin-top: 1vh;
   overflow-y: auto;

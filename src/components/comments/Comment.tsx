@@ -23,7 +23,7 @@ function Comment({
 }: Props) {
   return (
     <CommentContainer
-      onMouseOver={() => setReplyHover(item.replyNum)}
+      onMouseOver={() => setReplyHover(item.id)}
       onMouseOut={() => setReplyHover(-1)}
     >
       <CommentMain item={item} />
