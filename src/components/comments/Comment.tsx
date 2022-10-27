@@ -38,7 +38,6 @@ export default Comment;
 
 const CommentContainer = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr;
   & > .comment-date-container {
     display: flex;
   }
