@@ -1,9 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import styled, { css } from 'styled-components/macro';
 
-import { type PayloadType } from './index';
-
-import { validate } from 'common/utils';
+import { IValidationResult } from 'common/utils';
 
 interface SizeType<T> {
   width: T;
@@ -12,16 +10,11 @@ interface SizeType<T> {
 interface Props extends SizeType<string> {
   type: string;
   title: string;
-  setText: Function;
-  formType: string;
-  reqId: string;
   limit: number;
   placeholder: string;
-}
-
-interface ResultType {
-  isValid: boolean | undefined;
-  error: '';
+  formType: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errors: IValidationResult<string>;
 }
 
 function SignUpInput({
@@ -29,43 +22,29 @@ function SignUpInput({
   width = '100%',
   height = 'auto',
   title,
-  setText,
-  formType,
-  reqId,
   limit,
   placeholder,
+  formType,
+  onChange,
+  errors,
 }: Props) {
-  const [result, setResult] = useState<ResultType>({
-    isValid: undefined,
-    error: '',
-  });
   const [count, setCount] = useState(0);
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setCount(e.target.value.length);
-    const validateResult = validate(e.target.value, formType);
-    setText((prevState: PayloadType) => ({
-      ...prevState,
-      [reqId]: e.target.value,
-    }));
-
-    if (validateResult[formType] !== '')
-      setResult({ isValid: false, error: validateResult[formType] });
-    else setResult({ isValid: true, error: '' });
-    if (e.target.value.length === 0)
-      setResult({ isValid: undefined, error: '' });
-  }
 
   return (
     <StyledWrapper className="signup-input-wrapper">
-      <Section isValid={result.isValid}>
+      <Section error={errors[formType]}>
         <StyledInput
+          name={formType}
           type={type}
           width={width}
           height={height}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            onChange(e);
+            setCount(e.target.value.length);
+          }}
           maxLength={limit}
           placeholder={placeholder}
+          autoComplete="off"
         />
         <Header>
           <span>{title}</span>
@@ -74,7 +53,7 @@ function SignUpInput({
           </span>
         </Header>
       </Section>
-      <Description isValid={result.isValid}>{result.error}</Description>
+      <Description error={errors[formType]}>{errors[formType]}</Description>
     </StyledWrapper>
   );
 }
@@ -84,17 +63,17 @@ export default SignUpInput;
 const StyledWrapper = styled.div`
   display: grid;
 `;
-const Section = styled.div<{ isValid: boolean | undefined }>`
+const Section = styled.div<{ error: string }>`
   display: grid;
   grid-template-rows: 0 1fr;
   height: 54.5px;
   ${(props) => {
-    switch (props.isValid) {
-      case true:
+    switch (props.error.length > 0) {
+      case false:
         return css`
           border: 1px solid #cf990c;
         `;
-      case false:
+      case true:
         return css`
           border: 1px solid red;
         `;
@@ -142,7 +121,7 @@ const Header = styled.header`
     overflow: hidden;
   }
 `;
-const Description = styled.p<{ isValid: boolean | undefined }>`
+const Description = styled.p<{ error: string }>`
   height: 2vh;
   color: #e50303;
   font-size: 12px;

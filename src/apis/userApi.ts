@@ -16,7 +16,8 @@ const userApi = {
         : '';
     return response;
   }),
-  postUserInfoForSignUp: methodFormat(async ({ userInfo }) => {
+  postUserInfoForSignUp: methodFormat(async (userInfo) => {
+    console.log('signup', userInfo);
     const options = {
       params: {
         userId: userInfo.userId,

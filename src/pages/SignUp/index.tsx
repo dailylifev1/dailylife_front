@@ -16,85 +16,89 @@ export interface PayloadType {
   password: string;
   passwordConfirm: string;
 }
+const signUpData = {
+  username: '',
+  email: '',
+  userId: '',
+  password: '',
+  passwordConfirm: '',
+};
 
 function SignUp() {
-  const signUpData = {
-    username: '',
-    email: '',
-    userId: '',
-    password: '',
-    passwordConfirm: '',
-  };
+  const { values, errors, handleSubmit, handleChange } = useForm(signUpData);
 
-  const [inputValues, setInputValues] = useState(signUpData);
   const activator = () => {
-    const firstErrorMsg =
-      validate(inputValues.username, 'username').username !== '';
-    const secondErrorMsg = validate(inputValues.email, 'email').email !== '';
-    const thirdErrorMsg = validate(inputValues.userId, 'userId').userId !== '';
-    const fourthErrorMsg =
-      validate(inputValues.password, 'password').password !== '';
-    const fifthErrorMsg =
-      validate(inputValues.passwordConfirm, 'password').password !== '';
+    let firstErrorMsg: boolean;
+    let secondErrorMsg: boolean;
+    let thirdErrorMsg: boolean;
+    let fourthErrorMsg: boolean;
+    let fifthErrorMsg: boolean;
 
-    if (
-      firstErrorMsg ||
-      secondErrorMsg ||
-      thirdErrorMsg ||
-      fourthErrorMsg ||
-      fifthErrorMsg
-    )
-      return false;
+    if (values.username !== undefined) {
+      firstErrorMsg = validate(values.username, 'username').username !== '';
+      secondErrorMsg = validate(values.email, 'email').email !== '';
+      thirdErrorMsg = validate(values.userId, 'userId').userId !== '';
+      fourthErrorMsg = validate(values.password, 'password').password !== '';
+      fifthErrorMsg =
+        validate(values.passwordConfirm, 'passwordConfirm').password !== '';
+      if (
+        firstErrorMsg ||
+        secondErrorMsg ||
+        thirdErrorMsg ||
+        fourthErrorMsg ||
+        fifthErrorMsg
+      )
+        return false;
+    }
     return true;
   };
   const signUpInputData = [
     {
+      id: 0,
       type: 'text',
       reqId: 'username',
       title: '사용자 이름',
-      setText: setInputValues,
       formType: 'username',
       limit: 20,
       placeholder: '사용자 이름',
     },
     {
+      id: 1,
       type: 'email',
       reqId: 'email',
       title: '이메일',
-      setText: setInputValues,
       formType: 'email',
       limit: 30,
       placeholder: '이메일',
     },
     {
+      id: 2,
       type: 'text',
       reqId: 'userId',
       title: '아이디',
-      setText: setInputValues,
       formType: 'userId',
       limit: 30,
       placeholder: '아이디',
     },
     {
+      id: 3,
       type: 'password',
       reqId: 'password',
       title: '비밀번호',
-      setText: setInputValues,
       formType: 'password',
       limit: 15,
       placeholder: '비밀번호',
     },
     {
+      id: 4,
       type: 'password',
       reqId: 'passwordConfirm',
       title: '비밀번호 확인',
-      setText: setInputValues,
-      formType: 'password',
+      formType: 'passwordConfirm',
       limit: 15,
       placeholder: '비밀번호 확인',
     },
   ];
-  const { handleSubmit } = useForm(signUpData);
   const [imageName, setImageName] = useState<string[]>([]);
   const [file, setFile] = useState('');
   const [fileImage, setFileImage] = useState<string>('');
@@ -128,12 +132,13 @@ function SignUp() {
             {signUpInputData.map((item) => (
               <div className="register-input-wrapper">
                 <SignUpInput
+                  key={item.id}
                   type={item.type}
                   title={item.title}
-                  setText={item.setText}
                   formType={item.formType}
-                  reqId={item.reqId}
                   limit={item.limit}
+                  errors={errors}
+                  onChange={handleChange}
                   placeholder={item.placeholder}
                   width="100%"
                   height="auto"
