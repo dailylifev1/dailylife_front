@@ -28,19 +28,18 @@ const methodFormat = (callbackfunc: Function) => {
   return method;
 };
 
-interface IValidationResult<T> {
+export interface IValidationResult<T> {
   userId: T;
   password: T;
   username: T;
   email: T;
+  passwordConfirm: T;
 }
 
 const validate = (value: string, formType: string) => {
   let isValidate = true;
-  const userIdRegex = /^[a-z][a-z\d]{3,11}$/;
-  const userIdNumberRegex = /[0-9]/;
+  const userIdRegex = [/^[a-z]/, /\d/, /^.{3,11}$/];
   const passwordRegexArr = [/^.{8,15}$/, /\d/, /[a-zA-Z]/, /[\\*!&]/];
-  // const usernameRegex = /^[a-z][a-z\d]{2,}$/;
   const usernameRegex = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|0-9]{2,20}$/;
   const emailRegex = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
   const errorMessage = {
@@ -49,17 +48,20 @@ const validate = (value: string, formType: string) => {
     username: '닉네임은 2글자 이상입니다.',
     email: '이메일 형식이 아닙니다. 다시 입력해주세요.',
   };
-  const validtaionResult: IValidationResult<string | undefined> = {
-    userId: undefined,
-    password: undefined,
-    username: undefined,
-    email: undefined,
+  const validtaionResult: IValidationResult<string> = {
+    userId: '',
+    password: '',
+    username: '',
+    email: '',
+    passwordConfirm: ''
   };
 
   if (formType === 'userId') {
-    if (!(userIdRegex.test(value) || userIdNumberRegex.test(value))) {
-      isValidate = false;
-    }
+    userIdRegex.forEach((el) => {
+      if (!el.test(value)) {
+        isValidate = false;
+      }
+    })
   }
   if (formType === 'password') {
     passwordRegexArr.forEach((el) => {
